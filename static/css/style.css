@@ -1,0 +1,47 @@
+body {
+    background-image: url("https://images4.alphacoders.com/111/1112898.jpg");
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+  }
+
+#column_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    padding: 1%;
+}
+#all_albums_wrapper {
+    padding: 1%;
+
+}
+#all_seasons_wrapper {
+    padding: 1%;
+}
+
+input[type=text], 
+input[type=date], 
+input[type=file],
+input[type=submit] {
+    width: 80%;
+    padding: 12px 6px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-left: 10%;
+  }
+
+select {
+    border-radius: 10px;
+    width: 80%;
+    height: 20%;
+    margin-left: 10%;
+  }
+
+/* #success_album_created_message {
+  font-size: 1.2vw;
+} */
+
+#display_all_images_from_single_album {
+  padding: 1%;
+}

@@ -1,0 +1,31 @@
+
+
+<div id="success_album_upload_message">
+  <a class="navbar-brand" 
+      hx-get="{% url 'create_new_album_form_display' %}"
+      hx-target="#replaced_years_with_create_new_album_form_display"> 
+      <b> Create new album </b>
+  </a><br><br>
+</div>
+
+<div id="replaced_years_with_create_new_album_form_display">
+</div>
+
+
+
+
+
+<h6> See albums by years </h6> 
+
+{% for year in all_years %}
+  <div class="list-group">
+      <a hx-get="{% url 'one_year_album_display' year.pk %}" 
+        hx-target="#replaced_div_with_one_year-season_view"
+        class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-0"> {{ year.album_year }} </h5>
+          <small class="text-primary">3 days ago</small>
+        </div>
+      </a>
+  </div>
+{% endfor %}

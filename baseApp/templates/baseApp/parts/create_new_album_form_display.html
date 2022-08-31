@@ -1,0 +1,38 @@
+
+<div class="alert alert-muted alert-dismissible fade show" role="alert">
+
+    <!-- <div style="height:500px; overflow: scroll"> -->
+    
+        <form action="." method="post" enctype="multipart/form-data"  
+                hx-post="{% url 'create_new_album' %}"
+                hx-encoding="multipart/form-data">
+            <!-- After submit, show the message inside rerendered form -->
+            <div id="success_album_created_message">
+                {% if messages %}
+                    {% for message in messages %} <br>
+                        <h5>{{ message }}, add another or <a href="{% url 'home' %}" hx-boost="true"> 
+                            <button>refresh</button> </a> the page to see created album </h5> <br>
+                    {% endfor %}
+                {% endif %}
+
+
+            {% csrf_token %}
+
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {{ form }}
+
+            {{ images_form.management_form }}
+            {% for image_field in images_form %}
+                {{ image_field }}
+            {% endfor %}
+
+            <input type="submit" value="Save album"> <br><br>
+        </form>
+    
+    <!-- </div> -->
+
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

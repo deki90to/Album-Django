@@ -1,0 +1,21 @@
+
+
+<ul class="nav justify-content-end">
+
+    {% if not user.is_authenticated %}
+        <li class="nav-item">
+        <a class="nav-link" href="">Login</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="">Register</a>
+        </li>
+
+    {% else %}
+
+        <li class="nav-item">
+        <a class="nav-link" href="">Logout {{ request.user.username }} | {{ request.user }}</a>
+        </li>
+    {% endif %}
+
+</ul>
+

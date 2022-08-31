@@ -1,0 +1,11 @@
+registracija i login emailom
+
+navbar sa godisnjim dobima i registracijom
+
+2 kolone
+
+leva strana s destinacijama iz godisnjeg doba
+
+desna strana sa destinacijom, datumom, autorom i velikim klikljivim-slide-showom
+
+korisnik - email, ime, username

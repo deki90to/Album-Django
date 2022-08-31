@@ -1,0 +1,27 @@
+{% extends 'baseApp/base.html '%}
+
+{% block body %}
+
+{% if not request.user.is_authenticated %}
+    <h1> Login </h1><br><br>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="formcontainer">
+        <div class="container">
+        <input type="text" placeholder="Email" name="email" required> <br><br>
+        <input type="password" placeholder="Password" name="password" required><br><br>
+
+        <button class="btn btn-primary" type="submit">Login</button><br><br>
+    </div>
+
+    <div class="container">
+        <span class="psw"><a href="{% url 'register' %}"> Swith to Register Page </a></span>
+    </div>
+</form>
+
+{% else %}
+    <h1> {{ request.user }} is already logged in. </h1>
+{% endif %}
+
+{% endblock %}
