@@ -1,0 +1,22 @@
+
+<form method="post" enctype="multipart/form-data"  
+    hx-post="{% url 'create_comment' %}"
+    hx-encoding="multipart/form-data">
+
+    {% csrf_token %}
+        {{ comment_form }} <br> <br>
+        <input type="submit" value="Save comment"> <br><br>
+
+
+        <div style="height:200px; overflow: scroll">
+            {% for comment in album_details.comment_set.all %}
+            {{ comment.comment_owner.username }} | <small>{{ comment.comment_created }}</small>
+            <ul>
+                <li>
+                    {{ comment.comment}}
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+
+</form>

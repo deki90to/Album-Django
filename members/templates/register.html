@@ -1,14 +1,16 @@
 {% extends 'baseApp/base.html '%}
 
 {% block body %}
-    <h1> Register </h1><br><br>
 
     <form method='post'>
         {% csrf_token %}
+        <div class="container">
+            {{ registration_form.as_p }}
 
-        {{ registration_form.as_p }}
+            <button class="btn btn-primary" type="submit">Login</button><br><br>
+            <span class="psw"><a href="{% url 'login' %}"> Swith to login page </a></span>
+        </div>
+    </form><br>
 
-        <button type="submit"> Register </button>
-    </form>
 
 {% endblock %}

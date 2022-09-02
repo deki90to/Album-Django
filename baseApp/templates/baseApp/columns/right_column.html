@@ -1,55 +1,28 @@
 
-<div id="all_seasons_wrapper">
-    <a href="{% url 'home' %}" style="text-decoration: none;" hx-boost="true">
-        <h5> All seasons </h5>
-    </a>
-    
-
-    <div class="alert alert-muted alert-dismissible fade show" role="alert">
-        <nav class="navbar-light bg-muted">
-            <form class="container-fluid justify-content-start">
-                <strong>
-                    {% for season in all_seasons %}
-                        <a hx-get="{% url 'one_season_albums_display' season.pk %}"
-                            hx-target="#replaced_div_with_one_year-season_view"
-                            style="text-decoration: none; padding-right: 10%;">
-                            <button class="btn btn-outline-primary me-1" type="button"> {{ season.season_name }} </button>
-                        </a>
-                    {% endfor %}
-                    <button class="btn btn-primary me-1" type="button"> {{ request.user.username }}'s albums</button>
-                </strong>
-            </form>
-        </nav>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-</div>
-
-
-
 <div id="replaced_div_with_one_year-season_view">
     <div id="all_albums_wrapper">
-
-        {% for album in all_albums %}
-            <div class="card mb-2">
-                <div class="row g-0"> 
-                    <div class="col-md-4">
-                        {% for image in album.images_set.all|slice:":1" %}
-                            <a hx-get="{% url 'display_all_images_from_single_album' album.pk %}"
-                                hx-target="#replaced_div_with_one_year-season_view">
-                                <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
-                            </a>
-                        {% endfor %}
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body"> <br>
-                        <h5 class="card-title" style="color: blue;"> {{ album.album_name }} {{ album.album_year }}</h5> <br><br>
-                        <p class="card-text" style="color: grey;"> {{ album.album_owner.username }} | {{ album.album_owner.email }} </p>
-                        <p class="card-text"><small class="text-muted"> Created: {{ album.album_created }} </small></p>
+            {% for album in all_albums %}
+                <div class="card mb-2">
+                    <div class="row g-0"> 
+                        <div class="col-md-4">
+                            {% for image in album.images_set.all|slice:":1" %}
+                                <a hx-get="{% url 'display_all_images_from_single_album' album.pk %}"
+                                    hx-target="#replaced_div_with_one_year-season_view">
+                                    <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body"> <br>
+                            <h5 class="card-title" style="color: blue;"> {{ album.album_name }} {{ album.album_year }}</h5> <br><br>
+                            <p class="card-text" style="color: grey;"> {{ album.album_owner.username }} | {{ album.album_owner.email }} </p>
+                            <p class="card-text"><small class="text-muted"> Created: {{ album.album_created }} </small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-        
+            {% endfor %}
     </div>
 </div>
+
+

@@ -1,9 +1,9 @@
-body {
-    background-image: url("https://images4.alphacoders.com/111/1112898.jpg");
+/* body { */
+    /* background-image: url("https://images4.alphacoders.com/111/1112898.jpg"); */
     /* background-position: center; */
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
     /* background-size: cover; */
-  }
+  /* } */
 
 #column_wrapper {
     display: grid;
@@ -21,7 +21,9 @@ body {
 input[type=text], 
 input[type=date], 
 input[type=file],
-input[type=submit] {
+input[type=submit],
+input[type=password],
+input[type=email] {
     width: 80%;
     padding: 12px 6px;
     display: inline-block;

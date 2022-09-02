@@ -1,5 +1,4 @@
 
-
 <div id="success_album_upload_message">
   <a class="navbar-brand" 
       hx-get="{% url 'create_new_album_form_display' %}"
@@ -11,6 +10,39 @@
 <div id="replaced_years_with_create_new_album_form_display">
 </div>
 
+
+
+<form action="" 
+  hx-get="{% url 'albums_search' %}"
+  hx-target="#all_albums_wrapper">
+  {% csrf_token %}
+    <input type="text" name="q" placeholder="Search Posts">
+    <input type="submit" value="Search">
+</form> <br>
+
+
+
+
+<a href="{% url 'home' %}" style="text-decoration: none;" hx-boost="true">
+  <h5> All albums </h5>
+</a>
+
+
+
+<h6> See albums by seasons </h6> 
+
+{% for season in all_seasons %}
+  <div class="list-group">
+    <a hx-get="{% url 'one_year_album_display' season.pk %}" 
+      hx-target="#replaced_div_with_one_year-season_view"
+      class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-0"> {{ season.season_name }} </h5>
+        <small class="text-primary">3 days ago</small>
+      </div>
+    </a>
+  </div>
+{% endfor %} <br>
 
 
 

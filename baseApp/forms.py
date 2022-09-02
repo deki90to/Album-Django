@@ -12,15 +12,23 @@ class AlbumForm(ModelForm):
         exclude = ['album_owner']
 
 
+
+
 class ImagesForm(ModelForm):
-    images = forms.ImageField(label='Images', widget=forms.ClearableFileInput(attrs={"multiple": True}),)
+    images = forms.ImageField(
+        label='Images', 
+        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+    )
     class Meta:
         model = Images
         fields = '__all__'
         exclude = ['album_images']
 
 
+
+
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = '__all__'
+        exclude = ['comment_owner', 'commented_album']

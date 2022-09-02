@@ -50,3 +50,5 @@ class Comment(models.Model):
     comment_created = models.DateTimeField(auto_now_add=True, null=True, blank=False)
     def __str__(self):
         return f'{self.comment_owner}, {self.comment}, {self.commented_album}, {self.comment_created.date()}'
+    class Meta:
+        ordering = ['-comment_created']
