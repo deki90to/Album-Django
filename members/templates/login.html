@@ -1,4 +1,4 @@
-{% extends 'baseApp/base.html '%}
+{% extends 'baseApp/base.html' %}
 
 {% block body %}
 
@@ -16,7 +16,9 @@
 </form>
 
 {% else %}
-    <h1> {{ request.user }} is already logged in. </h1>
+    <h6 style="text-align: center;"> {{ request.user.username }} is already logged in. 
+        Back to <a href="{% url 'home' %}"> homepage. </a>
+    </h6>
 {% endif %}
 
-{% endblock %}
+{% endblock body %}

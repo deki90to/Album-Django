@@ -18,8 +18,10 @@ urlpatterns = [
     
     path('comment_form_display/', views.comment_form_display, name='comment_form_display'),
     path('create_comment/', views.create_comment, name='create_comment'),
-
+    
+    path('display_my_albums/', views.display_my_albums, name='display_my_albums'),
 
     path('albums_search/', views.albums_search, name='albums_search'),
 
+    
 ]

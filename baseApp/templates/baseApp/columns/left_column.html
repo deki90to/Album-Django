@@ -16,15 +16,24 @@
   hx-get="{% url 'albums_search' %}"
   hx-target="#all_albums_wrapper">
   {% csrf_token %}
-    <input type="text" name="q" placeholder="Search Posts">
+    <input type="text" name="q" placeholder="Search destinations">
     <input type="submit" value="Search">
 </form> <br>
 
 
 
 
+<a href="{% url 'display_my_albums' %}" style="text-decoration: none;" 
+  hx-get="{% url 'display_my_albums' %}"
+  hx-target="#all_albums_wrapper"> 
+  My Albums 
+</a>
+
+
+
+
 <a href="{% url 'home' %}" style="text-decoration: none;" hx-boost="true">
-  <h5> All albums </h5>
+  <h5> All albums ({{all_albums.count}}) </h5> 
 </a>
 
 
@@ -38,7 +47,7 @@
       class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-0"> {{ season.season_name }} </h5>
-        <small class="text-primary">3 days ago</small>
+        <small class="text-primary">{{ season.album_set.all.count }}</small>
       </div>
     </a>
   </div>
@@ -56,7 +65,7 @@
         class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-0"> {{ year.album_year }} </h5>
-          <small class="text-primary">3 days ago</small>
+          <small class="text-primary">{{ year.album_set.all.count }}</small>
         </div>
       </a>
   </div>

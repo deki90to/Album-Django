@@ -1,29 +1,34 @@
 
-<div id="display_all_images_from_single_album">
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    {% for images in album_images %}
-      <div class="col">
-        <div class="card">
-          <img src="{{ images.images.url }}" class="card-img-top" width="100%" height="100%" alt="...">
-          <div class="card-body">
-            <hp class="card-title">{{ album_details.album_name }} {{ album_details.album_year }} </p>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
 
-
-
-<div id="comment_form">
   <!-- comment form --> 
   <a hx-get="{% url 'comment_form_display' %}"
     hx-target="#comment_form"> 
     <button class="btn btn-outline-primary">
-      Album comments 
+      Album comments {{ album_details.comment_set.all.count }}
     </button>
   </a>
-</div> <br>
 
-<a href="#" hx-boost="true"> <button>🔝</button> </a>
+<div id="comment_form">
+</div> 
+
+
+<div id="display_all_images_from_single_album">
+  {{ album_images.count }} images of {{ album_details.album_name}}
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+
+    {% for images in album_images %}
+      <div class="col">
+        <div class="card">
+          <img src="{{ images.images.url }}" class="card-img-top" width="100%" height="100%" alt="...">
+          <!-- <div class="card-body"> -->
+            <!-- <hp class="card-title">{{ album_details.album_name }} {{ album_details.album_year }} </p> -->
+          <!-- </div> -->
+        </div>
+      </div>
+    {% endfor %}
+  </div> <br>
+  <a href="#" hx-boost="true"> <button>🔝</button> </a>
+</div>
+
+

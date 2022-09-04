@@ -1,16 +1,28 @@
-{% extends 'baseApp/base.html '%}
+{% extends 'baseApp/base.html' %}
 
 {% block body %}
 
     <form method='post'>
         {% csrf_token %}
-        <div class="container">
-            {{ registration_form.as_p }}
+        <div class="container"> 
 
-            <button class="btn btn-primary" type="submit">Login</button><br><br>
+            <!-- <h6 style="color: red;">{{ form_error }}</h6> -->
+
+            <label for=""> Email </label> <br>
+            {{ registration_form.email }} <br>
+
+            <label for=""> Username </label>
+            {{ registration_form.username }} <br>
+
+            <label for=""> Password</label>
+            {{ registration_form.password1 }} <br>
+
+            <label for=""> Repeat password</label>
+            {{ registration_form.password2 }} <br> <br>
+
+            <button class="btn btn-primary" type="submit"> Register </button><br><br>
+
             <span class="psw"><a href="{% url 'login' %}"> Swith to login page </a></span>
         </div>
     </form><br>
-
-
 {% endblock %}

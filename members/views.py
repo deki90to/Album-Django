@@ -23,8 +23,9 @@ def register_(request):
     else:
         form = RegistrationForm()
 
-    context = {'registration_form': form}
-    return render(request, 'register.html', context)
+    return render(request, 'register.html', {
+        'registration_form': form,
+    })
 
 
 

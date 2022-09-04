@@ -4,8 +4,6 @@ from . forms import AlbumForm, ImagesForm, CommentForm
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from rest_framework import status
-from rest_framework.response import Response
 from django.http import HttpResponse
 
 
@@ -125,6 +123,14 @@ def create_comment(request):
     content = '<h5> Comment created </h5>'
     return HttpResponse(content)
 
+
+
+
+def display_my_albums(request):
+    my_albums = Album.objects.all()
+    return render(request, 'baseApp/parts/display_my_albums.html', {
+        'my_albums': my_albums,
+    })
 
 
 
