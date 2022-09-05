@@ -1,5 +1,4 @@
 
-<div id="all_albums_wrapper">
     {% if searched_albums %}
         <h5> Results for "{{ q }}"</h> <br><br>
         {% for search in searched_albums %}
@@ -26,4 +25,3 @@
     {% else %}
         <h5> No results for "{{ q }}"</h5>
     {% endif %}
-</div>

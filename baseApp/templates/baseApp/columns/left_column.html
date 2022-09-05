@@ -1,3 +1,14 @@
+<form action="" 
+  hx-get="{% url 'albums_search' %}"
+  hx-target="#all_albums_wrapper">
+  {% csrf_token %}
+    <input type="text" name="q" placeholder="Search destinations">
+    <input type="submit" value="Search">
+</form> <br>
+
+
+
+
 
 <div id="success_album_upload_message">
   <a class="navbar-brand" 
@@ -10,15 +21,6 @@
 <div id="replaced_years_with_create_new_album_form_display">
 </div>
 
-
-
-<form action="" 
-  hx-get="{% url 'albums_search' %}"
-  hx-target="#all_albums_wrapper">
-  {% csrf_token %}
-    <input type="text" name="q" placeholder="Search destinations">
-    <input type="submit" value="Search">
-</form> <br>
 
 
 
@@ -42,7 +44,7 @@
 
 {% for season in all_seasons %}
   <div class="list-group">
-    <a hx-get="{% url 'one_year_album_display' season.pk %}" 
+    <a hx-get="{% url 'one_season_albums_display' season.pk %}" 
       hx-target="#replaced_div_with_one_year-season_view"
       class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">

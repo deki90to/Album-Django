@@ -1,7 +1,7 @@
-<div class="alert alert-muted alert-dismissible fade show" role="alert">
 <form method="post" enctype="multipart/form-data"  
     hx-post="{% url 'create_comment' %}"
     hx-encoding="multipart/form-data">
+    <div class="alert alert-muted alert-dismissible fade show" role="alert">
 
     {% csrf_token %}
         {{ comment_form }} <br> <br>
@@ -18,7 +18,7 @@
             </ul>
             {% endfor %}
         </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 </form>
 
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
