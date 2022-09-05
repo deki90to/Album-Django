@@ -7,7 +7,6 @@ urlpatterns = [
 
     path('', views.home, name='home'),
 
-    path('display_my_albums/', views.display_my_albums, name='display_my_albums'),
     path('one_season_albums_display/<pk>/', views.one_season_albums_display, name='one_season_albums_display'),
     path('one_year_album_display/<pk>/', views.one_year_album_display, name='one_year_album_display'),
 
@@ -23,5 +22,4 @@ urlpatterns = [
 
     path('albums_search/', views.albums_search, name='albums_search'),
 
-    
 ]

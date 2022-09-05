@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 
-@login_required(login_url='login')
 def home(request):
     all_albums = Album.objects.all()
     all_years = Year.objects.all()
@@ -21,12 +20,12 @@ def home(request):
     })
 
 
-@login_required(login_url='login')
-def display_my_albums(request):
-    my_albums = Album.objects.all()
-    return render(request, 'baseApp/parts/display_my_albums.html', {
-        'my_albums': my_albums,
-    })
+# @login_required(login_url='login')
+# def display_my_albums(request):
+#     my_albums = Album.objects.all()
+#     return render(request, 'baseApp/parts/display_my_albums.html', {
+#         'my_albums': my_albums,
+#     })
 
 @login_required(login_url='login')
 def one_season_albums_display(request, pk):
@@ -125,7 +124,7 @@ def create_comment(request):
 
 
 
-
+@login_required(login_url='login')
 def display_my_albums(request):
     my_albums = Album.objects.all()
     return render(request, 'baseApp/parts/display_my_albums.html', {

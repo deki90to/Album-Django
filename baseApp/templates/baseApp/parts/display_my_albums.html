@@ -8,6 +8,7 @@
                         <a hx-get="{% url 'display_all_images_from_single_album' my_album.pk %}"
                             hx-target="#replaced_div_with_one_year-season_view">
                             <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+                            
                         </a>
                     {% endfor %}
                 </div>
