@@ -33,14 +33,10 @@ input[type=email] {
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 5px;
-    margin-left: 5%;
   }
 
 select {
     border-radius: 10px;
-    width: 80%;
-    height: 20%;
-    margin-left: 10%;
   }
 
 /* #success_album_created_message {

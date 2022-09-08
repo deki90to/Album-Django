@@ -22,4 +22,8 @@ urlpatterns = [
 
     path('albums_search/', views.albums_search, name='albums_search'),
 
+    path('delete_album/<pk>/', views.delete_album, name='delete_album'),
+
+    path('display_update_album_form/', views.display_update_album_form, name='display_update_album_form'),
+
 ]

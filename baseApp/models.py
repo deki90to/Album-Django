@@ -29,6 +29,7 @@ class Album(models.Model):
     season_name = models.ForeignKey(Season, on_delete=models.CASCADE, null=True)
     album_year = models.ForeignKey(Year, on_delete=models.CASCADE, null=True)
     album_created = models.DateTimeField(auto_now_add=True, null=True)
+    hidden = models.BooleanField(default=False, blank=True, null=True)
     def __str__(self):
         return f'{self.album_name}, {self.season_name}, {self.album_created.date()}'
     class Meta:

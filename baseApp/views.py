@@ -63,21 +63,25 @@ def create_new_album(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST)
         files = request.FILES.getlist('images')
-        if form.is_valid():
-            f = form.save(commit=False)
-            f.album_owner = request.user
-            f.save()
-            for i in files:
-                Images.objects.create(
-                    album_images = f,
-                    images = i                 
-                )
-            return redirect('create_new_album')
+        if len(files) > 20:
+            content = '<p> Max images upload is 20 </p>'
+            return HttpResponse(content)
         else:
-            print(form.errors)
+            if form.is_valid():
+                f = form.save(commit=False)
+                f.album_owner = request.user
+                f.save()
+                for i in files:
+                    Images.objects.create(
+                        album_images = f,
+                        images = i                 
+                    )
+                return redirect('create_new_album')
+            else:
+                print(form.errors)
     else:
         form = AlbumForm()
-    content = '<h5> Album created </h5>'
+    content = '<p> Album created </p>'
     return HttpResponse(content)
 
 
@@ -143,3 +147,28 @@ def albums_search(request):
         'searched_albums': searched_albums,
          'q': q,
     })
+
+
+
+@login_required(login_url='login')
+def delete_album(request, pk):
+    if request.method == 'DELETE':
+        delete_album = Album.objects.get(pk=pk)
+        delete_album.delete()
+        content = '<h6 style="color:red;"> This album is deleted </h6>'
+        return HttpResponse(content)
+
+
+
+@login_required(login_url='login')
+def display_update_album_form(request):
+    display_update_album_form = AlbumForm()
+    return render(request, 'baseApp/parts/display_update_album_form.html', {
+        'display_update_album_form': display_update_album_form,
+    })
+
+
+# @login_required(login_url='login')
+# def update_album(request, pk):
+#     if request.method == 'POST':
+#         update_album = Album.objects.get(pk=pk)

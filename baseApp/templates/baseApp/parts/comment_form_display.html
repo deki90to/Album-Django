@@ -2,24 +2,28 @@
 <form method="post" enctype="multipart/form-data"  
     hx-post="{% url 'create_comment' %}"
     hx-encoding="multipart/form-data">
-    <div class="alert alert-muted alert-dismissible fade show" role="alert">
 
-    {% csrf_token %}
-    {{ comment_form }} <br> <br>
-    <input type="submit" value="Save comment"> <br><br>
+    <!-- <div class="alert alert-muted alert-dismissible fade show" role="alert"> -->
 
+        {% csrf_token %}
+        {{ comment_form }} <br> <br>
 
-    <div style="height:150px; overflow: scroll">
+        <input type="submit" value="Save"> <br><br>
+
+        <div style="height:150px; overflow: scroll">
         {% for comment in album_details.comment_set.all %}
-        {{ comment.comment_owner.username }} | <small>{{ comment.comment_created }}</small>
-        <ul>
-            <li>
-                {{ comment.comment}}
-            </li>
-        </ul>
+        <p>
+            {{ comment.comment_owner.username }} | <small>{{ comment.comment_created }}</small>
+            <ul>
+                <li>
+                    {{ comment.comment}}
+                </li>
+            </ul>
+        </p>
         {% endfor %}
-    </div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+        </div>
+
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
 </form>
 

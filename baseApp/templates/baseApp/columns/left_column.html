@@ -1,26 +1,24 @@
-
-<form action="" 
+<!-- dynamic search -->
+<input type="text" name="q" placeholder="By destination"   
   hx-get="{% url 'albums_search' %}"
-  hx-target="#all_albums_wrapper">
-  {% csrf_token %}
-    <input type="text" name="q" placeholder="By destination">
-    <input type="submit" value="Search">
-</form> <br>
-
+  hx-target="#all_albums_wrapper"
+  hx-trigger="keyup changed delay:500ms"> <br><br>
 
 
 <div id="success_album_upload_message">
   <a class="navbar-brand" 
       hx-get="{% url 'create_new_album_form_display' %}"
       hx-target="#replaced_years_with_create_new_album_form_display"> 
-        <button class="btn btn-sm btn-primary">
-          <small>New album</small> 
+        <button class="btn btn-sm btn-outline-primary">
+          <small><b>New album</b></small> 
         </button>
   </a>
 </div> 
 
 <div id="replaced_years_with_create_new_album_form_display">
 </div> <br>
+
+
 
 
 
@@ -35,6 +33,17 @@
   hx-target="#all_albums_wrapper"> 
   <button class="btn btn-sm btn-outline-primary"><small> My albums </small> </button>
 </a> <br> <br>
+
+
+
+<!-- <form 
+  hx-get="{% url 'albums_search' %}"
+  hx-target="#all_albums_wrapper">
+  {% csrf_token %}
+    <input type="text" name="q" placeholder="By destination">
+    <input type="submit" value="Search">
+</form> <br> -->
+
 
 
 

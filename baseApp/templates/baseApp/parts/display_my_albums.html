@@ -1,25 +1,36 @@
 
-    {% for my_album in my_albums %}
-        {% if my_album.album_owner == request.user %}
-        <div class="card mb-2">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    {% for images in my_album.images_set.all|slice:":1" %}
-                        <a hx-get="{% url 'display_all_images_from_single_album' my_album.pk %}"
-                            hx-target="#replaced_div_with_one_year-season_view">
-                            <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
-                            
-                        </a>
-                    {% endfor %}
+{% for my_album in my_albums %}
+    {% if my_album.album_owner == request.user %}
+    <div class="card mb-2">
+        <div class="row g-0">
+            <div class="col-md-4">
+                {% for images in my_album.images_set.all|slice:":1" %}
+                    <a hx-get="{% url 'display_all_images_from_single_album' my_album.pk %}"
+                        hx-target="#replaced_div_with_one_year-season_view">
+                        <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: blue;"> {{ my_album.album_name }} {{ my_album.album_year }}</h5> <br>
+                    <p class="card-text" style="color: grey;"> {{ my_album.album_owner.username }} | {{ my_album.album_owner.email }} </p>
+                    <p class="card-text"><small class="text-muted"> Created: {{ my_album.album_created }} </small></p>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body"> <br>
-                        <h5 class="card-title" style="color: blue;"> {{ my_album.album_name }} {{ my_album.album_year }}</h5> <br><br>
-                        <p class="card-text" style="color: grey;"> {{ my_album.album_owner.username }} | {{ my_album.album_owner.email }} </p>
-                        <p class="card-text"><small class="text-muted"> Created: {{ my_album.album_created }} </small></p>
-                    </div>
-                </div>
+
+                <a href=""> 
+                    <button class="btn btn-sm btn-outline-primary">
+                        Edit 
+                    </button> 
+                </a>
+                <a hx-delete="{% url 'delete_album' my_album.pk %}" hx-confirm="Delete {{ my_album }}?"> 
+                    <button class="btn btn-sm btn-outline-danger">
+                        Delete 
+                    </button> 
+                </a>
+                
             </div>
         </div>
-        {% endif %}
-    {% endfor %}
+    </div>
+    {% endif %}
+{% endfor %}

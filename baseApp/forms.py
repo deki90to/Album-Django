@@ -6,6 +6,9 @@ from . models import Album, Images, Comment
 
 
 class AlbumForm(ModelForm):
+    hidden = forms.BooleanField(
+        label='Visible only for me'
+    )
     class Meta:
         model = Album
         fields = '__all__'

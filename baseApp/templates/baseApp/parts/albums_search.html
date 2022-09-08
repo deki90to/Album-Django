@@ -1,6 +1,6 @@
 
     {% if searched_albums %}
-        <h5> Results for "{{ q }}"</h> <br><br>
+        <p> Results for "{{ q }}"</p> 
         {% for search in searched_albums %}
             <div class="card mb-2">
                 <div class="row g-0"> 
@@ -23,5 +23,5 @@
             </div>
         {% endfor %}
     {% else %}
-        <h5> No results for "{{ q }}"</h5>
+        <p> No results for "{{ q }}"</p>
     {% endif %}
