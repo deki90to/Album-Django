@@ -12,14 +12,14 @@
             {{ hidden }}
         {% endfor %}
 
-        {{ form }}
+        {{ form }} <br><br>
 
         {{ images_form.management_form }}
         {% for image_field in images_form %}
             {{ image_field }}
-        {% endfor %}
+        {% endfor %} <br> <br>
 
-        <input type="submit" value="Save album"> <br><br>
+        <input type="submit" class="btn btn-outline-primary" value="Save"> <br><br>
     </form>
     <!-- </div> -->
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

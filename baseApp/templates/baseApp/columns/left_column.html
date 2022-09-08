@@ -1,12 +1,11 @@
+
 <form action="" 
   hx-get="{% url 'albums_search' %}"
   hx-target="#all_albums_wrapper">
   {% csrf_token %}
-    <input type="text" name="q" placeholder="Search destinations">
+    <input type="text" name="q" placeholder="By destination">
     <input type="submit" value="Search">
 </form> <br>
-
-
 
 
 
@@ -14,33 +13,33 @@
   <a class="navbar-brand" 
       hx-get="{% url 'create_new_album_form_display' %}"
       hx-target="#replaced_years_with_create_new_album_form_display"> 
-      <b> Create new album </b>
-  </a><br><br>
-</div>
+        <button class="btn btn-sm btn-primary">
+          <small>New album</small> 
+        </button>
+  </a>
+</div> 
 
 <div id="replaced_years_with_create_new_album_form_display">
-</div>
+</div> <br>
 
 
+
+<a href="{% url 'home' %}" style="text-decoration: none;" hx-boost="true">
+  <button class="btn btn-sm btn-outline-primary"><small> All albums ({{all_albums.count}}) </small> </button>
+</a><br><br>
 
 
 
 <a href="{% url 'display_my_albums' %}" style="text-decoration: none;" 
   hx-get="{% url 'display_my_albums' %}"
   hx-target="#all_albums_wrapper"> 
-  My Albums 
-</a>
+  <button class="btn btn-sm btn-outline-primary"><small> My albums </small> </button>
+</a> <br> <br>
 
 
 
 
-<a href="{% url 'home' %}" style="text-decoration: none;" hx-boost="true">
-  <h5> All albums ({{all_albums.count}}) </h5> 
-</a>
-
-
-
-<h6> See albums by seasons </h6> 
+<p> See albums by seasons </p> 
 
 {% for season in all_seasons %}
   <div class="list-group">
@@ -48,7 +47,7 @@
       hx-target="#replaced_div_with_one_year-season_view"
       class="list-group-item list-group-item-action">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-0"> {{ season.season_name }} </h5>
+        <p class="mb-0" id="all_seasons_font"> {{ season.season_name }} </p>
         <small class="text-primary">{{ season.album_set.all.count }}</small>
       </div>
     </a>
@@ -58,7 +57,7 @@
 
 
 
-<h6> See albums by years </h6> 
+<p> See albums by years </p> 
 
 {% for year in all_years %}
   <div class="list-group">
@@ -66,7 +65,7 @@
         hx-target="#replaced_div_with_one_year-season_view"
         class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-0"> {{ year.album_year }} </h5>
+          <p class="mb-0" id="all_years_font"> {{ year.album_year }} </p>
           <small class="text-primary">{{ year.album_set.all.count }}</small>
         </div>
       </a>

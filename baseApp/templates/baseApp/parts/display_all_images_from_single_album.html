@@ -2,10 +2,10 @@
   <!-- comment form --> 
   <a hx-get="{% url 'comment_form_display' %}"
     hx-target="#comment_form"> 
-    <button class="btn btn-outline-primary">
-      Album comments {{ album_details.comment_set.all.count }}
+    <button class="btn btn-sm btn-outline-primary">
+      Comments {{ album_details.comment_set.all.count }}
     </button>
-  </a>
+  </a> <br><br>
 
 <div id="comment_form">
 </div> 

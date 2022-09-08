@@ -2,10 +2,6 @@
 <ul class="nav justify-content-end">
 
     {% if not user.is_authenticated %}
-
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}" hx-boost="true">See covers </a>
-        </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'login' %}" hx-boost="true">Login</a>
         </li>
