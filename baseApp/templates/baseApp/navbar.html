@@ -14,7 +14,9 @@
 
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}" hx-boost="true"> 
-                Logout {{ request.user.username }} | {{ request.user }}
+                <small>
+                    Logout {{ request.user.username }} | {{ request.user }}
+                </small>
             </a>
         </li>
         

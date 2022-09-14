@@ -1,38 +1,29 @@
 <!-- dynamic search -->
-<input type="text" name="q" placeholder="By destination"   
+<input type="text" name="q" placeholder="Destination"   
   hx-get="{% url 'albums_search' %}"
   hx-target="#all_albums_wrapper"
-  hx-trigger="keyup changed delay:500ms"> <br><br>
+  hx-trigger="keyup changed delay:500ms"> <br> <br>
+
+
+
+<button hx-get="{% url 'display_participants' %}"
+  hx-target="#display_participants"
+  id="activities_button"> Activities 
+</button> <br><br>
+
 
 
 <div id="success_album_upload_message">
   <a class="navbar-brand" 
       hx-get="{% url 'create_new_album_form_display' %}"
-      hx-target="#replaced_years_with_create_new_album_form_display"> 
-        <button class="btn btn-sm btn-outline-primary">
-          <small><b>New album</b></small> 
+      hx-target="#create_new_album_form"> 
+        <button id="new_album_button">
+          Upload 
         </button>
   </a>
-</div> 
-
-<div id="replaced_years_with_create_new_album_form_display">
 </div> <br>
 
 
-
-
-
-<a href="{% url 'home' %}" style="text-decoration: none;" hx-boost="true">
-  <button class="btn btn-sm btn-outline-primary"><small> All albums ({{all_albums.count}}) </small> </button>
-</a><br><br>
-
-
-
-<a href="{% url 'display_my_albums' %}" style="text-decoration: none;" 
-  hx-get="{% url 'display_my_albums' %}"
-  hx-target="#all_albums_wrapper"> 
-  <button class="btn btn-sm btn-outline-primary"><small> My albums </small> </button>
-</a> <br> <br>
 
 
 
@@ -44,6 +35,24 @@
     <input type="submit" value="Search">
 </form> <br> -->
 
+
+
+
+<a href="{% url 'home' %}" style="text-decoration: none;" hx-boost="true">
+  <button id="all_albums_my_albums_button">
+    Albums {{all_albums.count}} 
+  </button>
+</a><br> <br>
+
+
+
+<a href="{% url 'display_my_albums' %}" style="text-decoration: none;" 
+  hx-get="{% url 'display_my_albums' %}"
+  hx-target="#all_albums_wrapper"> 
+  <button id="all_albums_my_albums_button">
+    Library
+  </button>
+</a> <br> <br>
 
 
 

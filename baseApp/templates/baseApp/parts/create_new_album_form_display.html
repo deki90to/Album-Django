@@ -1,7 +1,8 @@
 
-<!-- <div class="alert alert-muted alert-dismissible fade show" role="alert"> -->
+<div class="alert alert-muted alert-dismissible fade show" role="alert">
     <!-- <div style="height:500px; overflow: scroll"> -->
-    <form action="." method="post" enctype="multipart/form-data"  
+
+    <form
         hx-post="{% url 'create_new_album' %}"
         hx-encoding="multipart/form-data">
 
@@ -12,8 +13,12 @@
             {{ hidden }}
         {% endfor %}
 
+        
+        Album name </label>{{ form.album_name|capfirst }} <label for=""> <br>
+        {{ form.season_name }} <label for=""> Season </label> <br> <br>
+        {{ form.album_year }} <label for=""> Year </label> <br> <br>
+        {{ form.hidden }} <label for=""> Visible for me only </label> <br> <br>
 
-        {{ form }}
 
         {{ images_form.management_form }}
         {% for image_field in images_form %}
@@ -22,6 +27,7 @@
 
         <input type="submit" class="btn btn-outline-primary" value="Save"> <br><br>
     </form>
+    
     <!-- </div> -->
-    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div> -->
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

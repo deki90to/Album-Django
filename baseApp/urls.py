@@ -24,6 +24,10 @@ urlpatterns = [
 
     path('delete_album/<pk>/', views.delete_album, name='delete_album'),
 
-    path('display_update_album_form/', views.display_update_album_form, name='display_update_album_form'),
+    path('delete_album_comment/<pk>/', views.delete_album_comment, name='delete_album_comment'),
+
+    path('display_participants/', views.display_participants, name='display_participants'),
+
+
 
 ]

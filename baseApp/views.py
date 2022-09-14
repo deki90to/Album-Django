@@ -1,3 +1,4 @@
+from re import A
 from django.shortcuts import render, redirect
 from . models import Album, Season, Year, Images, Comment
 from . forms import AlbumForm, ImagesForm, CommentForm
@@ -5,6 +6,8 @@ from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.core.paginator import EmptyPage, Paginator
+
 
 
 
@@ -22,12 +25,6 @@ def home(request):
     })
 
 
-# @login_required(login_url='login')
-# def display_my_albums(request):
-#     my_albums = Album.objects.all()
-#     return render(request, 'baseApp/parts/display_my_albums.html', {
-#         'my_albums': my_albums,
-#     })
 
 @login_required(login_url='login')
 def one_season_albums_display(request, pk):
@@ -64,7 +61,7 @@ def create_new_album(request):
         form = AlbumForm(request.POST)
         files = request.FILES.getlist('images')
         if len(files) > 20:
-            content = '<p> Max images upload is 20 </p>'
+            content = '<p> Max number of images is 20 </p>'
             return HttpResponse(content)
         else:
             if form.is_valid():
@@ -76,15 +73,15 @@ def create_new_album(request):
                         album_images = f,
                         images = i                 
                     )
-                return redirect('create_new_album')
-            else:
-                print(form.errors)
-    else:
-        form = AlbumForm()
-    content = '<p> Album created </p>'
-    return HttpResponse(content)
-
-
+                # return redirect('redirect_to_right_column')
+                content = "<p> Album created <a href='/'> <b> refresh </b> </a></p>"
+                return HttpResponse(content)
+            # else:
+            #     print(form.errors)
+    # else:
+    #     form = AlbumForm()
+    # content = '<p> Album created </p>'
+    # return HttpResponse(content)
 
 
 
@@ -121,12 +118,12 @@ def create_comment(request):
             f.comment_owner = request.user
             f.commented_album = album_details
             f.save()
-            messages.success(request, 'Comment created')
+            # messages.success(request, 'Comment created')
             return redirect('comment_form_display')
         else:
             comment_form = CommentForm()
-    content = '<h5> Comment created </h5>'
-    return HttpResponse(content)
+    # content = '<h5> Comment created </h5>'
+    # return HttpResponse(content)
 
 
 
@@ -155,20 +152,25 @@ def delete_album(request, pk):
     if request.method == 'DELETE':
         delete_album = Album.objects.get(pk=pk)
         delete_album.delete()
-        content = '<h6 style="color:red;"> This album is deleted </h6>'
+        content = "<p> <b> Album deleted </b> </p>"
         return HttpResponse(content)
 
 
 
-@login_required(login_url='login')
-def display_update_album_form(request):
-    display_update_album_form = AlbumForm()
-    return render(request, 'baseApp/parts/display_update_album_form.html', {
-        'display_update_album_form': display_update_album_form,
+def delete_album_comment(request, pk):
+    album_comment = Comment.objects.get(pk=pk)
+    if request.method == 'DELETE':
+        album_comment.delete()
+        content = "<p> Comment deleted </p>"
+        return HttpResponse(content)
+
+
+
+
+def display_participants(request):
+    participants = Comment.objects.all()
+    return render(request, 'baseApp/parts/display_participants.html', {
+        'participants': participants,
     })
 
 
-# @login_required(login_url='login')
-# def update_album(request, pk):
-#     if request.method == 'POST':
-#         update_album = Album.objects.get(pk=pk)

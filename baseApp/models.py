@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django_resized import ResizedImageField
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -15,7 +14,7 @@ class Season(models.Model):
 class Year(models.Model):
     album_year = models.IntegerField(
         validators=[MinValueValidator(1990), MaxValueValidator(2022)], default=2022
-        )
+    )
     def __str__(self):
         return f'{self.album_year}'
     class Meta:
@@ -29,7 +28,7 @@ class Album(models.Model):
     season_name = models.ForeignKey(Season, on_delete=models.CASCADE, null=True)
     album_year = models.ForeignKey(Year, on_delete=models.CASCADE, null=True)
     album_created = models.DateTimeField(auto_now_add=True, null=True)
-    hidden = models.BooleanField(default=False, blank=True, null=True)
+    hidden = models.BooleanField(blank=True, null=True, default=False)
     def __str__(self):
         return f'{self.album_name}, {self.season_name}, {self.album_created.date()}'
     class Meta:

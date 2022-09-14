@@ -2,7 +2,7 @@
   <!-- comment form --> 
   <a hx-get="{% url 'comment_form_display' %}"
     hx-target="#comment_form"> 
-    <button class="btn btn-sm btn-outline-primary">
+    <button id="album_comments_button">
       Comments {{ album_details.comment_set.all.count }}
     </button>
   </a> <br><br>
@@ -23,12 +23,13 @@
           <a href="{{ images.images.url }}" download="Click do download">
             <img src="{{ images.images.url }}" class="card-img-top" width="100%" height="100%" alt="...">
           </a>
-            <p class="card-title"> Click image to download </p>
+            <p class="card-title"> Tap image to download </p>
         </div>
       </div>
     {% endfor %}
   </div> <br>
-  <a href="#" hx-boost="true"> <button>🔝</button> </a>
+  
+  <a href="#" hx-boost="true" class="btn btn-outline-primary"> Top </a>
 </div>
 
 
