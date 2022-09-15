@@ -1,6 +1,7 @@
 
   <!-- comment form --> 
-  <a hx-get="{% url 'comment_form_display' %}"
+  <a id="album_comments_button"  
+    hx-get="{% url 'comment_form_display' %}"
     hx-target="#comment_form"> 
     <button id="album_comments_button">
       Comments {{ album_details.comment_set.all.count }}
@@ -9,8 +10,6 @@
 
 <div id="comment_form">
 </div> 
-
-
 
 
 <div id="display_all_images_from_single_album">
@@ -30,6 +29,6 @@
   </div> <br>
   
   <a href="#" hx-boost="true" class="btn btn-outline-primary"> Top </a>
-</div>
+</div> <br>
 
 

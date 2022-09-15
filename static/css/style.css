@@ -57,41 +57,45 @@ select {
   font-size: 2.5vw;
 }
 #comment_delete_button {
-  background-color: red;
-  color: white;
+  background-color: white;
+  color: red;
   border: none;
   border-radius: 5px;
   margin-left: 10px;
   font-size: 2vw;
+  box-shadow: 2px 2px 10px 0px black;
 }
 #delete_album_button {
-  background-color: red;
-  color: white;
+  background-color: white;
+  color: red;
   border: none;
   border-radius: 5px;
+  box-shadow: 2px 2px 10px 0px black;
 }
 #new_album_button {
-  background-color: blue;
-  color: white;
+  background-color: white;
+  color: blue;
   border: none;
   border-radius: 5px;
   font-size: 3vw;
   font-weight: bold;
-  box-shadow: 2px 5px 10px 0px black;
+  box-shadow: 3px 3px 10px 0px black;
+  padding: 3px;
 }
 
 #all_albums_my_albums_button {
-  background-color: blue;
-  color: white;
+  background-color: white;
+  color: blue;
   border: none;
   border-radius: 5px;
   font-size: 2.5vw;
-  box-shadow: 2px 5px 10px 0px black;
+  box-shadow: 3px 3px 10px 0px black;
+  padding: 3px;
 }
 
 #album_comments_button {
-  background-color: blue;
-  color: white;
+  background-color: white;
+  color: blue;
   border: none;
   border-radius: 5px;
   font-size: 3vw;
@@ -100,13 +104,16 @@ select {
 }
 
 #activities_button {
-  background-color: blue;
-  color: white;
+  background-color: white;
+  color: blue;
   border: none;
   border-radius: 5px;
   font-size: 2.5vw;
-  box-shadow: 2px 5px 10px 0px black;
+  box-shadow: 3px 3px 10px 0px black;
+  padding: 3px;
 }
 
-/* #participant_comment {
-} */
+#search {
+  box-shadow: 3px 3px 10px 0px black;
+  padding: 3px;
+}

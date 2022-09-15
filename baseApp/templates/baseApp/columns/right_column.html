@@ -8,7 +8,6 @@
 
 
 <div id="display_participants_album">
-</div>
 
     <div id="replaced_div_with_one_year-season_view">
         <div id="all_albums_wrapper">
@@ -27,8 +26,10 @@
                             <div class="col-md-8">
                                 <div class="card-body"> 
                                     <h5 class="card-title" style="color: blue;"> {{ album.album_name }} {{ album.album_year }}</h5> <br>
-                                    <p class="card-text" style="color: grey;"> {{ album.album_owner.username }} | {{ album.album_owner.email }} </p>
-                                    <p class="card-text"><small class="text-muted"> Created: {{ album.album_created }} </small></p>
+                                    <p class="card-text" style="color: grey;">
+                                        <b><a href="" style="text-decoration: none;">{{ album.album_owner.username }} | {{ album.album_owner.email }}</a></b>
+                                    </p>
+                                    <p class="card-text"><small class="text-muted"> {{ album.album_created }} </small></p>
                                 </div>
                             </div>
                             
@@ -39,3 +40,4 @@
         </div>
     </div>
 
+</div>

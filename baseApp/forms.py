@@ -5,6 +5,7 @@ from django.db.models import fields
 from . models import Album, Images, Comment
 
 
+
 class AlbumForm(ModelForm):
     hidden = forms.BooleanField(
         label='Visible only for me',

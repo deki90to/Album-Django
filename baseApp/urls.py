@@ -28,6 +28,8 @@ urlpatterns = [
 
     path('display_participants/', views.display_participants, name='display_participants'),
 
+    path('redirect_to_right_column/', views.redirect_to_right_column, name='redirect_to_right_column'),
 
+    path('display_other_user_albums/', views.display_other_user_albums, name='display_other_user_albums'),
 
 ]

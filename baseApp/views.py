@@ -1,4 +1,3 @@
-from re import A
 from django.shortcuts import render, redirect
 from . models import Album, Season, Year, Images, Comment
 from . forms import AlbumForm, ImagesForm, CommentForm
@@ -82,6 +81,10 @@ def create_new_album(request):
     #     form = AlbumForm()
     # content = '<p> Album created </p>'
     # return HttpResponse(content)
+
+
+def redirect_to_right_column(request):
+    return render(request, 'baseApp/columns/right_column.html')
 
 
 
@@ -174,3 +177,8 @@ def display_participants(request):
     })
 
 
+def display_other_user_albums(request):
+    other_user_albums = Album.objects.all()
+    return render(request, 'baseApp/parts/display_other_user_albums.html',{
+        'other_user_albums': other_user_albums
+    })

@@ -3,7 +3,7 @@
     hx-post="{% url 'create_comment' %}"
     hx-encoding="multipart/form-data">
 
-<!-- <div class="alert alert-muted alert-dismissible fade show" role="alert"> -->
+<div class="alert alert-muted alert-dismissible fade show" role="alert">
 
     {% csrf_token %}
     {{ comment_form }} <br> <br>
@@ -12,7 +12,8 @@
 
     <div style="height:200px; overflow: scroll">
         {% for comment in album_details.comment_set.all %}
-            <p> <b>{{ comment.comment_owner.username }}</b> | <small>{{ comment.comment_created|timesince }} ago</small>
+            <p> <b> {{ comment.comment_owner.username }} </b> | 
+                <small> {{ comment.comment_created|timesince }} ago </small>
                 <ul>
                     {{ comment.comment|capfirst }} 
                     <button id="comment_delete_button"
@@ -25,8 +26,6 @@
         {% endfor %}
     </div>
 
-    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div> -->
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 </form>
-
-<!-- class="btn btn-sm btn-sm btn-sm btn-danger" -->
