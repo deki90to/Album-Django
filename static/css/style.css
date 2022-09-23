@@ -70,7 +70,11 @@ select {
   border: none;
   border-radius: 5px;
 }
+<<<<<<< HEAD
 /* #new_album_button {
+=======
+#new_album_button {
+>>>>>>> 9b040a1be5b8f4895d5134337111eab2fd0d041a
   background-color: blue;
   color: white;
   border: none;
@@ -81,7 +85,11 @@ select {
   padding: 10px;
 } */
 
+<<<<<<< HEAD
 /* #all_albums_my_albums_button {
+=======
+#all_albums_my_albums_button {
+>>>>>>> 9b040a1be5b8f4895d5134337111eab2fd0d041a
   background-color: blue;
   color: white;
   border: none;
@@ -100,7 +108,11 @@ select {
   font-weight: bold;
 }
 
+<<<<<<< HEAD
 /* #activities_button {
+=======
+#activities_button {
+>>>>>>> 9b040a1be5b8f4895d5134337111eab2fd0d041a
   background-color: blue;
   color: white;
   border: none;
@@ -111,5 +123,11 @@ select {
 } */
 
 #search {
+<<<<<<< HEAD
   padding: 2px;
 }
+=======
+  box-shadow: 3px 3px 10px 0px black;
+  padding: 3px;
+}
+>>>>>>> 9b040a1be5b8f4895d5134337111eab2fd0d041a
