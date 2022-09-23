@@ -13,19 +13,21 @@
 
 
 <div id="display_all_images_from_single_album">
-  {{ album_images.count }} images of {{ album_details.album_name}}
+  <div id="all_albums_wrapper">
+    {{ album_images.count }} images of {{ album_details.album_name}}
 
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    {% for images in album_images %}
-      <div class="col">
-        <div class="card">
-          <a href="{{ images.images.url }}" download="Click do download">
-            <img src="{{ images.images.url }}" class="card-img-top" width="100%" height="100%" alt="...">
-          </a>
-            <p class="card-title"> Tap image to download </p>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for images in album_images %}
+        <div class="col">
+          <div class="card">
+            <a href="{{ images.images.url }}" download="Click do download">
+              <img src="{{ images.images.url }}" class="card-img-top" width="100%" height="100%" alt="...">
+            </a>
+              <p class="card-title"> Tap image to download </p>
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div> <br>
   
   <a href="#" hx-boost="true" class="btn btn-outline-primary"> Top </a>

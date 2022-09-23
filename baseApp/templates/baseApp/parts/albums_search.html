@@ -2,27 +2,29 @@
 {% if searched_albums %}
     <p> Results for "{{ q }}"</p> 
     {% for search in searched_albums %}
-        <div class="card mb-2">
-            <div class="row g-0"> 
-                <div class="col-md-4">
-                    {% for image in search.images_set.all|slice:":1" %}
-                        <a hx-get="{% url 'display_all_images_from_single_album' search.pk %}"
-                            hx-target="#replaced_div_with_one_year-season_view">
-                            <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
-                        </a>
-                    {% endfor %}
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: blue;"> {{ search.album_name }} {{ search.album_year }}</h5> <br>
-                        <p class="card-text" style="color: grey;"> 
-                            <b><a href="" style="text-decoration: none;">{{ search.album_owner.username }} | {{ search.album_owner.email }}</a></b>
-                        </p>
-                        <p class="card-text"><small class="text-muted"> {{ search.album_created }} </small></p>
+        {% if search.hidden == False %}
+            <div class="card mb-2">
+                <div class="row g-0"> 
+                    <div class="col-md-4">
+                        {% for image in search.images_set.all|slice:":1" %}
+                            <a hx-get="{% url 'display_all_images_from_single_album' search.pk %}"
+                                hx-target="#replaced_div_with_one_year-season_view">
+                                <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+                            </a>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: blue;"> {{ search.album_name }} {{ search.album_year }}</h5> <br>
+                            <p class="card-text" style="color: grey;"> 
+                                <b><a href="" style="text-decoration: none;">{{ search.album_owner.username }} | {{ search.album_owner.email }}</a></b>
+                            </p>
+                            <p class="card-text"><small class="text-muted"> {{ search.album_created }} </small></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
     {% endfor %}
 {% else %}
     <p> No results for "{{ q }}"</p>

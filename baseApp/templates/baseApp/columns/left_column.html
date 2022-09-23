@@ -6,12 +6,19 @@
 
 
 
+<a id="activities_button" style="text-decoration: none;"
+  hx-get="{% url 'display_participants' %}"
+  hx-target="#display_participants"> 
+  Activities 
+</a> <br> <br> <br>
+
+
+
 <div id="success_album_upload_message">
-  <a id="new_album_button"
-  style="text-decoration: none;"
+  <a id="new_album_button" style="text-decoration: none;"
     hx-get="{% url 'create_new_album_form_display' %}"
     hx-target="#create_new_album_form"> 
-      Add new
+      <b>Add new</b>
   </a>
 </div> <br> <br>
 
@@ -25,9 +32,9 @@
 
 
 <a id="all_albums_my_albums_button"
-href="{% url 'home' %}" style="text-decoration: none;" 
+  href="{% url 'home' %}" style="text-decoration: none;" 
   hx-boost="true">
-    Albums {{all_albums.count}} 
+    Albums({{ all_albums.count }}) 
 </a> <br> <br>
 
 
@@ -35,15 +42,8 @@ href="{% url 'home' %}" style="text-decoration: none;"
   href="{% url 'display_my_albums' %}" style="text-decoration: none;" 
   hx-get="{% url 'display_my_albums' %}"
   hx-target="#all_albums_wrapper"> 
-    Archive
-</a> <br> <br> <br>
-
-
-<a id="activities_button" style="text-decoration: none;"
-  hx-get="{% url 'display_participants' %}"
-  hx-target="#display_participants"> 
-  Activities 
-</a> <br> <br> <br>
+    Archive 
+</a> <br> <br> <br><br>
 
 
 

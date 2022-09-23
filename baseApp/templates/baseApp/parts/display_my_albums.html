@@ -1,4 +1,6 @@
-
+<!-- <b>{{ my_albums|length }} albums</b> -->
+<div id="replaced_div_with_one_year-season_view">
+    <div id="all_albums_wrapper">
 {% for my_album in my_albums %}
     {% if my_album.album_owner == request.user %}
         <div class="card mb-2">
@@ -17,14 +19,16 @@
                         <p class="card-text" style="color: grey;"> {{ my_album.album_owner.username }} | {{ my_album.album_owner.email }} </p>
                         <p class="card-text"><small class="text-muted"> Created: {{ my_album.album_created }} </small></p>
                     </div>
-                    <a hx-delete="{% url 'delete_album' my_album.pk %}"
-                        hx-confirm="Confirm deleting"> 
-                        <button id="delete_album_button">
-                            Delete 
-                        </button> 
-                    </a>
                 </div>
             </div>
+                <button id="delete_album_button" 
+                    hx-delete="{% url 'delete_album' my_album.pk %}"
+                    hx-confirm="Confirm deleting"> 
+                        Delete 
+                </button> 
+            </a>
         </div>
     {% endif %}
 {% endfor %}
+</div>
+</div>

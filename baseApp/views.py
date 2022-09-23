@@ -1,3 +1,4 @@
+from msilib.schema import CustomAction
 from django.shortcuts import render, redirect
 from . models import Album, Season, Year, Images, Comment
 from . forms import AlbumForm, ImagesForm, CommentForm
@@ -6,7 +7,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.paginator import EmptyPage, Paginator
-
+import time
 
 
 
@@ -72,9 +73,9 @@ def create_new_album(request):
                         album_images = f,
                         images = i                 
                     )
-                # return redirect('redirect_to_right_column')
-                content = "<p> Album created <a href='/'> <b> refresh </b> </a></p>"
-                return HttpResponse(content)
+                return redirect('redirect_to_right_column')
+                # content = "<p> Album created <a href='/'> <b> refresh </b> </a></p>"
+                # return HttpResponse(content)
             # else:
             #     print(form.errors)
     # else:
@@ -84,7 +85,10 @@ def create_new_album(request):
 
 
 def redirect_to_right_column(request):
-    return render(request, 'baseApp/columns/right_column.html')
+    all_albums = Album.objects.all()
+    return render(request, 'baseApp/columns/right_column.html', {
+        'all_albums': all_albums,
+    })
 
 
 
@@ -152,13 +156,11 @@ def albums_search(request):
 
 @login_required(login_url='login')
 def delete_album(request, pk):
+    delete_album = Album.objects.get(pk=pk)
     if request.method == 'DELETE':
-        delete_album = Album.objects.get(pk=pk)
         delete_album.delete()
         content = "<p> <b> Album deleted </b> </p>"
         return HttpResponse(content)
-
-
 
 def delete_album_comment(request, pk):
     album_comment = Comment.objects.get(pk=pk)
@@ -177,8 +179,4 @@ def display_participants(request):
     })
 
 
-def display_other_user_albums(request):
-    other_user_albums = Album.objects.all()
-    return render(request, 'baseApp/parts/display_other_user_albums.html',{
-        'other_user_albums': other_user_albums
-    })
+
