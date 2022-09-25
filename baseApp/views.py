@@ -1,4 +1,3 @@
-from msilib.schema import CustomAction
 from django.shortcuts import render, redirect
 from . models import Album, Season, Year, Images, Comment
 from . forms import AlbumForm, ImagesForm, CommentForm
@@ -146,7 +145,11 @@ def display_my_albums(request):
 @login_required(login_url='login')
 def albums_search(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    searched_albums = Album.objects.filter(Q(album_name__icontains=q))
+    searched_albums = Album.objects.filter(
+        Q(album_name__icontains=q) 
+        | 
+        Q(album_owner__email__icontains=q)
+    )
     return render(request, 'baseApp/parts/albums_search.html', {
         'searched_albums': searched_albums,
          'q': q,

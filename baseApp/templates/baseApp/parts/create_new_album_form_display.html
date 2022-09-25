@@ -1,33 +1,37 @@
 
-<!-- <div class="alert alert-muted alert-dismissible fade show" role="alert"> -->
-    <!-- <div style="height:500px; overflow: scroll"> -->
-    <form
-        hx-post="{% url 'create_new_album' %}"
-        hx-encoding="multipart/form-data">
+<div id="new_album_form">
 
-        <!-- After submit, show the message inside rerendered form -->
-        {% csrf_token %}
+    <!-- <div class="alert alert-muted alert-dismissible fade show" role="alert"> -->
+        <!-- <div style="height:500px; overflow: scroll"> -->
+        <form
+            hx-post="{% url 'create_new_album' %}"
+            hx-encoding="multipart/form-data">
 
-        
-        <label for=""> Album name </label> 
-        {{ form.album_name|capfirst }} <br> <br>
+            <!-- After submit, show the message inside rerendered form -->
+            {% csrf_token %}
 
-        {{ form.season_name }} 
-        <label for=""> Season </label> <br> <br>
-        
-        {{ form.album_year }} 
-        <label for=""> Year </label> <br> <br>
-        
-        {{ form.hidden }} 
-        <label for=""> Visible for me only </label> <br> <br>
+            
+            <label for=""> Album name </label> 
+            {{ form.album_name|capfirst }} <br> <br>
+
+            {{ form.season_name }} 
+            <label for=""> Season </label> <br> <br>
+            
+            {{ form.album_year }} 
+            <label for=""> Year </label> <br> <br>
+            
+            {{ form.hidden }} 
+            <label for=""> Visible for me only </label> <br> <br>
 
 
-        {% for image_field in images_form %}
-            {{ image_field }}
-        {% endfor %} <br> <br>
+            {% for image_field in images_form %}
+                {{ image_field }}
+            {% endfor %} <br> <br>
 
-        <input type="submit" class="btn btn-outline-primary" value="Save"> <br><br>
-    </form>
-    <!-- </div> -->
-    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div> -->
+            <input type="submit" class="btn btn-outline-primary" value="Save"> <br><br>
+        </form>
+        <!-- </div> -->
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
+
+</div>

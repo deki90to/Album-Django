@@ -1,5 +1,5 @@
 <!-- dynamic search -->
-<input id="search" type="text" name="q" placeholder="Destination"   
+<input id="search" type="text" name="q" placeholder="Dest/Email"   
   hx-get="{% url 'albums_search' %}"
   hx-target="#all_albums_wrapper"
   hx-trigger="keyup changed delay:500ms"> <br> <br> <br>
@@ -14,28 +14,21 @@
 
 
 
-<div id="success_album_upload_message">
+
   <a id="new_album_button" style="text-decoration: none;"
     hx-get="{% url 'create_new_album_form_display' %}"
     hx-target="#create_new_album_form"> 
       <b>Add new</b>
-  </a>
-</div> <br> <br>
+  </a> <br> <br> <br>
 
-<!-- <form 
-  hx-get="{% url 'albums_search' %}"
-  hx-target="#all_albums_wrapper">
-  {% csrf_token %}
-    <input type="text" name="q" placeholder="By destination">
-    <input type="submit" value="Search">
-</form> <br> -->
+
 
 
 <a id="all_albums_my_albums_button"
   href="{% url 'home' %}" style="text-decoration: none;" 
   hx-boost="true">
-    Albums({{ all_albums.count }}) 
-</a> <br> <br>
+    Albums {{ all_albums.count }} 
+</a> <br> <br> <br>
 
 
 <a id="all_albums_my_albums_button"
@@ -43,7 +36,7 @@
   hx-get="{% url 'display_my_albums' %}"
   hx-target="#all_albums_wrapper"> 
     Archive 
-</a> <br> <br> <br><br>
+</a> <br> <br> <br>
 
 
 
@@ -62,6 +55,7 @@
     </a>
   </div>
 {% endfor %} <br>
+
 
 
 <p> See albums by years </p> 

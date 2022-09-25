@@ -16,7 +16,6 @@ body {
 
 #all_albums_wrapper {
     padding: 1%;
-
 }
 #all_seasons_wrapper {
     padding: 1%;
@@ -50,11 +49,11 @@ select {
 }
 
 #all_seasons_font {
-  font-size: 2.5vw;
+  font-size: 2.2vw;
 }
 
 #all_years_font {
-  font-size: 2.5vw;
+  font-size: 2.2vw;
 }
 #comment_delete_button {
   background-color: red;
@@ -70,64 +69,42 @@ select {
   border: none;
   border-radius: 5px;
 }
-<<<<<<< HEAD
-/* #new_album_button {
-=======
 #new_album_button {
->>>>>>> 9b040a1be5b8f4895d5134337111eab2fd0d041a
   background-color: blue;
   color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 3vw;
-  font-weight: bold;
-  box-shadow: 3px 3px 10px 0px black;
-  padding: 10px;
-} */
-
-<<<<<<< HEAD
-/* #all_albums_my_albums_button {
-=======
-#all_albums_my_albums_button {
->>>>>>> 9b040a1be5b8f4895d5134337111eab2fd0d041a
-  background-color: blue;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 2.5vw;
-  box-shadow: 3px 3px 10px 0px black;
-  padding: 8px;
-} */
+  padding: 10%; 
+}
+
+#all_albums_my_albums_button {
+  background-color: blue;
+  color: white;
+  border-radius: 10px;
+  font-size: 2.5vw;
+  padding: 10%; 
+}
 
 #album_comments_button {
   background-color: blue;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 3vw;
   font-weight: bold;
 }
 
-<<<<<<< HEAD
-/* #activities_button {
-=======
 #activities_button {
->>>>>>> 9b040a1be5b8f4895d5134337111eab2fd0d041a
   background-color: blue;
   color: white;
-  border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 2.5vw;
-  box-shadow: 3px 3px 10px 0px black;
-  padding: 5px;
-} */
+  padding: 10%;  
+}
 
 #search {
-<<<<<<< HEAD
-  padding: 2px;
+  padding: 5%;
 }
-=======
-  box-shadow: 3px 3px 10px 0px black;
-  padding: 3px;
+#new_album_form {
+  padding: 1%;
 }
->>>>>>> 9b040a1be5b8f4895d5134337111eab2fd0d041a

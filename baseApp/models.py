@@ -39,6 +39,8 @@ class Album(models.Model):
 class Images(models.Model):
     images = models.ImageField(upload_to='images/')
     album_images = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, blank=False)
+    def __str__(self):
+        return f'{self.album_images}'
 
 
 
