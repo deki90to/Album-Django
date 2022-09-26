@@ -1,4 +1,6 @@
-Note: *Made for 16:9 screen aspect ratio*
+*Made for 16:9 screen aspect ratio*
+
+Requirements:
 
 pip install django
 
