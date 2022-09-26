@@ -6,5 +6,5 @@ pip install django
 
 pip install django-htmx
 
-pip install pillow 
+pip install Pillow 
 
