@@ -6,6 +6,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Season(models.Model):
     season_name = models.CharField(max_length=255, null=True, blank=False)
+
     def __str__(self):
         return f'{self.season_name}'
 
@@ -29,6 +30,7 @@ class Album(models.Model):
     album_year = models.ForeignKey(Year, on_delete=models.CASCADE, null=True)
     album_created = models.DateTimeField(auto_now_add=True, null=True)
     hidden = models.BooleanField(blank=True, null=True, default=False)
+
     def __str__(self):
         return f'{self.album_name}, {self.season_name}, {self.album_created.date()}'
     class Meta:
@@ -39,6 +41,7 @@ class Album(models.Model):
 class Images(models.Model):
     images = models.ImageField(upload_to='images/')
     album_images = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, blank=False)
+
     def __str__(self):
         return f'{self.album_images}'
 
@@ -49,6 +52,7 @@ class Comment(models.Model):
     commented_album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, blank=False)
     comment_owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,  null=True, blank=False)
     comment_created = models.DateTimeField(auto_now_add=True, null=True, blank=False)
+    
     def __str__(self):
         return f'{self.comment_owner}, {self.comment}, {self.commented_album}, {self.comment_created.date()}'
     class Meta:

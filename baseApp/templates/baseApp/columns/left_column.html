@@ -1,9 +1,20 @@
+
 <!-- dynamic search -->
 <input id="search" type="text" name="q" placeholder="Dest/mail"   
   hx-get="{% url 'albums_search' %}"
   hx-target="#all_albums_wrapper"
   hx-trigger="keyup changed delay:500ms"
 /> <br> <br> <br>
+
+
+<a href="{% url 'chat_home' %}"> 
+  <button class="btn btn-primary btn-sm">
+    <small> <small> 
+      Chat rooms 
+    </small> </small>
+  </button> <br> <br>
+</a>
+
 
 <a hx-get="{% url 'display_participants' %}"
   hx-target="#display_participants"> 
