@@ -17,7 +17,9 @@
                         <div class="card-body">
                             <h5 class="card-title" style="color: blue;"> {{ my_album.album_name }} {{ my_album.album_year }}</h5> <br>
                             <p class="card-text" style="color: grey;"> {{ my_album.album_owner.username }} | {{ my_album.album_owner.email }} </p>
-                            <p class="card-text"><small class="text-muted"> Created: {{ my_album.album_created }} </small></p>
+                            <p class="card-text"><small class="text-muted"> Created {{ my_album.album_created.date }} </small></p>
+                            <p class="card-text"><small class="text-muted"> Last login {{ my_album.album_owner.last_login|timesince }} ago </small></p>
+                            <p class="card-text"><small class="text-muted"> Member since {{ my_album.album_owner.date_joined.date }} </small></p>
                         </div>
                     </div>
                 </div>

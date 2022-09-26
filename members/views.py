@@ -1,4 +1,3 @@
-from multiprocessing import AuthenticationError
 from urllib import response
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -54,3 +53,5 @@ def logout_(request):
     logout(request)
     messages.error(request, 'Logged out')
     return redirect('login')
+
+

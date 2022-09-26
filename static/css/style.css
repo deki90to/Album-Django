@@ -44,16 +44,18 @@ select {
   font-size: 1.2vw;
 } */
 
-#display_all_images_from_single_album {
+/* #display_all_images_from_single_album {
   padding: 1%;
-}
+} */
 
 #all_seasons_font {
-  font-size: 2.2vw;
+  font-size: 2.0vw;
+  font-weight: bold;
 }
 
 #all_years_font {
-  font-size: 2.2vw;
+  font-size: 2.0vw;
+  font-weight: bold;
 }
 #comment_delete_button {
   background-color: red;
@@ -69,42 +71,43 @@ select {
   border: none;
   border-radius: 5px;
 }
-#new_album_button {
+/* #new_album_button {
   background-color: blue;
   color: white;
   border-radius: 10px;
   font-size: 2.5vw;
   padding: 10%; 
-}
+} */
 
-#all_albums_my_albums_button {
+/* #all_albums_my_albums_button {
   background-color: blue;
   color: white;
   border-radius: 10px;
   font-size: 2.5vw;
   padding: 10%; 
-}
+} */
 
-#album_comments_button {
+/* #album_comments_button {
   background-color: blue;
   color: white;
   border: none;
   border-radius: 10px;
   font-size: 3vw;
   font-weight: bold;
-}
+} */
 
-#activities_button {
+/* #activities_button {
   background-color: blue;
   color: white;
   border-radius: 10px;
   font-size: 2.5vw;
   padding: 10%;  
-}
+} */
 
 #search {
   padding: 5%;
 }
+
 #new_album_form {
   padding: 1%;
 }

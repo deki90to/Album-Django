@@ -18,7 +18,9 @@
                             <p class="card-text" style="color: grey;"> 
                                 <b><a href="" style="text-decoration: none;">{{ season.album_owner.username }} | {{ season.album_owner.email }}</a></b>
                             </p> 
-                            <p class="card-text"><small class="text-muted"> {{ season.album_created }} </small></p>
+                            <p class="card-text"><small class="text-muted"> Created {{ season.album_created.date }} </small></p>
+                            <p class="card-text"><small class="text-muted"> Last login {{ season.album_owner.last_login|timesince }} ago </small></p>
+                            <p class="card-text"><small class="text-muted"> Member since {{ season.album_owner.date_joined.date }} </small></p>
                         </div>
                     </div>
                 </div>

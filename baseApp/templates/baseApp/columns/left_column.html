@@ -1,41 +1,40 @@
 <!-- dynamic search -->
-<input id="search" type="text" name="q" placeholder="Dest/Email"   
+<input id="search" type="text" name="q" placeholder="Dest/mail"   
   hx-get="{% url 'albums_search' %}"
   hx-target="#all_albums_wrapper"
-  hx-trigger="keyup changed delay:500ms"> <br> <br> <br>
+  hx-trigger="keyup changed delay:500ms"
+/> <br> <br> <br>
 
-
-
-<a id="activities_button" style="text-decoration: none;"
-  hx-get="{% url 'display_participants' %}"
+<a hx-get="{% url 'display_participants' %}"
   hx-target="#display_participants"> 
-  Activities 
-</a> <br> <br> <br>
+  <button class="btn btn-primary btn-sm btn-block">
+    Activities 
+  </button>
+</a> <br> <br>
 
 
+<a hx-get="{% url 'create_new_album_form_display' %}"
+  hx-target="#create_new_album_form"> 
+  <button class="btn btn-primary btn-sm btn-block">
+    <b> Add new </b>
+  </button>
+</a> <br> <br> 
 
 
-  <a id="new_album_button" style="text-decoration: none;"
-    hx-get="{% url 'create_new_album_form_display' %}"
-    hx-target="#create_new_album_form"> 
-      <b>Add new</b>
-  </a> <br> <br> <br>
-
-
-
-
-<a id="all_albums_my_albums_button"
-  href="{% url 'home' %}" style="text-decoration: none;" 
+<a href="{% url 'home' %}" 
   hx-boost="true">
+  <button class="btn btn-primary btn-sm btn-block">
     Albums {{ all_albums.count }} 
-</a> <br> <br> <br>
+  </button>
+</a> <br> <br> 
 
 
-<a id="all_albums_my_albums_button"
-  href="{% url 'display_my_albums' %}" style="text-decoration: none;" 
+<a href="{% url 'display_my_albums' %}"
   hx-get="{% url 'display_my_albums' %}"
   hx-target="#all_albums_wrapper"> 
-    Archive 
+  <button class="btn btn-primary btn-sm btn-block">
+    Archive
+  </button>
 </a> <br> <br> <br>
 
 

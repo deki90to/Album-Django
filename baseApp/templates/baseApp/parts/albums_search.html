@@ -19,7 +19,9 @@
                             <p class="card-text" style="color: grey;"> 
                                 <b><a href="" style="text-decoration: none;">{{ search.album_owner.username }} | {{ search.album_owner.email }}</a></b>
                             </p>
-                            <p class="card-text"><small class="text-muted"> {{ search.album_created }} </small></p>
+                            <p class="card-text"><small class="text-muted"> Created {{ search.album_created.date }} </small></p>
+                            <p class="card-text"><small class="text-muted"> Last login {{ search.album_owner.last_login|timesince }} ago </small></p>
+                            <p class="card-text"><small class="text-muted"> Member since {{ search.album_owner.date_joined.date }} </small></p>
                         </div>
                     </div>
                 </div>
