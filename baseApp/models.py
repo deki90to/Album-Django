@@ -18,6 +18,7 @@ class Year(models.Model):
     )
     def __str__(self):
         return f'{self.album_year}'
+    
     class Meta:
         ordering = ['-album_year']
 
@@ -33,6 +34,7 @@ class Album(models.Model):
 
     def __str__(self):
         return f'{self.album_name}, {self.season_name}, {self.album_created.date()}'
+    
     class Meta:
         ordering = ['-album_created']
 
@@ -55,5 +57,6 @@ class Comment(models.Model):
     
     def __str__(self):
         return f'{self.comment_owner}, {self.comment}, {self.commented_album}, {self.comment_created.date()}'
+    
     class Meta:
         ordering = ['-comment_created']

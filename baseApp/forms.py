@@ -8,7 +8,7 @@ from . models import Album, Images, Comment
 
 class AlbumForm(ModelForm):
     hidden = forms.BooleanField(
-        label='Visible only for me',
+        label='Visible only for me (Archive)',
         required=False, 
         initial=False,
     )

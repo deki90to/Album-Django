@@ -12,7 +12,14 @@ import time
 
 @login_required(login_url='login')
 def home(request):
-    all_albums = Album.objects.all()
+    album_p = Paginator(Album.objects.all(), 3)
+    page = request.GET.get('page')
+    try:
+        all_albums = album_p.get_page(page)
+    except EmptyPage:
+        all_albums = album_p.get_page(album_p.num_pages)
+
+    # all_albums = Album.objects.all()
     all_years = Year.objects.all()
     all_seasons = Season.objects.all()
     all_album_images = Images.objects.all()

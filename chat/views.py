@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from chat.models import Room, Message
 from django.http import HttpResponse, JsonResponse
 
+
 def chat_home(request):
     return render(request, 'chat_home.html')
+
 
 def room(request, room):
     username = request.GET.get('username')
@@ -13,6 +15,7 @@ def room(request, room):
         'room': room,
         'room_details': room_details
     })
+
 
 def checkview(request):
     room = request.POST['room_name']
@@ -25,13 +28,15 @@ def checkview(request):
         new_room.save()
         return redirect('/chat/'+room+'/?username='+username)
 
+
 def send(request):
     message = request.POST['message']
-    username = request.POST['username']
+    username = request.user.username
     room_id = request.POST['room_id']
     new_message = Message.objects.create(value=message, user=username, room=room_id)
     new_message.save()
     return HttpResponse('Message sent successfully')
+
 
 def getMessages(request, room):
     room_details = Room.objects.get(name=room)
