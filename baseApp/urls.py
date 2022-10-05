@@ -28,5 +28,7 @@ urlpatterns = [
 
     path('redirect_to_right_column/', views.redirect_to_right_column, name='redirect_to_right_column'),
 
+    path('all_albums_display/', views.all_albums_display, name='all_albums_display'),
+
 
 ]

@@ -12,7 +12,7 @@
             <div id="all_albums_wrapper">
 
                 {% if all_albums.has_previous %}
-                    <a hx-get="?page={{ all_albums.previous_page_number }}" hx-target="#column_wrapper"> 
+                    <a href="?page={{ all_albums.previous_page_number }}"> 
                         <button class="btn btn-primary btn-sm"> &laquo </button> 
                     </a>
                 {% endif %}
@@ -27,48 +27,38 @@
                 <br>
 
 
-                {% for album in all_albums %}
-                    {% if album.hidden == False %}
-                        <div class="card mb-2">
-                            <div class="row g-0"> 
-                                <div class="col-md-4">
-                                    {% for image in album.images_set.all|slice:":1" %}
 
-                                        <a hx-get="{% url 'display_all_images_from_single_album' album.pk %}"
-                                            hx-target="#replaced_div_with_one_year-season_view">
-                                            <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
-                                        </a>
-                                    {% endfor %}
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body"> 
-                                        <h5 class="card-title" style="color: blue;"> {{ album.album_name }} {{ album.album_year }}</h5> <br>
-                                        <p class="card-text" style="color: grey;">
-                                            <b><a href="#" style="text-decoration: none;">{{ album.album_owner.username }} | {{ album.album_owner.email }}</a></b>
-                                        </p>
-                                        <p class="card-text"><small class="text-muted"> Created {{ album.album_created.date }} </small></p>
-                                        <p class="card-text"><small class="text-muted"> Last login {{ album.album_owner.last_login|timesince }} ago </small></p>
-                                        <p class="card-text"><small class="text-muted"> Member since {{ album.album_owner.date_joined.date }} </small></p>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
 
+                {% include 'baseApp/parts/all_albums_display.html' %}
+
+                {% if forloop.last %}
+                    <div hx-get="{% url 'all_albums_display' %}?page={{ all_albums.number|add:1 }}"
+                        hx-trigger="revealed"
+                        hx-target="this"
+                        hx-swap="afterend">
+                    </div>
+                {% else %}
+                    <div></div>
+                {% endif %}
+
+
+
+                
 
                 {% if all_albums.has_previous %}
-                    <a href="?page={{all_albums.previous_page_number}}"> <button class="btn btn-primary btn-sm"> &laquo </button> </a>
+                    <a href="?page={{ all_albums.previous_page_number }}"> 
+                        <button class="btn btn-primary btn-sm"> &laquo </button> 
+                    </a>
                 {% endif %}
 
                 {% if all_albums.has_next %}
-                    <a href="?page={{all_albums.next_page_number}}"> <button class="btn btn-primary btn-sm"> &raquo </button> </a>
+                    <a href="?page={{ all_albums.next_page_number }}"> 
+                        <button class="btn btn-primary btn-sm"> &raquo </button> 
+                    </a>
                 {% endif %} 
 
-                <b> <small>{{all_albums.number}} page of {{all_albums.paginator.num_pages}}</small> </b>
+                <b> <small>{{ all_albums.number }} page of {{ all_albums.paginator.num_pages }}</small> </b>
                 <br>
-
 
             </div>
         </div>

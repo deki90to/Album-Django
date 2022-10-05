@@ -1,4 +1,5 @@
 
+<a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-primary btn-sm"> &laquo Back </a>
   <!-- comment form --> 
   <a id="album_comments_button"  
     hx-get="{% url 'comment_form_display' %}"
@@ -28,7 +29,7 @@
         </div>
       {% endfor %}
     </div> <br>
-    <a href="#" hx-boost="true" class="btn btn-primary btn-sm btn-block"> ^ </a>
+    <a href="#" hx-boost="true" class="btn btn-primary btn-sm btn-block"> Top ^ </a>
   </div> <br>
   
 </div> <br>
