@@ -1,5 +1,7 @@
 
-<a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-primary btn-sm"> &laquo Back </a>
+<a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-primary btn-sm"> 
+  &laquo Back 
+</a>
   <!-- comment form --> 
   <a id="album_comments_button"  
     hx-get="{% url 'comment_form_display' %}"
@@ -15,7 +17,7 @@
 
 <div id="display_all_images_from_single_album">
   <div id="all_albums_wrapper">
-    {{ album_images.count }} images of {{ album_details.album_name}}
+    {{ album_images.count }} of {{ album_details.album_name}} images
 
     <div class="row row-cols-1 row-cols-md-2 g-4">
       {% for images in album_images %}

@@ -2,19 +2,21 @@
 <div class="alert alert-muted alert-dismissible fade show" role="alert">
     <div style="height:200px; overflow: scroll">
 
-        {% for participant in participants %}
-            {{ participant.comment_owner.username }} commented album
-            {{ participant.commented_album.album_owner.username }}'s
-            <a hx-get="{% url 'display_all_images_from_single_album' participant.commented_album.pk %}"
-                hx-target="#display_participants_album">
-                <b>{{ participant.commented_album.album_name }}</b>
-            </a>
-            <ul> 
-                <div id="participant_comment">
-                    "{{ participant.comment|truncatewords:20 }}"
-                </div> 
-            </ul>
-        {% endfor %}
+        {% if participants %}
+            {% for participant in participants %}
+                {{ participant.comment_owner.username }} commented album
+                {{ participant.commented_album.album_owner.username }}'s
+                <a hx-get="{% url 'display_all_images_from_single_album' participant.commented_album.pk %}"
+                    hx-target="#display_participants_album">
+                    <b>{{ participant.commented_album.album_name }}</b>
+                </a>
+                    <div id="participant_comment">
+                        "{{ participant.comment|truncatewords:20 }}"
+                    </div> 
+            {% endfor %}
+        {% else %}
+            No activities yet...
+        {% endif %}
 
     </div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
