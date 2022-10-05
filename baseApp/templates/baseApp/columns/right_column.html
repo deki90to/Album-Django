@@ -11,6 +11,43 @@
         <div id="replaced_div_with_one_year-season_view">
             <div id="all_albums_wrapper">
 
+<<<<<<< HEAD
+=======
+                {% if all_albums.has_previous %}
+                    <a href="?page={{ all_albums.previous_page_number }}"> 
+                        <button class="btn btn-primary btn-sm"> &laquo </button> 
+                    </a>
+                {% endif %}
+
+                {% if all_albums.has_next %}
+                    <a href="?page={{ all_albums.next_page_number }}"> 
+                        <button class="btn btn-primary btn-sm"> &raquo </button> 
+                    </a>
+                {% endif %} 
+
+                <center><b> <small>{{ all_albums.number }} page of {{ all_albums.paginator.num_pages }}</small> </b></center>
+
+              
+
+
+
+
+                {% include 'baseApp/parts/all_albums_display.html' %}
+
+                {% if forloop.last %}
+                    <div hx-get="{% url 'all_albums_display' %}?page={{ all_albums.number|add:1 }}"
+                        hx-trigger="revealed"
+                        hx-target="this"
+                        hx-swap="afterend">
+                    </div>
+                {% else %}
+                    <div></div>
+                {% endif %}
+
+
+
+                
+>>>>>>> 06673f0571f5fe66da5be006f77cc7b3aee6fa8a
 
                 {% if all_albums.has_previous %}
                     <a href="?page={{ all_albums.previous_page_number }}"> 
@@ -83,6 +120,11 @@
                     {{ all_albums.number }} page of {{ all_albums.paginator.num_pages }}
                 </small></b></center>
 
+<<<<<<< HEAD
+=======
+               <center><b> <small>{{ all_albums.number }} page of {{ all_albums.paginator.num_pages }}</small> </b></center>
+
+>>>>>>> 06673f0571f5fe66da5be006f77cc7b3aee6fa8a
 
             </div>
         </div>
