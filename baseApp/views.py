@@ -12,7 +12,7 @@ import time
 
 @login_required(login_url='login')
 def home(request):
-    album_p = Paginator(Album.objects.all(), 2)
+    album_p = Paginator(Album.objects.all(), 10)
     page = request.GET.get('page')
     try:
         all_albums = album_p.get_page(page)
@@ -191,7 +191,7 @@ def display_participants(request):
 
 
 def all_albums_display(request):
-    album_p = Paginator(Album.objects.all(), 2)
+    album_p = Paginator(Album.objects.all(), 10)
     page = request.GET.get('page')
     try:
         all_albums = album_p.get_page(page)
