@@ -54,11 +54,13 @@ def one_year_album_display(request, pk):
 # ALBUM CREATING
 @login_required(login_url='login')
 def create_new_album_form_display(request):
+    all_albums = Album.objects.all()
     form = AlbumForm()
     images_form = ImagesForm()
     return render(request, 'baseApp/parts/create_new_album_form_display.html',{
         'form': form,
         'images_form': images_form,
+        'all_albums': all_albums,
     })
 
 @login_required(login_url='login')

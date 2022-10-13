@@ -11,7 +11,7 @@
                     <b>{{ participant.commented_album.album_name }}</b>
                 </a>
                     <div id="participant_comment">
-                        "{{ participant.comment|truncatewords:20 }}"
+                        "{{ participant.comment|truncatewords:20 }}" <br> <br>
                     </div> 
             {% endfor %}
         {% else %}

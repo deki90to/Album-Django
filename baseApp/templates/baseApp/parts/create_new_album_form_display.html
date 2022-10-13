@@ -1,16 +1,13 @@
 
 <div id="new_album_form">
 
-    <!-- <div class="alert alert-muted alert-dismissible fade show" role="alert"> -->
         <!-- <div style="height:500px; overflow: scroll"> -->
         <form
             hx-post="{% url 'create_new_album' %}"
             hx-encoding="multipart/form-data">
 
-            <!-- After submit, show the message inside rerendered form -->
             {% csrf_token %}
 
-            
             <label for=""> Album name </label> 
             {{ form.album_name|capfirst }} <br> <br>
 
@@ -35,3 +32,5 @@
     </div> -->
 
 </div>
+
+

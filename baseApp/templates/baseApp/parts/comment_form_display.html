@@ -15,11 +15,13 @@
                 <p> <b> {{ comment.comment_owner.username }} </b> | 
                     <small> {{ comment.comment_created|timesince }} ago </small> <br>
                         {{ comment.comment|capfirst }} 
-                        <button id="comment_delete_button"
-                            hx-delete="{% url 'delete_album_comment' comment.pk %}"
-                            hx-confirm="Delete comment?">
-                            Delete 
-                        </button>
+                        {% if comment.comment_owner.email == request.user.email %}
+                            <button id="comment_delete_button"
+                                hx-delete="{% url 'delete_album_comment' comment.pk %}"
+                                hx-confirm="Delete comment?">
+                                Delete 
+                            </button>
+                        {% endif %}
                 </p>
             {% endfor %}
         </div>
