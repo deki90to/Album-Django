@@ -1,36 +1,25 @@
 
-<div id="new_album_form">
+<form hx-post="{% url 'create_new_album' %}" hx-encoding="multipart/form-data">
+    {% csrf_token %}
 
-        <!-- <div style="height:500px; overflow: scroll"> -->
-        <form
-            hx-post="{% url 'create_new_album' %}"
-            hx-encoding="multipart/form-data">
+    <label for=""> Album name </label> 
+    {{ form.album_name|capfirst }} <br> <br>
 
-            {% csrf_token %}
-
-            <label for=""> Album name </label> 
-            {{ form.album_name|capfirst }} <br> <br>
-
-            {{ form.season_name }} 
-            <label for=""> Season </label> <br> <br>
-            
-            {{ form.album_year }} 
-            <label for=""> Year </label> <br> <br>
-            
-            {{ form.hidden }} 
-            <label for=""> Visible for me only (Archive) </label> <br> <br>
+    {{ form.season_name }} 
+    <label for=""> Season </label> <br> <br>
+    
+    {{ form.album_year }} 
+    <label for=""> Year </label> <br> <br>
+    
+    {{ form.hidden }} 
+    <label for=""> Visible for me only (Archive) </label> <br> <br>
 
 
-            {% for image_field in images_form %}
-                {{ image_field }}
-            {% endfor %} <br> <br>
+    {% for album_form in images_form %}
+        {{ album_form }}
+    {% endfor %} <br> <br>
 
-            <input type="submit" class="btn btn-outline-primary" value="Save"> <br><br>
-        </form>
-        <!-- </div> -->
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div> -->
-
-</div>
+    <input type="submit" value="Save"> <br><br>
+</form>
 
 

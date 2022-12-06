@@ -1,6 +1,6 @@
 
 {% if searched_albums %}
-    <p> Results for "{{ q }}"</p> 
+    <center><h3> Results for "{{ q }}"</h3> </center>
     {% for search in searched_albums %}
         {% if search.hidden == False %}
             <div class="card mb-2">
@@ -8,7 +8,7 @@
                     <div class="col-md-4">
                         {% for image in search.images_set.all|slice:":1" %}
                             <a hx-get="{% url 'display_all_images_from_single_album' search.pk %}"
-                                hx-target="#replaced_div_with_one_year-season_view">
+                                hx-target="#searched-albums">
                                 <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
                             </a>
                         {% endfor %}

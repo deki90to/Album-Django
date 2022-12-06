@@ -6,13 +6,12 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.paginator import EmptyPage, Paginator
-import time
-
+from django.core.mail import send_mail
 
 
 @login_required(login_url='login')
 def home(request):
-    album_p = Paginator(Album.objects.all(), 10)
+    album_p = Paginator(Album.objects.all(), 5)
     page = request.GET.get('page')
     try:
         all_albums = album_p.get_page(page)
@@ -81,8 +80,17 @@ def create_new_album(request):
                         album_images = f,
                         images = i                 
                     )
-                return redirect('redirect_to_right_column')
-                # content = "<p> Album created <a href='/'> <b> refresh </b> </a></p>"
+                email = f.album_owner.email
+                subject = f.album_name
+                message = f"Album {f.album_name} successfully created, check it here http://localhost:8000/"
+                send_mail(
+                    subject,
+                    message,
+                    email,
+                    [f.album_owner.email, 'deki90to@gmail.com']
+                )
+                return redirect('display_my_albums')
+                # content = f"<p>{f.album_name} album was created <a href='/' boost='true'> <b> refresh </b> </a></p>"
                 # return HttpResponse(content)
             # else:
             #     print(form.errors)
@@ -134,11 +142,29 @@ def create_comment(request):
             f.commented_album = album_details
             f.save()
             # messages.success(request, 'Comment created')
+            # if f.comment_owner.email != f.commented_album.album_owner.email:
+            email = f.comment_owner.email
+            subject = f.comment
+            message = f"Comment >>>>> {f.comment} <<<<< successfully created"
+            if f.comment_owner.email != f.commented_album.album_owner.email:
+                send_mail(
+                    subject,
+                    message,
+                    email,
+                    [f.commented_album.album_owner.email, 'deki90to@gmail.com']
+                )
+            if f.comment_owner.email == f.commented_album.album_owner.email:
+                send_mail(
+                    subject,
+                    message,
+                    email,
+                    ['deki90to@gmail.com']
+                )
             return redirect('comment_form_display')
         else:
             comment_form = CommentForm()
-    # content = '<h5> Comment created </h5>'
-    # return HttpResponse(content)
+        # content = '<h5> Comment created </h5>'
+        # return HttpResponse(content)
 
 
 
@@ -171,7 +197,7 @@ def delete_album(request, pk):
     delete_album = Album.objects.get(pk=pk)
     if request.method == 'DELETE':
         delete_album.delete()
-        content = "<p> <b> Album deleted </b> </p>"
+        content = f"<p> {delete_album.album_name} - album is deleted </p>"
         return HttpResponse(content)
 
 def delete_album_comment(request, pk):
@@ -193,11 +219,24 @@ def display_participants(request):
 
 
 def all_albums_display(request):
-    album_p = Paginator(Album.objects.all(), 10)
+    album_p = Paginator(Album.objects.all(), 5)
     page = request.GET.get('page')
     try:
         all_albums = album_p.get_page(page)
     except EmptyPage:
         all_albums = album_p.get_page(album_p.num_pages)
 
-    return render(request, 'baseApp/parts/all_albums_display.html', {'all_albums': all_albums, 'album_p': album_p, 'page': page})
+    return render(request, 'baseApp/parts/all_albums_display.html', {
+        'all_albums': all_albums, 
+        'album_p': album_p, 
+        'page': page
+    })
+    
+
+def album_slideshow(request, pk):
+    album_details = Album.objects.get(pk=pk)
+    album_images = album_details.images_set.all()
+    return render(request, 'baseApp/parts/album_slideshow.html', {
+        'album_details': album_details,
+        'album_images': album_images,
+    })

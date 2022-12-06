@@ -1,31 +1,25 @@
 
-<form method="post" enctype="multipart/form-data"  
-    hx-post="{% url 'create_comment' %}"
+
+<form method="post" 
+    enctype="multipart/form-data" 
+    hx-post="{% url 'create_comment' %}" 
     hx-encoding="multipart/form-data">
-
-    <div class="alert alert-muted alert-dismissible fade show" role="alert">
-
     {% csrf_token %}
     {{ comment_form }} <br> <br>
+    <input type="submit"value="Save" class="btn btn-outline-primary btn-sm"> <br><br>
 
-    <input type="submit" class="btn btn-primary" value="Save"> <br><br>
-
-        <div style="height:200px; overflow: scroll">
-            {% for comment in album_details.comment_set.all %}
-                <p> <b> {{ comment.comment_owner.username }} </b> | 
-                    <small> {{ comment.comment_created|timesince }} ago </small> <br>
-                        {{ comment.comment|capfirst }} 
-                        {% if comment.comment_owner.email == request.user.email %}
-                            <button id="comment_delete_button"
-                                hx-delete="{% url 'delete_album_comment' comment.pk %}"
-                                hx-confirm="Delete comment?">
-                                Delete 
-                            </button>
-                        {% endif %}
-                </p>
-            {% endfor %}
-        </div>
-
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    {% for comment in album_details.comment_set.all %}
+        <p> <b> {{ comment.comment_owner.username }} </b> | 
+            <small> {{ comment.comment_created|timesince }} ago </small> <br>
+                {{ comment.comment|capfirst }} 
+                {% if comment.comment_owner.email == request.user.email %}
+                    <button class="btn btn-outline-danger btn-sm"
+                        hx-delete="{% url 'delete_album_comment' comment.pk %}"
+                        hx-confirm="Delete comment?">
+                        Delete 
+                    </button>
+                {% endif %}
+        </p>
+    {% endfor %}
 </form>
+

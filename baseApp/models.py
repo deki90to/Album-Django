@@ -1,8 +1,11 @@
 from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
+User = settings.AUTH_USER_MODEL
 
 class Season(models.Model):
     season_name = models.CharField(max_length=255, null=True, blank=False)
@@ -26,7 +29,7 @@ class Year(models.Model):
 
 class Album(models.Model):
     album_name = models.CharField(max_length=255, null=True)
-    album_owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    album_owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     season_name = models.ForeignKey(Season, on_delete=models.CASCADE, null=True)
     album_year = models.ForeignKey(Year, on_delete=models.CASCADE, null=True)
     album_created = models.DateTimeField(auto_now_add=True, null=True)
@@ -52,7 +55,7 @@ class Images(models.Model):
 class Comment(models.Model):
     comment = models.CharField(max_length=1000, null=True, blank=False)
     commented_album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, blank=False)
-    comment_owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,  null=True, blank=False)
+    comment_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False)
     comment_created = models.DateTimeField(auto_now_add=True, null=True, blank=False)
     
     def __str__(self):

@@ -9,6 +9,8 @@ class Room(models.Model):
     def __str__(self):
         return(f'{self.name} - room')
 
+
+
 class Message(models.Model):
     value = models.CharField(max_length=1000000)
     date = models.DateTimeField(default=datetime.now, blank=True)
@@ -17,3 +19,6 @@ class Message(models.Model):
 
     def __str__(self): 
         return(f'{self.value} - message, {self.room} - room, {self.user} - user')
+
+    class Meta:
+        ordering = ['-date']

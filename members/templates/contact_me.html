@@ -1,0 +1,25 @@
+
+
+
+
+<br><br>
+<center>
+  <h1> Contact me </h1> <p>Fill up the form</p> <br>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <input type="email" placeholder="Your email" name="email"><br><br>
+    <input type="text" name="subject" placeholder="Subject"> <br><br>
+    <textarea name="message" placeholder="Ask a question or give a suggestion..." cols="30" rows="10"></textarea> <br><br>
+
+    <input type="submit" placeholder="Send" class="btn btn-outline-primary">
+  </form>
+</center>
+
+{% if message %}
+  <center>
+    <h1> Email successfully sent! </h1>
+    Send another or <a href="{% url 'login' %}"> <b>login</b> </a>
+  </center>
+{% endif %}

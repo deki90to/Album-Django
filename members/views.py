@@ -5,8 +5,9 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from requests import Response
 from . forms import RegistrationForm
-
-
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.http import HttpResponse
 
 
 def register_(request):
@@ -27,8 +28,6 @@ def register_(request):
     })
 
 
-
-
 def login_(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -46,12 +45,61 @@ def login_(request):
         return render(request, 'login.html')
     
 
-
-
-
 def logout_(request):
     logout(request)
     messages.error(request, 'Logged out')
     return redirect('login')
 
 
+def resetPassword(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid:
+            form.save()
+            email = request.POST['email']
+            user = authenticate(email=email)
+            login(request, user)
+            messages.success(request, 'Password Sent')
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+        
+    context = {'form': form}
+    return render(request, 'reset_password.html', context)
+
+
+
+def resetPasswordConfirm(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
+            user = authenticate(password1=password1, password2=password2)
+            login(request, user)
+            messages.success(request, 'Password Saved')
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+        
+    context = {'form': form}
+    return render(request, 'reset_password_confirm.html', context)
+
+
+def contact_me(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+        send_mail(
+            subject,
+            message,
+            email,
+            ['deki90to@gmail.com']
+        )
+        messages.success(request, 'Your message/suggestion was sent!')
+
+        return render(request, 'contact_me.html', {'email': email, 'message': message})
+    else:
+        return render(request, 'contact_me.html')

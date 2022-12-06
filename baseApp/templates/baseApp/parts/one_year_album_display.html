@@ -1,5 +1,7 @@
-   
-<div id="all_albums_wrapper">
+
+<center><h3> Year view </h3></center>
+
+{% if  choosen_year %}
     {% for year in choosen_year %}
         {% if year.hidden == False %}
             <div class="card mb-2">
@@ -7,8 +9,8 @@
                     <div class="col-md-4">
                         {% for images in year.images_set.all|slice:":1" %}
                             <a hx-get="{% url 'display_all_images_from_single_album' year.pk %}"
-                                hx-target="#replaced_div_with_one_year-season_view">
-                                <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+                                hx-target="#filtered-albums">
+                                    <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
                             </a>
                         {% endfor %}
                     </div>
@@ -27,4 +29,6 @@
             </div>
         {% endif %}
     {% endfor %}
-</div>
+{% else %}
+    <h6>No albums for this year yet</h6>
+{% endif %} 
