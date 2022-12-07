@@ -7,8 +7,33 @@
   &laquo Back 
 </a> -->
 {{ album_images.count }} "{{ album_details.album_name }}" image/s 
-<div style="float: right;"><h3> {{ album_details.likes.count }} 👍  👎 {{ album_details.dislikes.count }}  </h3></div>
-<br><br>
+<div style="display: flex; float: right;">
+  <input type="hidden">
+  <form action="{% url 'like' album_details.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
+  </form>
+
+  <!-- Liked by {{ album_details.likes }} -->
+  
+  <input type="hidden">
+  <form action="{% url 'dislike' album_details.pk %}" method="POST">
+    {% csrf_token  %}
+    <button type="submit" class="btn btn-sm btn-outline-primary"> 👎 {{ album_details.dislikes.count }} </button>
+  </form> 
+</div><br><br>
+
+<div style="float: right;">
+  {% if album_details.likes %}
+  <small>Recent liked by
+    {% for likes in users_likes|slice:":3" %}
+       <b>{{ likes.username }}</b>,
+    {% endfor %}...
+  </small>
+  {% endif %}
+</div><br><br>
+
+
 <!-- comment form --> 
 <a id="album_comments_button"  
   hx-get="{% url 'comment_form_display' %}"

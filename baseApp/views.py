@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core.paginator import EmptyPage, Paginator
 from django.core.mail import send_mail
+from members.models import CustomUser
 
 
 @login_required(login_url='login')
@@ -112,11 +113,13 @@ def redirect_to_right_column(request):
 def display_all_images_from_single_album(request, pk):
     # global album_details used in commented_album
     global album_details
+    users_likes = CustomUser.objects.filter(likes=True)
     album_details = Album.objects.get(pk=pk)
     album_images = album_details.images_set.all()
     return render(request, 'baseApp/parts/display_all_images_from_single_album.html', {
         'album_details': album_details,
         'album_images': album_images,
+        'users_likes': users_likes
     })
 
 
@@ -227,46 +230,46 @@ def album_slideshow(request, pk):
     })
 
 
-# @login_required(login_url='login')
-# def addLike(request, pk):
-#     recipe = Recipe.objects.get(pk=pk)
+@login_required(login_url='login')
+def addLike(request, pk):
+    album = Album.objects.get(pk=pk)
 
-#     isDislike = False
-#     for dislike in recipe.dislikes.all():
-#         if dislike == request.user:
-#             isDislike = True
-#             break
-#     if isDislike:
-#         recipe.dislikes.remove(request.user)
-#     isLike = False
-#     for like in recipe.likes.all():
-#         if like == request.user:
-#             isLike = True
-#     if not isLike:
-#         recipe.likes.add(request.user)
-#     if isLike:
-#         recipe.likes.remove(request.user)
-#     return redirect('recipe_details', pk=recipe.pk)
+    isDislike = False
+    for dislike in album.dislikes.all():
+        if dislike == request.user:
+            isDislike = True
+            break
+    if isDislike:
+        album.dislikes.remove(request.user)
+    isLike = False
+    for like in album.likes.all():
+        if like == request.user:
+            isLike = True
+    if not isLike:
+        album.likes.add(request.user)
+    if isLike:
+        album.likes.remove(request.user)
+    return redirect('home')
 
 
-# @login_required(login_url='login')
-# def addDislike(request, pk):
-#     recipe = Recipe.objects.get(pk=pk)
+@login_required(login_url='login')
+def addDislike(request, pk):
+    album = Album.objects.get(pk=pk)
     
-#     isLike = False
-#     for like in recipe.likes.all():
-#         if like == request.user:
-#             isLike = True
-#             break
-#     if isLike:
-#         recipe.likes.remove(request.user)
-#     isDislike = False
-#     for dislike in recipe.dislikes.all():
-#         if dislike == request.user:
-#             isDislike = True
-#             break
-#     if not isDislike:
-#         recipe.dislikes.add(request.user)
-#     if isDislike:
-#         recipe.dislikes.remove(request.user)
-#     return redirect('recipe_details', pk=recipe.pk)
+    isLike = False
+    for like in album.likes.all():
+        if like == request.user:
+            isLike = True
+            break
+    if isLike:
+        album.likes.remove(request.user)
+    isDislike = False
+    for dislike in album.dislikes.all():
+        if dislike == request.user:
+            isDislike = True
+            break
+    if not isDislike:
+        album.dislikes.add(request.user)
+    if isDislike:
+        album.dislikes.remove(request.user)
+    return redirect('home')

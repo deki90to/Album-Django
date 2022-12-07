@@ -22,4 +22,7 @@ urlpatterns = [
     path('display_participants/', views.display_participants, name='display_participants'),
     path('redirect_to_right_column/', views.redirect_to_right_column, name='redirect_to_right_column'),
     path('album_slideshow/<pk>/', views.album_slideshow, name='album_slideshow'),
+
+    path('like/<pk>/', views.addLike, name='like'),
+    path('dislike/<pk>/', views.addDislike, name='dislike'),
 ]
