@@ -34,6 +34,8 @@ class Album(models.Model):
     album_year = models.ForeignKey(Year, on_delete=models.CASCADE, null=True)
     album_created = models.DateTimeField(auto_now_add=True, null=True)
     hidden = models.BooleanField(blank=True, null=True, default=False)
+    likes = models.ManyToManyField(User, blank=True, related_name='likes')
+    dislikes = models.ManyToManyField(User, blank=True, related_name='dislikes')
 
     def __str__(self):
         return f'{self.album_name}, {self.season_name}, {self.album_created.date()}'

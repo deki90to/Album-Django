@@ -2,6 +2,7 @@
 <!-- <b>{{ my_albums|length }} albums</b> -->
 
 <h3>My albums</h3>
+
 {% if my_albums %}
 {% for my_album in my_albums %}
     {% if my_album.album_owner == request.user %}
@@ -10,7 +11,7 @@
                 <div class="col-md-4">
                     {% for images in my_album.images_set.all|slice:":1" %}
                         <a hx-get="{% url 'display_all_images_from_single_album' my_album.pk %}"
-                            hx-target="#album-images">
+                            hx-target="#replaceable-div">
                             <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
                         </a>
                     {% endfor %}
@@ -26,6 +27,7 @@
                 </div>
             </div>
                 <button id="delete_album_button" 
+                    class="btn btn-danger btn-sm"
                     hx-delete="{% url 'delete_album' my_album.pk %}"
                     hx-confirm="Confirm deleting"> 
                         Delete 

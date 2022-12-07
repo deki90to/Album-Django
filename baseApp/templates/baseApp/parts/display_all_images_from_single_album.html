@@ -1,46 +1,43 @@
 
 <div id="album-slideshow"></div>
 
+<h3>Album images</h3>
 
-<center><h3>Album images</h3></center>
-
-<a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-outline-primary btn-sm"> 
+<!-- <a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-outline-primary btn-sm"> 
   &laquo Back 
-</a>
-  <!-- comment form --> 
-  <a id="album_comments_button"  
-    hx-get="{% url 'comment_form_display' %}"
-    hx-target=""> 
-    <button class="btn btn-primary btn-sm btn-block">
+</a> -->
+{{ album_images.count }} "{{ album_details.album_name }}" image/s 
+<div style="float: right;"><h3> {{ album_details.likes.count }} 👍  👎 {{ album_details.dislikes.count }}  </h3></div>
+<br><br>
+<!-- comment form --> 
+<a id="album_comments_button"  
+  hx-get="{% url 'comment_form_display' %}"
+  hx-target="#comment_form"> 
+    <button class="btn btn-primary btn-sm btn-block" style="width: 100%;">
       Comments {{ album_details.comment_set.all.count }}
-    </button>
-  </a>
-
+    </button> 
+</a><br><br>
 
 <div id="comment_form"></div> 
 
-    {{ album_images.count }} {{ album_details.album_name}} images
+<!-- {{ album_images.count }} {{ album_details.album_name}} images -->
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  {% for images in album_images %}
+    <div class="col">
+      <div class="card">  
+        <!-- <a hx-get="{% url 'album_slideshow' images.album_images.pk %}" hx-target="#album-slideshow"> -->
+          <img src="{{ images.images.url }}" class="card-img-top"  alt="...">
+        <!-- </a> -->
+        <a href="{{ images.images.url }}" download="Click do download">
+          <button class="btn" style="width:100%"><i class="fa fa-download"></i> Download</button>
+        </a>
+          <!-- <p class="card-title"> Tap image to download </p> -->
+      </div>
+    </div>
+  {% endfor %}
+</div> <br>
 
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-      {% for images in album_images %}
-        <div class="col">
-          <div class="card">
-
-            <!-- <a hx-get="{% url 'album_slideshow' images.album_images.pk %}" hx-target="#album-slideshow"> -->
-              <img src="{{ images.images.url }}" class="card-img-top"  alt="...">
-            <!-- </a> -->
-
-            <a href="{{ images.images.url }}" download="Click do download">
-              <button class="btn" style="width:100%"><i class="fa fa-download"></i> Download</button>
-            </a>
-
-              <!-- <p class="card-title"> Tap image to download </p> -->
-          </div>
-        </div>
-      {% endfor %}
-    </div> <br>
-    <center><a href="#" hx-boost="true" class="btn btn-outline-primary btn-sm"> ^ </a></center><br>
-
+<a href="#" hx-boost="true" class="btn btn-primary btn-sm" style="display: block;"> ^ </a><br>
 
 
 

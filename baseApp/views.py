@@ -89,7 +89,7 @@ def create_new_album(request):
                     email,
                     [f.album_owner.email, 'deki90to@gmail.com']
                 )
-                return redirect('display_my_albums')
+                return redirect('display_all_images_from_single_album', f.pk)
                 # content = f"<p>{f.album_name} album was created <a href='/' boost='true'> <b> refresh </b> </a></p>"
                 # return HttpResponse(content)
             # else:
@@ -218,21 +218,6 @@ def display_participants(request):
 
 
 
-def all_albums_display(request):
-    album_p = Paginator(Album.objects.all(), 5)
-    page = request.GET.get('page')
-    try:
-        all_albums = album_p.get_page(page)
-    except EmptyPage:
-        all_albums = album_p.get_page(album_p.num_pages)
-
-    return render(request, 'baseApp/parts/all_albums_display.html', {
-        'all_albums': all_albums, 
-        'album_p': album_p, 
-        'page': page
-    })
-    
-
 def album_slideshow(request, pk):
     album_details = Album.objects.get(pk=pk)
     album_images = album_details.images_set.all()
@@ -240,3 +225,48 @@ def album_slideshow(request, pk):
         'album_details': album_details,
         'album_images': album_images,
     })
+
+
+# @login_required(login_url='login')
+# def addLike(request, pk):
+#     recipe = Recipe.objects.get(pk=pk)
+
+#     isDislike = False
+#     for dislike in recipe.dislikes.all():
+#         if dislike == request.user:
+#             isDislike = True
+#             break
+#     if isDislike:
+#         recipe.dislikes.remove(request.user)
+#     isLike = False
+#     for like in recipe.likes.all():
+#         if like == request.user:
+#             isLike = True
+#     if not isLike:
+#         recipe.likes.add(request.user)
+#     if isLike:
+#         recipe.likes.remove(request.user)
+#     return redirect('recipe_details', pk=recipe.pk)
+
+
+# @login_required(login_url='login')
+# def addDislike(request, pk):
+#     recipe = Recipe.objects.get(pk=pk)
+    
+#     isLike = False
+#     for like in recipe.likes.all():
+#         if like == request.user:
+#             isLike = True
+#             break
+#     if isLike:
+#         recipe.likes.remove(request.user)
+#     isDislike = False
+#     for dislike in recipe.dislikes.all():
+#         if dislike == request.user:
+#             isDislike = True
+#             break
+#     if not isDislike:
+#         recipe.dislikes.add(request.user)
+#     if isDislike:
+#         recipe.dislikes.remove(request.user)
+#     return redirect('recipe_details', pk=recipe.pk)

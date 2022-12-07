@@ -1,25 +1,27 @@
 
-<form hx-post="{% url 'create_new_album' %}" hx-encoding="multipart/form-data">
+<div class="alert alert-muted alert-dismissible fade show" role="alert">
+  <form hx-post="{% url 'create_new_album' %}" hx-encoding="multipart/form-data">
     {% csrf_token %}
+    <center>
+      <label for=""> Album name </label> <br>
+      {{ form.album_name|capfirst }} <br> <br>
 
-    <label for=""> Album name </label> 
-    {{ form.album_name|capfirst }} <br> <br>
+      <label for=""> Season </label> <br> 
+      {{ form.season_name }}  <br> <br>
 
-    {{ form.season_name }} 
-    <label for=""> Season </label> <br> <br>
-    
-    {{ form.album_year }} 
-    <label for=""> Year </label> <br> <br>
-    
-    {{ form.hidden }} 
-    <label for=""> Visible for me only (Archive) </label> <br> <br>
+      <label for=""> Year </label> <br> 
+      {{ form.album_year }} <br> <br>
 
+      {% for album_form in images_form %}
+          {{ album_form }}
+      {% endfor %} <br> <br>
 
-    {% for album_form in images_form %}
-        {{ album_form }}
-    {% endfor %} <br> <br>
+      {{ form.hidden }} 
+      <label for=""> Visible for me only  </label> <br> <br>
 
-    <input type="submit" value="Save"> <br><br>
-</form>
-
+      <input type="submit" value="Save"> <br><br>
+    </center>
+  </form>
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 

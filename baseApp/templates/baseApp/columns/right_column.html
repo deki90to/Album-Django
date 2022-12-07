@@ -1,83 +1,73 @@
 
 <br><br><br>
 
-<div id="searched-albums"></div>
-
-<div id="filtered-albums"></div>
-
-<div id="album-images"></div>
-
 <div id="activities"></div>
-<div id="activities-album"></div>
-
-<div id="album-create"></div>
-
-<div id="my-albums"> </div>
-
-{% if all_albums.has_previous %}
-	<a href="?page={{ all_albums.previous_page_number }}"> 
-			<button class="btn btn-outline-primary btn-sm"> &laquo </button> 
-	</a>
-{% endif %}
-
-{% if all_albums.has_next %}
-	<a href="?page={{ all_albums.next_page_number }}"> 
-			<button class="btn btn-outline-primary btn-sm"> &raquo </button> 
-	</a>
-{% endif %} 
-
-<center>
-	<small>
-			{{ all_albums.number }} page of {{ all_albums.paginator.num_pages }}
-	</small>
-</center>
 
 
-<center><h3>All albums</h3></center>
+<div id="replaceable-div">
+  {% if all_albums.has_previous %}
+    <a href="?page={{ all_albums.previous_page_number }}"> 
+      <button class="btn btn-outline-primary btn-sm"> &laquo </button> 
+    </a>
+  {% endif %}
 
-{% for album in all_albums %}
-	{% if album.hidden == False %}
-			<div class="card mb-2">
-					<div class="row g-0"> 
-							<div class="col-md-4">
-									{% for image in album.images_set.all|slice:":1" %}
-										<a hx-get="{% url 'display_all_images_from_single_album' album.pk %}"
-											hx-target="#album-images">
-											<img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
-										</a>
-									{% endfor %}
-							</div>
-							<div class="col-md-8">
-									<div class="card-body"> 
-										<h5 class="card-title" style="color: blue;"> {{ album.album_name }} {{ album.album_year }}</h5> <br>
-										<p class="card-text" style="color: grey;">
-												<b><a href="#" style="text-decoration: none;">{{ album.album_owner.username }} | {{ album.album_owner.email }}</a></b>
-										</p>
-										<p class="card-text"><small class="text-muted"> Created {{ album.album_created.date }} </small></p>
-										<p class="card-text"><small class="text-muted"> Last login {{ album.album_owner.last_login|timesince }} ago </small></p>
-										<p class="card-text"><small class="text-muted"> Member since {{ album.album_owner.date_joined.date }} </small></p>
-									</div>
-							</div>
-					</div>
-			</div>        
-	{% endif %}
-{% endfor %}
+  {% if all_albums.has_next %}
+    <a href="?page={{ all_albums.next_page_number }}"> 
+      <button class="btn btn-outline-primary btn-sm"> &raquo </button> 
+    </a>
+  {% endif %} 
 
+  <center>
+    <small>
+      Page {{ all_albums.number }} of {{ all_albums.paginator.num_pages }}
+    </small>
+  </center>
 
-{% if all_albums.has_previous %}
-	<a href="?page={{ all_albums.previous_page_number }}"> 
-			<button class="btn btn-outline-primary btn-sm"> &laquo </button> 
-	</a>
-{% endif %}
+  <h3>All albums</h3>
 
-{% if all_albums.has_next %}
-	<a href="?page={{ all_albums.next_page_number }}"> 
-			<button class="btn btn-outline-primary btn-sm"> &raquo </button> 
-	</a>
-{% endif %}
+  {% for album in all_albums %}
+    {% if album.hidden == False %}
+      <div class="card mb-2">
+        <div class="row g-0"> 
+          <div class="col-md-4">
+            {% for image in album.images_set.all|slice:":1" %}
+              <a hx-get="{% url 'display_all_images_from_single_album' album.pk %}"
+                hx-target="#replaceable-div">
+                <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+              </a>
+            {% endfor %}
+          </div>
+          <div class="col-md-8">
+            <div class="card-body"> 
+              <h5 class="card-title" style="color: blue;"> {{ album.album_name }} {{ album.album_year }}</h5> <br>
+              <p class="card-text" style="color: grey;">
+                  <b><a href="#" style="text-decoration: none;">{{ album.album_owner.username }} | {{ album.album_owner.email }}</a></b>
+              </p>
+              <p class="card-text"><small class="text-muted"> Created {{ album.album_created.date }} </small></p>
+              <p class="card-text"><small class="text-muted"> Last login {{ album.album_owner.last_login|timesince }} ago </small></p>
+              <p class="card-text"><small class="text-muted"> Member since {{ album.album_owner.date_joined.date }} </small></p>
+            </div>
+          </div>
+        </div>
+      </div>        
+    {% endif %}
+  {% endfor %}
 
-<center>
-	<small>
-			{{ all_albums.number }} page of {{ all_albums.paginator.num_pages }}
-	</small>
-</center>
+  <center>
+    <small>
+      Page {{ all_albums.number }} of {{ all_albums.paginator.num_pages }}
+    </small>
+  </center>
+
+  {% if all_albums.has_previous %}
+    <a href="?page={{ all_albums.previous_page_number }}"> 
+      <button class="btn btn-outline-primary btn-sm"> &laquo </button> 
+    </a>
+  {% endif %}
+
+  {% if all_albums.has_next %}
+    <a href="?page={{ all_albums.next_page_number }}"> 
+      <button class="btn btn-outline-primary btn-sm"> &raquo </button> 
+    </a>
+  {% endif %}
+</div>
