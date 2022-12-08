@@ -83,7 +83,7 @@ def create_new_album(request):
                     )
                 email = f.album_owner.email
                 subject = 'Album created'
-                message = f"Album '{f.album_name}' successfully created, check it here http://localhost:8000/"
+                message = f"Album '{f.album_name}' successfully created, check it here http://localhost:8000/ or https://deki90to.pythonanywhere.com/"
                 send_mail(
                     subject,
                     message,
@@ -148,7 +148,7 @@ def create_comment(request):
             # messages.success(request, 'Comment created')
             # if f.comment_owner.email != f.commented_album.album_owner.email:
             email = f.comment_owner.email
-            subject = f.comment
+            subject = 'New comment'
             message = f"{f.comment_owner.email} commented your album '{f.comment}'"
             if f.comment_owner.email != f.commented_album.album_owner.email:
                 send_mail(
@@ -157,7 +157,7 @@ def create_comment(request):
                     email,
                     [f.commented_album.album_owner.email, 'deki90to@gmail.com']
                 )
-            if f.comment_owner.email == f.commented_album.album_owner.email:
+            elif f.comment_owner.email == f.commented_album.album_owner.email:
                 send_mail(
                     subject,
                     message,

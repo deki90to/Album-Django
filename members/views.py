@@ -21,8 +21,8 @@ def register_(request):
             login(request, account)
 
             email = email
-            subject = 'New registration!'
-            message = f'{email} user is registred'
+            subject = 'New registration'
+            message = f'Welcome {email} you are successfully registred'
             send_mail(
                 subject,
                 message,
@@ -109,7 +109,6 @@ def contact_me(request):
             ['deki90to@gmail.com']
         )
         messages.success(request, 'Your message/suggestion was sent!')
-
         return render(request, 'contact_me.html', {'email': email, 'message': message})
     else:
         return render(request, 'contact_me.html')
