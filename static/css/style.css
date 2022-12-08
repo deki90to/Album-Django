@@ -4,6 +4,21 @@ body  {
   color: darkslategrey;
 }
 
+input[type=text], 
+input[type=date], 
+input[type=file],
+input[type=submit],
+input[type=password],
+input[type=email] {
+    width: 90%;
+    padding: 1%;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 0px black;
+  }
+
 /*body {
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }*/

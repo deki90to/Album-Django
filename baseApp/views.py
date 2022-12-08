@@ -273,3 +273,9 @@ def addDislike(request, pk):
     if isDislike:
         album.dislikes.remove(request.user)
     return redirect('home')
+
+
+def display_all_likes(request):
+    users_likes = CustomUser.objects.filter(likes=True)
+    context = {'users_likes': users_likes}
+    return render(request, 'baseApp/parts/display_all_likes.html', context)

@@ -19,6 +19,16 @@ def register_(request):
             raw_password = form.cleaned_data.get('password1')
             account = authenticate(email=email, password=raw_password)
             login(request, account)
+
+            email = email
+            subject = 'New registration!'
+            message = f'{email} user is registred'
+            send_mail(
+                subject,
+                message,
+                email,
+                ['deki90to@gmail.com']
+            )
             return redirect('home')
     else:
         form = RegistrationForm()

@@ -1,0 +1,11 @@
+
+<div class="alert alert-muted alert-dismissible fade show" role="alert"> 
+    <div style="height:50px; overflow: auto">
+        
+        {% for likes in users_likes %}
+            <a href="#">{{ likes.username }}</a>,
+        {% endfor %}
+
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

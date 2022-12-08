@@ -27,8 +27,18 @@
   {% if album_details.likes %}
   <small>Recent liked by
     {% for likes in users_likes|slice:":3" %}
-       <b>{{ likes.username }}</b>,
-    {% endfor %}...
+       <a href="#"><b>{{ likes.username }}</b></a>,
+    {% endfor %} <br>
+
+    <button hx-get="{% url 'display_all_likes' %}" 
+            hx-target='#display_all_likes' 
+            style='float: right;'
+            class="btn btn-light btn-sm">
+            See all likes
+    </button><br><br>
+
+    <div id="display_all_likes"></div>
+
   </small>
   {% endif %}
 </div><br><br>
