@@ -25,12 +25,13 @@
 
 <div style="float: right;">
   {% if album_details.likes %}
+  
   <small>Recent liked by
-    {% for likes in users_likes|slice:":3" %}
+    {% for likes in album_likes|slice:":3" %}
        <a href="#"><b>{{ likes.username }}</b></a>,
-    {% endfor %} <br>
+    {% endfor %} <br> 
 
-    <button hx-get="{% url 'display_all_likes' %}" 
+    <button hx-get="{% url 'display_all_likes' album_details.pk %}" 
             hx-target='#display_all_likes' 
             style='float: right;'
             class="btn btn-light btn-sm">

@@ -1,17 +1,18 @@
 
-
 <form enctype="multipart/form-data" 
       hx-post="{% url 'create_comment' %}" 
-      hx-encoding="multipart/form-data">
+      hx-encoding="multipart/form-data"
+      onsubmit='disableButton()'>
       <div class="alert alert-muted alert-dismissible fade show" role="alert"> 
-        <div style="height:300px; overflow: auto">
+        <div style="height:300px; overflow: auto;">
 
         {% csrf_token %}
           {% for form in comment_form %}
             <label for=""> Write comment </label><br>
             {{ form }}
           {% endfor %}<br><br>
-          <input type="submit"value="Save comment" class="btn btn-outline-primary btn-sm"><br><br>
+          <button type="submit" id="btn" class="btn btn-primary btn-sm"> Save comment </button><br><br>
+
           {% if album_details.comment_set.all %}
           {% for comment in album_details.comment_set.all %}
             <p><b>{{ comment.comment_owner.username }}</b> | 
@@ -34,3 +35,11 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 </form>
+
+<script>
+  function disableButton() {
+      var btn = document.getElementById('btn');
+      btn.disabled = true;
+      btn.innerText = 'Saving...'
+  }
+</script>

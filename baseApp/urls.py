@@ -25,5 +25,5 @@ urlpatterns = [
 
     path('like/<pk>/', views.addLike, name='like'),
     path('dislike/<pk>/', views.addDislike, name='dislike'),
-    path('display_all_likes', views.display_all_likes, name='display_all_likes'),
+    path('display_all_likes/<pk>/', views.display_all_likes, name='display_all_likes'),
 ]

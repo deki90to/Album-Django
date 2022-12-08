@@ -1,31 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'baseApp/base.html' %}
 
-</head>
+{% block body %}
 
-<body>
+<br><br><br>
 
 <div align="center">
-    <h2> Chat rooms </h2>
+    <h2> Chat rooms </h2> <br><br>
 </div>
 
-
 <div class="container">
-
-
   <form id="post-form" method="POST" action="checkview">
     {% csrf_token %}
-    <input type="text" name="room_name" id="room_name" width="100px" required placeholder="Create / Enter the room"/>
-    <input type="hidden" type="text" name="username" id="username" width="100px" value="{{ request.user.username }}" placeholder="Your username"/>
-    <input type="submit" value="Enter Room">
+    <input type="text" name="room_name" id="room_name" required placeholder="Create / enter the room"/><br><br>
+    <input type="hidden" type="text" name="username" id="username" value="{{ request.user.username }}" placeholder="Your username"/>
+    <button type="submit" class="btn btn-primary btn-sm"> Enter room </button><br><br>
   </form>
   <a href="{% url 'home' %}" hx-boost="true" class="btn btn-primary btn-sm"> Back </a> 
 </div>
 
+{% endblock body %}
 
-</body>
-
-
-</html>

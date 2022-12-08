@@ -82,8 +82,8 @@ def create_new_album(request):
                         images = i                 
                     )
                 email = f.album_owner.email
-                subject = f.album_name
-                message = f"Album {f.album_name} successfully created, check it here http://localhost:8000/"
+                subject = 'Album created'
+                message = f"Album '{f.album_name}' successfully created, check it here http://localhost:8000/"
                 send_mail(
                     subject,
                     message,
@@ -113,13 +113,14 @@ def redirect_to_right_column(request):
 def display_all_images_from_single_album(request, pk):
     # global album_details used in commented_album
     global album_details
-    users_likes = CustomUser.objects.filter(likes=True)
     album_details = Album.objects.get(pk=pk)
+    album_likes = album_details.likes.all()
+    # users_likes = CustomUser.objects.filter(likes=True)
     album_images = album_details.images_set.all()
     return render(request, 'baseApp/parts/display_all_images_from_single_album.html', {
         'album_details': album_details,
         'album_images': album_images,
-        'users_likes': users_likes
+        'album_likes': album_likes
     })
 
 
@@ -148,7 +149,7 @@ def create_comment(request):
             # if f.comment_owner.email != f.commented_album.album_owner.email:
             email = f.comment_owner.email
             subject = f.comment
-            message = f"Comment >>>>> {f.comment} <<<<< successfully created"
+            message = f"{f.comment_owner.email} commented your album '{f.comment}'"
             if f.comment_owner.email != f.commented_album.album_owner.email:
                 send_mail(
                     subject,
@@ -275,7 +276,8 @@ def addDislike(request, pk):
     return redirect('home')
 
 
-def display_all_likes(request):
-    users_likes = CustomUser.objects.filter(likes=True)
-    context = {'users_likes': users_likes}
+def display_all_likes(request, pk):
+    album_details = Album.objects.get(pk=pk)
+    album_likes = album_details.likes.all()
+    context = {'album_likes': album_likes}
     return render(request, 'baseApp/parts/display_all_likes.html', context)

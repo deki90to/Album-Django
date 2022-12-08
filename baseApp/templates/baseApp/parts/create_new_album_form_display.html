@@ -1,8 +1,7 @@
 
-<div class="alert alert-muted alert-dismissible fade show" role="alert">
-  <form hx-post="{% url 'create_new_album' %}" hx-encoding="multipart/form-data">
+<form hx-post="{% url 'create_new_album' %}" hx-encoding="multipart/form-data" onsubmit='disableButton()'>
+  <div class="alert alert-muted alert-dismissible fade show" role="alert">
     {% csrf_token %}
-    <center>
       <label for=""> Album name </label> <br>
       {{ form.album_name|capfirst }} <br> <br>
 
@@ -19,9 +18,17 @@
       {{ form.hidden }} 
       <label for=""> Visible for me only  </label> <br> <br>
 
-      <input type="submit" value="Save"> <br><br>
-    </center>
-  </form>
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+      <button class="btn btn-primary" id='btn' type="submit"> Save album </button> <br><br>
+      
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</form>
 
+
+<script>
+  function disableButton() {
+      var btn = document.getElementById('btn');
+      btn.disabled = true;
+      btn.innerText = 'Saving...'
+  }
+</script>

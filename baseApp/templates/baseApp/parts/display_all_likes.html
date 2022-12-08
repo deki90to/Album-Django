@@ -1,8 +1,9 @@
 
+
 <div class="alert alert-muted alert-dismissible fade show" role="alert"> 
     <div style="height:50px; overflow: auto">
         
-        {% for likes in users_likes %}
+        {% for likes in album_likes %}
             <a href="#">{{ likes.username }}</a>,
         {% endfor %}
 
