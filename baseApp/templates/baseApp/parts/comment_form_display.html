@@ -15,7 +15,7 @@
 
           {% if album_details.comment_set.all %}
           {% for comment in album_details.comment_set.all %}
-            <p><b>{{ comment.comment_owner.username }}</b> | 
+            <p><b>{{ comment.comment_owner.username }}</b> <small>{{ comment.comment_owner.email }}</small> | 
             <small> {{ comment.comment_created|timesince }} ago</small><br>
               {{ comment.comment|capfirst }} 
               {% if comment.comment_owner.email == request.user.email %}
