@@ -19,6 +19,16 @@ select[name=album_year] {
     box-shadow: 2px 2px 5px 0px black;
   }
 
+#display {
+  background-color: rgb(255, 255, 255);
+  color: rgb(96, 96, 96);
+  /* border-right: 1px solid grey; */
+  /* border-bottom: 1px solid grey; */
+  padding-bottom: 20px;
+  border-radius: 20px;
+  box-shadow: 1px 10px 10px 1px grey;
+}
+
 /*body {
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }*/

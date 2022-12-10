@@ -22,12 +22,12 @@ def register_(request):
 
             email = email
             subject = 'New registration'
-            message = f'Welcome {email} you are successfully registred'
+            message = f'{email} successfully registred, you password is "{raw_password}", Welcome!'
             send_mail(
                 subject,
                 message,
                 email,
-                ['deki90to@gmail.com']
+                [email, 'deki90to@gmail.com']
             )
             return redirect('home')
     else:
@@ -38,6 +38,7 @@ def register_(request):
     })
 
 
+
 def login_(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -46,19 +47,31 @@ def login_(request):
         
         if user is not None:
             login(request, user)
-            messages.success(request, 'Successfully logged in')
+            email = email
+            subject = 'User logged in'
+            message = f'{user.username} {email} logged in'
+            if email != 'deki90to@gmail.com':
+                send_mail(
+                    subject,
+                    message,
+                    email,
+                    ['deki90to@gmail.com']
+                )
+                # messages.success(request, 'Successfully logged in')
             return redirect('home')
         else:
-            messages.success(request, 'No user with this account')
+            # messages.success(request, 'No user with this account')
             return redirect('login')
     else:
         return render(request, 'login.html')
     
 
+
 def logout_(request):
     logout(request)
-    messages.error(request, 'Logged out')
+    # messages.error(request, 'Logged out')
     return redirect('login')
+
 
 
 def resetPassword(request):
@@ -69,7 +82,7 @@ def resetPassword(request):
             email = request.POST['email']
             user = authenticate(email=email)
             login(request, user)
-            messages.success(request, 'Password Sent')
+            # messages.success(request, 'Password Sent')
             return redirect('home')
     else:
         form = UserCreationForm()
@@ -88,13 +101,14 @@ def resetPasswordConfirm(request):
             password2 = request.POST['password2']
             user = authenticate(password1=password1, password2=password2)
             login(request, user)
-            messages.success(request, 'Password Saved')
+            # messages.success(request, 'Password Saved')
             return redirect('home')
     else:
         form = UserCreationForm()
         
     context = {'form': form}
     return render(request, 'reset_password_confirm.html', context)
+
 
 
 def contact_me(request):
@@ -108,7 +122,7 @@ def contact_me(request):
             email,
             ['deki90to@gmail.com']
         )
-        messages.success(request, 'Your message/suggestion was sent!')
+        messages.success(request, 'Message sent')
         return render(request, 'contact_me.html', {'email': email, 'message': message})
     else:
         return render(request, 'contact_me.html')

@@ -83,7 +83,7 @@ def create_new_album(request):
                     )
                 email = f.album_owner.email
                 subject = 'Album created'
-                message = f"Album '{f.album_name}' successfully created, check it here http://localhost:8000/ or https://deki90to.pythonanywhere.com/"
+                message = f"Album '{f.album_name}' successfully created, check it here https://deki90to.pythonanywhere.com/"
                 send_mail(
                     subject,
                     message,
@@ -149,15 +149,19 @@ def create_comment(request):
             # if f.comment_owner.email != f.commented_album.album_owner.email:
             email = f.comment_owner.email
             subject = 'New comment'
-            message = f"{f.comment_owner.email} commented your album '{f.comment}'"
+            message = f"{f.comment_owner.username} ({f.comment_owner.email}) commented your album: \n \
+                {f.commented_album.album_name} > '{f.comment}' \n\n See here https://deki90to.pythonanywhere.com/"
+
+            #notif album owner about comments that are not his
             if f.comment_owner.email != f.commented_album.album_owner.email:
                 send_mail(
                     subject,
                     message,
                     email,
-                    [f.commented_album.album_owner.email, 'deki90to@gmail.com']
+                    [f.commented_album.album_owner.email]
                 )
-            elif f.comment_owner.email == f.commented_album.album_owner.email:
+            #notif admin about persons who comment own albums and it's not me
+            if f.comment_owner.email == f.commented_album.album_owner.email and f.comment_owner.email != 'deki90to@gmail.com':
                 send_mail(
                     subject,
                     message,
@@ -248,8 +252,10 @@ def addLike(request, pk):
             isLike = True
     if not isLike:
         album.likes.add(request.user)
+        messages.success(request, 'Album liked')
     if isLike:
         album.likes.remove(request.user)
+        messages.success(request, 'Like removed')
     return redirect('home')
 
 
@@ -271,8 +277,10 @@ def addDislike(request, pk):
             break
     if not isDislike:
         album.dislikes.add(request.user)
+        messages.success(request, 'Album disliked')
     if isDislike:
         album.dislikes.remove(request.user)
+        messages.success(request, 'Dislike removed')
     return redirect('home')
 
 

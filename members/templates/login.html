@@ -15,8 +15,8 @@
 
       <button class="btn btn-primary" type="submit">Login</button><br><br>
 
-      <span class="psw"><a href="{% url 'register' %}" hx-boost="true"> Swith to Register Page </a></span> <br>
-      <a href="{% url 'reset_password' %}" hx-boost="true"> <small><b>Forget password?</b></small> </a> <br><br>
+      <span class="psw"><a href="{% url 'register' %}" hx-boost="true"> Swith to Register Page </a></span> <br><br><br>
+      <a href="{% url 'reset_password' %}" hx-boost="true"> Forget password? </a><br><br>
       <a href="{% url 'contact_me' %}" hx-boost="true">Contact me</a> 
     </div>
   </form>
@@ -24,7 +24,7 @@
 {% else %}
   <center>    
     <h6> {{ request.user.username }} is already logged in. 
-      Back to <a href="{% url 'home' %}"> homepage. </a>
+      Back to <a href="{% url 'home' %}" hx-boost="true"> homepage. </a>
     </h6>
   </center>
 {% endif %}

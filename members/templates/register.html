@@ -4,27 +4,27 @@
 {% block body %}
 
 <form method='post'>
-    {% csrf_token %}
-    <div class="container"> 
-        <!-- <h6 style="color: red;">{{ form_error }}</h6> -->
+  {% csrf_token %}
+  <div class="container"> 
+    <!-- <h6 style="color: red;">{{ form_error }}</h6> -->
 
-        <label> Email </label> <br>
-        {{ registration_form.email }} <br>
+    <label> Email </label> <br>
+    {{ registration_form.email }} <br>
 
-        <label> Username </label><br>
-        {{ registration_form.username }} <br>
+    <label> Username </label><br>
+    {{ registration_form.username }} <br>
 
-        <label> Password</label><br>
-        {{ registration_form.password1 }} <br>
+    <label> Password</label><br>
+    {{ registration_form.password1 }} <br>
 
-        <label> Repeat password</label><br>
-        {{ registration_form.password2 }} 
-        <br> <br>
+    <label> Repeat password</label><br>
+    {{ registration_form.password2 }} 
+    <br> <br>
 
-        <button class="btn btn-primary" type="submit"> Register </button><br><br>
+    <button class="btn btn-primary" type="submit"> Register </button><br><br>
 
-        <span class="psw"><a href="{% url 'login' %}" hx-boost="true"> Swith to login page </a></span>
-    </div>
+    <span class="psw"><a href="{% url 'login' %}" hx-boost="true"> Swith to login page </a></span>
+  </div>
 </form><br>
 
 {% endblock body %}

@@ -4,17 +4,12 @@
 
 <br><br><br>
 
-
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous">
 </script>
 
-
-
-<center><h2>"{{ room }}" room chat</h2></center> <br><br>
-
-
+<center><h2>"{{ room }}" room chat</h2></center> <br>
 
 <script>
   $(document).ready(function(){
@@ -46,9 +41,10 @@
     <input type="hidden" name="username" id="username" value="{{username}}"/>
     <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
     <input type="text" name="message" id="message" width="100px" placeholder="Type here..."/><br><br>
-    <button type="submit" class="btn btn-primary btn-sm"> Send message </button><br><br>
+    <button type="submit" class="btn btn-primary btn-sm"> Send message </button>
+    <a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-primary btn-sm"> Back </a> 
   </form>
-  <a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-primary btn-sm"> Back </a> <br><br>
+  <br><br>
 </div>
 
 
