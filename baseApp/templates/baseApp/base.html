@@ -37,6 +37,31 @@
       border-radius: 5px;
       box-shadow: 2px 2px 5px 0px black;
     }
+
+    #display {
+      background-color: rgb(255, 255, 255);
+      color: rgb(96, 96, 96);
+      /* border-right: 1px solid grey; */
+      /* border-bottom: 1px solid grey; */
+      padding-bottom: 20px;
+      border-radius: 20px;
+      box-shadow: 1px 10px 10px 1px grey;
+    }
+
+    .profile-head {
+      transform: translateY(5rem)
+    }
+
+    .cover {
+      background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+      background-size: cover;
+      background-repeat: no-repeat
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
   </style>
 
   {% include 'baseApp/navbar.html' %}
@@ -46,8 +71,8 @@
   {% endblock body %}
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+  </script>
 
   <script src="https://unpkg.com/htmx.org@1.6.1"></script>
   <script>
