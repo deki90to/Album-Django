@@ -1,25 +1,24 @@
-
 <div class="alert alert-muted alert-dismissible fade show" role="alert">
   <div style="height:200px; overflow: auto">
 
-  <h3>Recent activities</h3>
+    <h3>Recent activities</h3>
 
-  {% if participants %}
+    {% if participants %}
     {% for participant in participants %}
-      <a href="#">@{{ participant.comment_owner.username }}</a> commented 
-      <a href="#">@{{ participant.commented_album.album_owner.username }}'s</a> album
-      <a hx-get="{% url 'display_all_images_from_single_album' participant.commented_album.pk %}"
-          hx-target="#replaceable-div">
-          <b>{{ participant.commented_album.album_name }}</b>
-      </a>
-        <div>
-            "{{ participant.comment|truncatewords:20 }}" <br> <br>
-        </div> 
+    <a href="#">@{{ participant.comment_owner.username }}</a> commented
+    <a href="#">@{{ participant.commented_album.album_owner.username }}'s</a> album
+    <a hx-get="{% url 'display_all_images_from_single_album' participant.commented_album.pk %}"
+      hx-target="#replaceable-div">
+      <b>{{ participant.commented_album.album_name }}</b>
+    </a>
+    <div>
+      "{{ participant.comment|truncatewords:20 }}" <br> <br>
+    </div>
     {% endfor %} <br>
-  {% else %}
+    {% else %}
     No activities yet <br>
-  {% endif %}
-  
+    {% endif %}
+
   </div>
-<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>

@@ -252,10 +252,10 @@ def addLike(request, pk):
             isLike = True
     if not isLike:
         album.likes.add(request.user)
-        messages.success(request, 'Album liked')
+        messages.success(request, f'{album.album_name} liked')
     if isLike:
         album.likes.remove(request.user)
-        messages.success(request, 'Like removed')
+        messages.success(request, f'{album.album_name} unliked')
     return redirect('home')
 
 
@@ -277,15 +277,18 @@ def addDislike(request, pk):
             break
     if not isDislike:
         album.dislikes.add(request.user)
-        messages.success(request, 'Album disliked')
+        messages.success(request, f'{album.album_name} disliked')
     if isDislike:
         album.dislikes.remove(request.user)
-        messages.success(request, 'Dislike removed')
+        messages.success(request, f'{album.album_name} undisliked')
     return redirect('home')
 
 
 def display_all_likes(request, pk):
     album_details = Album.objects.get(pk=pk)
     album_likes = album_details.likes.all()
-    context = {'album_likes': album_likes}
-    return render(request, 'baseApp/parts/display_all_likes.html', context)
+    return render(request, 'baseApp/parts/display_all_likes.html', {
+        'album_likes': album_likes
+    })
+
+

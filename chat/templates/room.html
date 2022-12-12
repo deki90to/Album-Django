@@ -2,35 +2,47 @@
 
 {% block body %}
 
+<style>
+  #display {
+    background-color: rgb(255, 255, 255);
+    color: rgb(96, 96, 96);
+    /* border-right: 1px solid grey; */
+    /* border-bottom: 1px solid grey; */
+    padding-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 1px 10px 10px 1px grey;
+  }
+</style>
+
 <br><br><br>
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"   
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous">
-</script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+  </script>
 
-<center><h2>"{{ room }}" room chat</h2></center> <br>
+<center>
+  <h2>"{{ room }}" room chat</h2>
+</center> <br>
 
 <script>
-  $(document).ready(function(){
-  setInterval(function(){
-    $.ajax({
+  $(document).ready(function () {
+    setInterval(function () {
+      $.ajax({
         type: 'GET',
-        url : "/chat/getMessages/{{room}}/",
-        success: function(response){
-            console.log(response);
-            $("#display").empty();
-            for (var key in response.messages)
-            {
-              var temp="<div class='container darker'><b>"+response.messages[key].user+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
-              $("#display").append(temp);
-            }
+        url: "/chat/getMessages/{{room}}/",
+        success: function (response) {
+          console.log(response);
+          $("#display").empty();
+          for (var key in response.messages) {
+            var temp = "<div class='container darker'><b>" + response.messages[key].user + "</b><p>" + response.messages[key].value + "</p><span class='time-left'>" + response.messages[key].date + "</span></div>";
+            $("#display").append(temp);
+          }
         },
-        error: function(response){
-            alert('An error occured')
+        error: function (response) {
+          alert('An error occured')
         }
-    });
-  },1000);
+      });
+    }, 1000);
   })
 </script>
 
@@ -38,11 +50,11 @@
 <div class="container">
   <form id="post-form">
     {% csrf_token %}
-    <input type="hidden" name="username" id="username" value="{{username}}"/>
-    <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
-    <input type="text" name="message" id="message" width="100px" placeholder="Type here..."/><br><br>
+    <input type="hidden" name="username" id="username" value="{{username}}" />
+    <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}" />
+    <input type="text" name="message" id="message" width="100px" placeholder="Type here..." /><br><br>
     <button type="submit" class="btn btn-primary btn-sm"> Send message </button>
-    <a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-primary btn-sm"> Back </a> 
+    <a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-primary btn-sm"> Back </a>
   </form>
   <br><br>
 </div>
@@ -51,19 +63,19 @@
 <div id="display"></div>
 
 <script type="text/javascript">
-  $(document).on('submit','#post-form',function(e){
+  $(document).on('submit', '#post-form', function (e) {
     e.preventDefault();
     $.ajax({
-      type:'POST',
-      url:'/chat/send',
-      data:{
-          username:$('#username').val(),
-          room_id:$('#room_id').val(),
-          message:$('#message').val(),
-        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      type: 'POST',
+      url: '/chat/send',
+      data: {
+        username: $('#username').val(),
+        room_id: $('#room_id').val(),
+        message: $('#message').val(),
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
       },
-      success: function(data){
-         //alert(data)
+      success: function (data) {
+        //alert(data)
       }
     });
     document.getElementById('message').value = ''

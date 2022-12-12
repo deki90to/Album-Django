@@ -1,11 +1,10 @@
-
 {% extends 'baseApp/base.html' %}
 
 {% block body %}
 
 <form method='post'>
   {% csrf_token %}
-  <div class="container"> 
+  <div class="container">
     <!-- <h6 style="color: red;">{{ form_error }}</h6> -->
 
     <label> Email </label> <br>
@@ -18,7 +17,7 @@
     {{ registration_form.password1 }} <br>
 
     <label> Repeat password</label><br>
-    {{ registration_form.password2 }} 
+    {{ registration_form.password2 }}
     <br> <br>
 
     <button class="btn btn-primary" type="submit"> Register </button><br><br>

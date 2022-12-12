@@ -1,28 +1,32 @@
-
 <ul class="nav justify-content-end">
   {% if not user.is_authenticated %}
-      <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}" hx-boost="true">Login</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}" hx-boost="true">Register</a>
-      </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'login' %}" hx-boost="true">Login</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'register' %}" hx-boost="true">Register</a>
+  </li>
 
-  {% else %} 
+  {% else %}
 
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-  
-      <a class="navbar-brand" class="nav-link" aria-current="page" href="{% url 'home' %}"> Bestinations </a> <!-- ({{ all_albums|length }})-->
-  
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+
+      <a class="navbar-brand" class="nav-link" aria-current="page" href="{% url 'home' %}"> Bestinations </a>
+      <!-- ({{ all_albums|length }})-->
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+        aria-controls="offcanvasDarkNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+        aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
           <!-- <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"> Pages </h5> -->
-          <a class="nav-link" aria-current="page" href="{% url 'logout' %}"> Logout {{ request.user.username }} {{ request.user.email }}</a> <br>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <a class="nav-link" aria-current="page" href="{% url 'logout' %}"> Logout {{ request.user.username }} 
+            {{ request.user.email }}</a> <br>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
         </div>
 
         <div class="offcanvas-body">
@@ -31,23 +35,25 @@
               <a class="nav-link" aria-current="page" href="{% url 'home' %}"> Show all albums </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" hx-get="{% url 'display_my_albums' %}" hx-target="#replaceable-div"> My albums </a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" hx-get="{% url 'display_participants' %}" hx-target="#activities"> Activities </a>
+              <a class="nav-link" aria-current="page" hx-get="{% url 'display_my_albums' %}"
+                hx-target="#replaceable-div"> My profile </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" hx-get="{% url 'create_new_album_form_display' %}"
-                hx-target="#album-create" swap="none"> Create new album </a>
+              <a class="nav-link" aria-current="page" hx-get="{% url 'display_participants' %}" hx-target="#activities">
+                Activities </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" hx-get="{% url 'create_new_album_form_display' %}" hx-target="#album-create"
+                swap="none"> Create new album </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'chat_home' %}"
-                > Create or join a room </a>
+              <a class="nav-link" href="{% url 'chat_home' %}"> Create or join a room </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 Filter albums
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
@@ -55,47 +61,44 @@
                 <li>
                   <!-- <a class="dropdown-item" href="#">eeee</a></li> -->
                   <p> By seasons</p>
-  
+
                   {% for season in all_seasons %}
-                      <a hx-get="{% url 'one_season_albums_display' season.pk %}" class="dropdown-item"
-                        hx-target="#replaceable-div"
-                        class="list-group-item list-group-item-action">
-                        <div class="d-flex w-90 justify-content-between">
-                          <p class="mb-0" id="all_seasons_font"> {{ season.season_name }} </p>
-                          <small class="text-primary">{{ season.album_set.all.count }}</small>
-                        </div>
-                      </a>
+                  <a hx-get="{% url 'one_season_albums_display' season.pk %}" class="dropdown-item"
+                    hx-target="#replaceable-div" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-90 justify-content-between">
+                      <p class="mb-0" id="all_seasons_font"> {{ season.season_name }} </p>
+                      <small class="text-primary">{{ season.album_set.all.count }}</small>
+                    </div>
+                  </a>
                   {% endfor %}
                 <li>
                   <hr class="dropdown-divider">
                 </li>
                 <!-- <li><a class="dropdown-item" href="#"> aaa </a></li> -->
-                <p> By years </p> 
-  
+                <p> By years </p>
+
                 {% for year in all_years %}
-                  <div class="list-group">
-                      <a hx-get="{% url 'one_year_album_display' year.pk %}" class="dropdown-item" 
-                        hx-target="#replaceable-div"
-                        class="list-group-item list-group-item-action">
-                        <div class="d-flex w-90 justify-content-between">
-                          <p class="mb-0" id="all_years_font"> {{ year.album_year }} </p>
-                          <small class="text-primary">{{ year.album_set.all.count }}</small>
-                        </div>
-                      </a>
-                  </div>
+                <div class="list-group">
+                  <a hx-get="{% url 'one_year_album_display' year.pk %}" class="dropdown-item"
+                    hx-target="#replaceable-div" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-90 justify-content-between">
+                      <p class="mb-0" id="all_years_font"> {{ year.album_year }} </p>
+                      <small class="text-primary">{{ year.album_set.all.count }}</small>
+                    </div>
+                  </a>
+                </div>
                 {% endfor %}
               </ul>
             </li>
           </ul>
           <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" id="search" type="text" name="q" placeholder="Search by destination / email"   
-              hx-get="{% url 'albums_search' %}"
-              hx-target="#replaceable-div"
-              hx-trigger="keyup changed delay:500ms" aria-label="Search">
+            <input class="form-control me-2" id="search" type="text" name="q"
+              placeholder="Search by destination / email" hx-get="{% url 'albums_search' %}"
+              hx-target="#replaceable-div" hx-trigger="keyup changed delay:500ms" aria-label="Search">
           </form>
         </div>
       </div>
     </div>
-  {% endif %}
+    {% endif %}
 </ul>
 </nav>

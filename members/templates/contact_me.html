@@ -1,10 +1,9 @@
-
 {% extends 'baseApp/base.html' %}
 
 {% block body %}
 
 <center>
-  <h1> Contact me </h1>  <br>
+  <h1> Contact me </h1> <br>
 
   <form method="POST">
     {% csrf_token %}
@@ -18,10 +17,10 @@
 </center>
 
 {% if message %}
-  <center>
-    <h1> Email successfully sent </h1>
-    Send another or <a href="{% url 'login' %}" hx-boost="true"> <b>login</b> </a>
-  </center>
+<center>
+  <h1> Email successfully sent </h1>
+  Send another or <a href="{% url 'login' %}" hx-boost="true"> <b>login</b> </a>
+</center>
 {% endif %}
 
 {% endblock body %}

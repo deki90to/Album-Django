@@ -1,4 +1,3 @@
-
 <div id="album-slideshow"></div>
 
 <h3>Album images</h3>
@@ -6,7 +5,7 @@
 <!-- <a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-outline-primary btn-sm"> 
   &laquo Back 
 </a> -->
-{{ album_images.count }} "{{ album_details.album_name }}" image/s 
+{{ album_images.count }} "{{ album_details.album_name }}" image/s
 <div style="display: flex; float: right;">
   <input type="hidden">
   <form action="{% url 'like' album_details.pk %}" method="POST">
@@ -15,27 +14,25 @@
   </form>
 
   <!-- Liked by {{ album_details.likes }} -->
-  
+
   <input type="hidden">
   <form action="{% url 'dislike' album_details.pk %}" method="POST">
-    {% csrf_token  %}
+    {% csrf_token %}
     <button type="submit" class="btn btn-sm btn-outline-primary"> 👎 {{ album_details.dislikes.count }} </button>
-  </form> 
+  </form>
 </div><br><br>
 
 <div style="float: right;">
   {% if album_details.likes %}
-  
+
   <small>Recent liked by
     {% for likes in album_likes|slice:":3" %}
-       <a href="#"><b>{{ likes.username }}</b></a>,
-    {% endfor %} <br> 
+    <a href="#"><b>{{ likes.username }}</b></a>,
+    {% endfor %} <br>
 
-    <button hx-get="{% url 'display_all_likes' album_details.pk %}" 
-            hx-target='#display_all_likes' 
-            style='float: right;'
-            class="btn btn-light btn-sm">
-            See all likes
+    <button hx-get="{% url 'display_all_likes' album_details.pk %}" hx-target='#display_all_likes' style='float: right;'
+      class="btn btn-light btn-sm">
+      See all likes
     </button><br><br>
 
     <div id="display_all_likes"></div>
@@ -45,35 +42,30 @@
 </div><br><br>
 
 
-<!-- comment form --> 
-<a id="album_comments_button"  
-  hx-get="{% url 'comment_form_display' %}"
-  hx-target="#comment_form"> 
-    <button class="btn btn-primary btn-sm btn-block" style="width: 100%;">
-      Comments {{ album_details.comment_set.all.count }}
-    </button> 
+<!-- comment form -->
+<a id="album_comments_button" hx-get="{% url 'comment_form_display' %}" hx-target="#comment_form">
+  <button class="btn btn-primary btn-sm btn-block" style="width: 100%;">
+    Comments {{ album_details.comment_set.all.count }}
+  </button>
 </a><br><br>
 
-<div id="comment_form"></div> 
+<div id="comment_form"></div>
 
 <!-- {{ album_images.count }} {{ album_details.album_name}} images -->
 <div class="row row-cols-1 row-cols-md-2 g-4">
   {% for images in album_images %}
-    <div class="col">
-      <div class="card">  
-        <!-- <a hx-get="{% url 'album_slideshow' images.album_images.pk %}" hx-target="#album-slideshow"> -->
-          <img src="{{ images.images.url }}" class="card-img-top"  alt="...">
-        <!-- </a> -->
-        <a href="{{ images.images.url }}" download="Click do download">
-          <button class="btn" style="width:100%"><i class="fa fa-download"></i> Download</button>
-        </a>
-          <!-- <p class="card-title"> Tap image to download </p> -->
-      </div>
+  <div class="col">
+    <div class="card">
+      <!-- <a hx-get="{% url 'album_slideshow' images.album_images.pk %}" hx-target="#album-slideshow"> -->
+      <img src="{{ images.images.url }}" class="card-img-top" alt="...">
+      <!-- </a> -->
+      <a href="{{ images.images.url }}" download="Click do download">
+        <button class="btn" style="width:100%"><i class="fa fa-download"></i> Download</button>
+      </a>
+      <!-- <p class="card-title"> Tap image to download </p> -->
     </div>
+  </div>
   {% endfor %}
 </div> <br>
 
 <a href="#" hx-boost="true" class="btn btn-primary btn-sm" style="display: block;"> ^ </a><br>
-
-
-

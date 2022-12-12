@@ -1,45 +1,41 @@
+<form enctype="multipart/form-data" hx-post="{% url 'create_comment' %}" hx-encoding="multipart/form-data"
+  onsubmit='disableButton()'>
+  <div class="alert alert-muted alert-dismissible fade show" role="alert">
+    <div style="height:300px; overflow: auto;">
 
-<form enctype="multipart/form-data" 
-      hx-post="{% url 'create_comment' %}" 
-      hx-encoding="multipart/form-data"
-      onsubmit='disableButton()'>
-      <div class="alert alert-muted alert-dismissible fade show" role="alert"> 
-        <div style="height:300px; overflow: auto;">
+      {% csrf_token %}
+      {% for form in comment_form %}
+      <label for=""> Write comment </label><br>
+      {{ form }}
+      {% endfor %}<br><br>
+      <button type="submit" id="btn" class="btn btn-primary btn-sm"> Save comment </button><br><br>
 
-        {% csrf_token %}
-          {% for form in comment_form %}
-            <label for=""> Write comment </label><br>
-            {{ form }}
-          {% endfor %}<br><br>
-          <button type="submit" id="btn" class="btn btn-primary btn-sm"> Save comment </button><br><br>
+      {% if album_details.comment_set.all %}
+      {% for comment in album_details.comment_set.all %}
+      <p><b>{{ comment.comment_owner.username }}</b> <small>{{ comment.comment_owner.email }}</small> |
+        <small> {{ comment.comment_created|timesince }} ago</small><br>
+        {{ comment.comment|capfirst }}
+        {% if comment.comment_owner.email == request.user.email %}
+        <button class="btn btn-outline-danger btn-sm" hx-delete="{% url 'delete_album_comment' comment.pk %}"
+          hx-confirm="Delete comment?">
+          Delete
+        </button>
+        {% endif %}
+      </p>
+      {% endfor %}
+      {% else %}
+      No comments.
+      {% endif %}
 
-          {% if album_details.comment_set.all %}
-          {% for comment in album_details.comment_set.all %}
-            <p><b>{{ comment.comment_owner.username }}</b> <small>{{ comment.comment_owner.email }}</small> | 
-            <small> {{ comment.comment_created|timesince }} ago</small><br>
-              {{ comment.comment|capfirst }} 
-              {% if comment.comment_owner.email == request.user.email %}
-                <button class="btn btn-outline-danger btn-sm"
-                  hx-delete="{% url 'delete_album_comment' comment.pk %}"
-                  hx-confirm="Delete comment?">
-                  Delete 
-                </button>
-              {% endif %}
-            </p>
-          {% endfor %}
-          {% else %}
-            No comments.
-          {% endif %}
-
-          </div>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 </form>
 
 <script>
   function disableButton() {
-      var btn = document.getElementById('btn');
-      btn.disabled = true;
-      btn.innerText = 'Saving...'
+    var btn = document.getElementById('btn');
+    btn.disabled = true;
+    btn.innerText = 'Saving...'
   }
 </script>
