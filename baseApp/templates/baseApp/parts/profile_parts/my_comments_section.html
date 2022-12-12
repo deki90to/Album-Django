@@ -1,1 +1,25 @@
-<h3>My comments</h3>
+
+{% for album in my_albums %}
+  {% for comment in album.comment_set.all %}
+    {% if comment.comment_owner == request.user %}
+
+      
+
+
+<ol class="list-group list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div><small>You commented</small></div>
+      "{{ comment.comment }}" to 
+      <a href="">{{ comment.commented_album.album_owner.username }}'s</a> 
+      <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}"
+      hx-target="#replaceable-div" style="font-weight: bold;"><b>{{ comment.commented_album }}</b></a>  
+    </div>
+    <span class="badge bg-primary rounded-pill">{{ comment.comment_created }}</span>
+  </li>
+
+</ol>
+
+{% endif %}
+{% endfor %}
+{% endfor %}

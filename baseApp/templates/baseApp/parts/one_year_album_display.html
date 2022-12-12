@@ -4,28 +4,28 @@
 {% for year in choosen_year %}
 {% if year.hidden == False %}
 <div class="card mb-2">
-    <div class="row g-0">
-        <div class="col-md-4">
-            {% for images in year.images_set.all|slice:":1" %}
-            <a hx-get="{% url 'display_all_images_from_single_album' year.pk %}" hx-target="#replaceable-div">
-                <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
-            </a>
-            {% endfor %}
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title" style="color: blue;"> {{ year.album_name }} {{ year.album_year }}</h5> <br>
-                <p class="card-text" style="color: grey;">
-                    <b><a href="" style="text-decoration: none;">{{ year.album_owner.username }} | {{ year.album_owner.email }}</a></b>
-                </p>
-                <p class="card-text"><small class="text-muted"> Created {{ year.album_created.date }} </small></p>
-                <p class="card-text"><small class="text-muted"> Last login {{ year.album_owner.last_login|timesince }}
-                        ago </small></p>
-                <p class="card-text"><small class="text-muted"> Member since {{ year.album_owner.date_joined.date }}
-                    </small></p>
-            </div>
-        </div>
+  <div class="row g-0">
+    <div class="col-md-4">
+      {% for images in year.images_set.all|slice:":1" %}
+      <a hx-get="{% url 'display_all_images_from_single_album' year.pk %}" hx-target="#replaceable-div">
+        <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+      </a>
+      {% endfor %}
     </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title" style="color: blue;"> {{ year.album_name }} {{ year.album_year }}</h5> <br>
+        <p class="card-text" style="color: grey;">
+          <b><a href="" style="text-decoration: none;">{{ year.album_owner.username }} | {{ year.album_owner.email }}</a></b>
+        </p>
+        <p class="card-text"><small class="text-muted"> Created {{ year.album_created.date }} </small></p>
+        <p class="card-text"><small class="text-muted"> Last login {{ year.album_owner.last_login|timesince }}
+            ago </small></p>
+        <p class="card-text"><small class="text-muted"> Member since {{ year.album_owner.date_joined.date }}
+          </small></p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endif %}
 {% endfor %}
