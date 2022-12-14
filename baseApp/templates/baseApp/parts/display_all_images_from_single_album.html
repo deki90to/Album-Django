@@ -5,7 +5,7 @@
 <!-- <a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-outline-primary btn-sm"> 
   &laquo Back 
 </a> -->
-{{ album_images.count }} "{{ album_details.album_name }}" image/s
+{{ album_images.count }} "{{ album_details.album_name }}" {% if album_images.count == 1 %} image {% else %} images {% endif %} 
 <div style="display: flex; float: right;">
   <input type="hidden">
   <form action="{% url 'like' album_details.pk %}" method="POST">
@@ -24,19 +24,15 @@
 
 <div style="float: right;">
   {% if album_details.likes %}
-
   <small>Recent liked by
-    {% for likes in album_likes|slice:":3" %}
-    <a href="#"><b>{{ likes.username }}</b></a>,
+    {% for likes in album_likes|slice:":2" %}
+    <a href="#"><b> {% if likes.email == request.user.email %} you {% else %} {{ likes.username }} {% endif %} </b></a>,
     {% endfor %} <br>
-
-    <button hx-get="{% url 'display_all_likes' album_details.pk %}" hx-target='#display_all_likes' style='float: right;'
-      class="btn btn-light btn-sm">
+    <a hx-get="{% url 'display_all_likes' album_details.pk %}" hx-target='#display_all_likes' style='float: right;'>
       See all likes
-    </button><br><br>
+    </a><br>
 
     <div id="display_all_likes"></div>
-
   </small>
   {% endif %}
 </div><br><br>

@@ -20,10 +20,10 @@ urlpatterns = [
     path('delete_album/<pk>/', views.delete_album, name='delete_album'),
     path('delete_album_comment/<pk>/', views.delete_album_comment, name='delete_album_comment'),
     path('display_participants/', views.display_participants, name='display_participants'),
-    path('redirect_to_right_column/', views.redirect_to_right_column, name='redirect_to_right_column'),
     path('album_slideshow/<pk>/', views.album_slideshow, name='album_slideshow'),
 
     path('like/<pk>/', views.addLike, name='like'),
     path('dislike/<pk>/', views.addDislike, name='dislike'),
     path('display_all_likes/<pk>/', views.display_all_likes, name='display_all_likes'),
+    path('display_all_dislikes/<pk>/', views.display_all_dislikes, name='display_all_dislikes'),
 ]

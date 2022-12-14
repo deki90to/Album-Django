@@ -8,6 +8,8 @@ from django.http import HttpResponse
 from django.core.paginator import EmptyPage, Paginator
 from django.core.mail import send_mail
 from members.models import CustomUser
+from django.urls import reverse
+
 
 
 @login_required(login_url='login')
@@ -100,12 +102,6 @@ def create_new_album(request):
     # content = '<p> Album created </p>'
     # return HttpResponse(content)
 
-
-def redirect_to_right_column(request):
-    all_albums = Album.objects.all()
-    return render(request, 'baseApp/columns/right_column.html', {
-        'all_albums': all_albums,
-    })
 
 
 
@@ -234,7 +230,6 @@ def album_slideshow(request, pk):
         'album_images': album_images,
     })
 
-
 @login_required(login_url='login')
 def addLike(request, pk):
     album = Album.objects.get(pk=pk)
@@ -286,9 +281,16 @@ def addDislike(request, pk):
 
 def display_all_likes(request, pk):
     album_details = Album.objects.get(pk=pk)
-    album_likes = album_details.likes.all()
+    album_likes = album_details.likes.all().order_by('-likes')
     return render(request, 'baseApp/parts/display_all_likes.html', {
         'album_likes': album_likes
+    })
+
+def display_all_dislikes(request, pk):
+    album_details = Album.objects.get(pk=pk)
+    album_dislikes = album_details.dislikes.all()
+    return render(request, 'baseApp/parts/display_all_dislikes.html', {
+        'album_dislikes': album_dislikes
     })
 
 

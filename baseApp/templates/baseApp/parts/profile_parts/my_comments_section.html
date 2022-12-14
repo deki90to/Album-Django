@@ -1,25 +1,108 @@
-
-{% for album in my_albums %}
-  {% for comment in album.comment_set.all %}
-    {% if comment.comment_owner == request.user %}
-
-      
+<!-- 
 
 
-<ol class="list-group list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div><small>You commented</small></div>
-      "{{ comment.comment }}" to 
-      <a href="">{{ comment.commented_album.album_owner.username }}'s</a> 
-      <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}"
-      hx-target="#replaceable-div" style="font-weight: bold;"><b>{{ comment.commented_album }}</b></a>  
-    </div>
-    <span class="badge bg-primary rounded-pill">{{ comment.comment_created }}</span>
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button"
+      role="tab" aria-controls="pills-home" aria-selected="true"> Comments </button>
   </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button"
+      role="tab" aria-controls="pills-profile" aria-selected="false"> Likes </button>
+  </li>
+</ul>
 
-</ol>
 
-{% endif %}
-{% endfor %}
-{% endfor %}
+
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+    {% for album in my_albums %}
+    {% for comment in album.comment_set.all %}
+    {% if comment.comment_owner == request.user %}
+    <ol class="list-group list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          💬 "{{ comment.comment }}" to
+          <a href="">{{ comment.commented_album.album_owner.username }}'s</a>
+          <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}"
+            hx-target="#replaceable-div" style="font-weight: bold;"><b>{{ comment.commented_album }}</b></a>
+        </div>
+        <span class="badge bg-primary rounded-pill">{{ comment.comment_created }}</span>
+      </li>
+    </ol>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+
+    
+    {% for liked_albums in my_albums %}
+    {% if likes == request.user %}
+    <ol class="list-group list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          ♥ <a href=""> {{ liked_albums }} </a> <br>
+          <a></a>
+        </div>
+        <span class="badge bg-primary rounded-pill"></span>
+      </li>
+    </ol>
+    {% endif %}
+    {% endfor %}
+  </div>
+  
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+
+  </div>
+</div> -->
+
+<div id="comments-likes-section">
+  <div id="comments-likes-left"> 
+    {% for album in my_albums %}
+    {% for comment in album.comment_set.all %}
+    {% if comment.comment_owner == request.user %}
+    <ol class="list-group list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          💬 "{{ comment.comment }}" to
+          <a href="">{{ comment.commented_album.album_owner.username }}'s</a>
+          <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}"
+            hx-target="#replaceable-div">{{ comment.commented_album }}</a>
+        </div>
+        
+      </li>
+      <span class="badge bg-muted rounded-pill">{{ comment.comment_created }}</span>
+    </ol>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+  </div>
+  <div id="comments-likes-right"> 
+    {% for liked_albums in my_albums %}
+
+    <!-- {% for likes in liked_albums.likes.all %} -->
+    <!-- {% if likes == request.user %}
+    <ol class="list-group list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto"> -->
+  <ol class="list-group list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+      <div class="ms-2 me-auto">
+      ♥ <a hx-get="{% url 'display_all_images_from_single_album' liked_albums.pk %}" 
+          hx-target="#replaceable-div"> 
+           {{ liked_albums }} 
+        </a>
+      </div>
+      <span class="badge bg-primary rounded-pill">{{ comment.comment_created }}</span>
+    </li>
+  </ol> 
+          <!-- <a></a>
+        </div>
+        <span class="badge bg-primary rounded-pill"></span>
+      </li>
+    </ol> -->
+    <!-- {% endif %} -->
+    <!-- {% endfor %} -->
+    {% endfor %}
+  </div>
+</div>
