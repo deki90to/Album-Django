@@ -2,7 +2,7 @@
 <div class="alert alert-muted alert-dismissible fade show" role="alert">
   <div style="height: auto; width: auto; overflow: auto;">
     {% for dislikes in album_dislikes %}
-    <a href="#">{{ dislikes.username }}</a>,
+    <a href="#">{% if dislikes.email == request.user.email %} you {% else %} {{ dislikes.username }} {% endif %}</a>,
     {% endfor %}
   </div>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

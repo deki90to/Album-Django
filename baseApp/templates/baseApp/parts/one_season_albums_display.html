@@ -1,4 +1,5 @@
-<h3> Season view </h3>
+
+<h3> {{ one_season }} </h3>
 
 {% if choosen_season %}
 {% for season in choosen_season %}
@@ -30,5 +31,5 @@
 {% endif %}
 {% endfor %}
 {% else %}
-<h6>No albums for this season yet</h6>
+<h6>No albums for {{ one_season }} season </h6>
 {% endif %}

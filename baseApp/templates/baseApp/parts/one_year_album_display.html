@@ -1,4 +1,5 @@
-<h3> Year view </h3>
+
+<h3> {{ one_year }} </h3>
 
 {% if choosen_year %}
 {% for year in choosen_year %}
@@ -30,5 +31,5 @@
 {% endif %}
 {% endfor %}
 {% else %}
-<h6>No albums for this year yet</h6>
+<h6>No albums for {{ one_year }} year </h6>
 {% endif %}
