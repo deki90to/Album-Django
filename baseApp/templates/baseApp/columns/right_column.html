@@ -57,13 +57,11 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title" style="color: blue;"> {{ album.album_name }} {{ album.album_year }}</h5>
+          <h5 class="card-title"> {{ album.album_name }} {{ album.album_year }}</h5>
           <div style="float: right;">
             <h6> 👍 {{ album.likes.count }} 👎 {{ album.dislikes.count }} </h6>
           </div> <br>
-          <p class="card-text" style="color: grey;">
-            <b><a href="#" style="text-decoration: none;">{{ album.album_owner.username }} | {{ album.album_owner.email }}</a></b>
-          </p>
+          <p class="card-text"> {{ album.album_owner.username }} | {{ album.album_owner.email }} </p>
           <p class="card-text"><small class="text-muted"> Created {{ album.album_created.date }} </small></p>
           <p class="card-text"><small class="text-muted"> Last login {{ album.album_owner.last_login|timesince }} ago
             </small></p>

@@ -1,3 +1,4 @@
+
 <div id="album-slideshow"></div>
 
 <h3>Album images</h3>
@@ -23,19 +24,21 @@
 </div><br><br>
 
 <div style="float: right;">
-  {% if album_details.likes %}
-  <small>Recent liked by
+  <small>
+    {% if album_likes %}
+    Recent liked by
     {% for likes in album_likes|slice:":2" %}
-    <a href="#"><b> {% if likes.email == request.user.email %} you {% else %} {{ likes.username }} {% endif %} </b></a>,
+    <a href="#"><b> {% if likes.email == request.user.email %} you {% else %} {{ likes.username }} {% endif %}</b></a>,
     {% endfor %} <br>
     <a hx-get="{% url 'display_all_likes' album_details.pk %}" hx-target='#display_all_likes' style='float: right;'>
-      See all likes
+      {% if album_details.likes.count > 2 %} and {{ album_details.likes.count|add:"-2" }} more {% else %} {% endif %}
     </a><br>
 
     <div id="display_all_likes"></div>
-
-  </small>
+  {% else %}
+    No likes yet
   {% endif %}
+</small>
 </div><br><br>
 
 

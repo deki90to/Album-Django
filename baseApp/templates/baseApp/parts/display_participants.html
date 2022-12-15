@@ -9,7 +9,7 @@
     <a href="#">@{{ participant.commented_album.album_owner.username }}'s</a> album
     <a hx-get="{% url 'display_all_images_from_single_album' participant.commented_album.pk %}"
       hx-target="#replaceable-div">
-      <b>{{ participant.commented_album.album_name }}</b>
+      <b style="text-decoration: underline;">{{ participant.commented_album.album_name }}</b>
     </a>
     <div>
       "{{ participant.comment|truncatewords:20 }}" <br> <br>

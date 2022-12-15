@@ -13,11 +13,11 @@
           "{{ comment.comment }}" to
           <a href="">{{ comment.commented_album.album_owner.username }}'s</a>
           <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}"
-            hx-target="#replaceable-div">{{ comment.commented_album }}</a>
+            hx-target="#replaceable-div"><b style="text-decoration: underline;">{{ comment.commented_album }}</b></a>
         </div>
         
       </li>
-      <span class="badge bg-muted text-dark">{{ comment.comment_created }}</span>
+      <span class="badge bg-muted text-light">{{ comment.comment_created }}</span>
     </ol>
     {% endif %}
     {% endfor %}
@@ -25,8 +25,9 @@
   </div>
   </div>
   
-  <div id="comments-likes-right"> 
-    <center>👍❤️</center>
+  <div id="comments-likes-right">
+    <!-- ❤️  -->
+    <center>👍</center>
     <div style="height:300px; overflow: auto;">
     {% for liked_albums in my_albums %}
     {% for likes in liked_albums.likes.all %}
@@ -36,7 +37,7 @@
         <div class="ms-2 me-auto">
           <a hx-get="{% url 'display_all_images_from_single_album' liked_albums.pk %}" 
             hx-target="#replaceable-div"> 
-            {{ liked_albums }} 
+            {{ liked_albums.album_owner.username }}'s album <p style="text-decoration: underline;">{{ liked_albums }}</p> 
           </a>
         </div>
         <span class="badge bg-primary rounded-pill"></span>
@@ -47,7 +48,8 @@
     {% endfor %}
     </div>
 
-    <center>👎💔</center>
+    <!-- 💔 -->
+    <center>👎</center> 
     <div style="height:300px; overflow: auto;">
       {% for disliked_albums in my_albums %}
       {% for likes in disliked_albums.dislikes.all %}
@@ -57,7 +59,7 @@
           <div class="ms-2 me-auto">
             <a hx-get="{% url 'display_all_images_from_single_album' disliked_albums.pk %}" 
               hx-target="#replaceable-div"> 
-              {{ disliked_albums }} 
+              {{ disliked_albums.album_owner.username }}'s album<p style="text-decoration: underline;">{{ disliked_albums }} </p>
             </a>
           </div>
           <span class="badge bg-primary rounded-pill"></span>
