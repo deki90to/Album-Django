@@ -48,7 +48,7 @@ select[name=album_year] {
 .card-body, .card-title {
   background-color: #1d1d1d;
 }
-.list-group-item {
+.list-group-item, .col-md-8 {
   background-color: #1d1d1d;
   color: lightblue;
 }
