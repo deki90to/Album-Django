@@ -22,7 +22,7 @@ def register_(request):
 
             email = email
             subject = 'New registration'
-            message = f'{email} successfully registred, you password is "{raw_password}", Welcome!'
+            message = f'{email} successfully registred, your password is "{raw_password}", Welcome!'
             send_mail(
                 subject,
                 message,

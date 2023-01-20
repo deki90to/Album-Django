@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 # from django.contrib.auth.models import User
 
+
 User = settings.AUTH_USER_MODEL
 
 class Season(models.Model):
@@ -17,7 +18,7 @@ class Season(models.Model):
 
 class Year(models.Model):
     album_year = models.IntegerField(
-        validators=[MinValueValidator(1990), MaxValueValidator(2022)], default=2022
+        validators=[MinValueValidator(1990), MaxValueValidator(2023)], default=2023
     )
     def __str__(self):
         return f'{self.album_year}'
@@ -43,7 +44,23 @@ class Album(models.Model):
     class Meta:
         ordering = ['-album_created']
 
+# from django.db.models.signals import post_save, pre_save
+# from django.core.mail import send_mail
 
+# def save_album(sender, instance, **kwargs):
+#     email = 'album owner'
+#     subject = 'Album created'
+#     message = f"Album successfully created, check it here https://deki90to.pythonanywhere.com/"
+#     print(sender.objects.all)
+
+#     send_mail(
+#         subject,
+#         message,
+#         email,
+#         ['deki90to@gmail.com']
+#     )
+# pre_save.connect(save_album, sender=Album)
+# post_save.connect(save_album, sender=Album)
 
 class Images(models.Model):
     images = models.ImageField(upload_to='images/')
@@ -51,7 +68,6 @@ class Images(models.Model):
 
     def __str__(self):
         return f'{self.album_images}'
-
 
 
 class Comment(models.Model):

@@ -18,8 +18,6 @@ class AlbumForm(ModelForm):
         exclude = ['album_owner']
 
 
-
-
 class ImagesForm(ModelForm):
     images = forms.ImageField(
         label='Images', 
@@ -29,8 +27,6 @@ class ImagesForm(ModelForm):
         model = Images
         fields = '__all__'
         exclude = ['album_images']
-
-
 
 
 class CommentForm(ModelForm):

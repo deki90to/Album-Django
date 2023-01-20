@@ -20,8 +20,7 @@
           <b><a href="" style="text-decoration: none;">{{ year.album_owner.username }} | {{ year.album_owner.email }}</a></b>
         </p>
         <p class="card-text"><small class="text-muted"> Created {{ year.album_created.date }} </small></p>
-        <p class="card-text"><small class="text-muted"> Last login {{ year.album_owner.last_login|timesince }}
-            ago </small></p>
+        <p class="card-text"><small class="text-muted"> Last login {{ year.album_owner.last_login|timesince }} ago </small></p>
         <p class="card-text"><small class="text-muted"> Member since {{ year.album_owner.date_joined.date }}
           </small></p>
       </div>

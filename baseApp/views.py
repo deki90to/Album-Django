@@ -9,6 +9,7 @@ from django.core.paginator import EmptyPage, Paginator
 from django.core.mail import send_mail
 from members.models import CustomUser
 from django.urls import reverse
+from members.models import Profile
 
 
 
@@ -93,15 +94,6 @@ def create_new_album(request):
                     [f.album_owner.email, 'deki90to@gmail.com']
                 )
                 return redirect('display_all_images_from_single_album', f.pk)
-                # content = f"<p>{f.album_name} album was created <a href='/' boost='true'> <b> refresh </b> </a></p>"
-                # return HttpResponse(content)
-            # else:
-            #     print(form.errors)
-    # else:
-    #     form = AlbumForm()
-    # content = '<p> Album created </p>'
-    # return HttpResponse(content)
-
 
 
 
@@ -111,14 +103,12 @@ def display_all_images_from_single_album(request, pk):
     global album_details
     album_details = Album.objects.get(pk=pk)
     album_likes = album_details.likes.all()
-    # users_likes = CustomUser.objects.filter(likes=True)
     album_images = album_details.images_set.all()
     return render(request, 'baseApp/parts/display_all_images_from_single_album.html', {
         'album_details': album_details,
         'album_images': album_images,
         'album_likes': album_likes
     })
-
 
 
 
@@ -136,7 +126,6 @@ def create_comment(request):
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            # comment_form.save()
             f = comment_form.save(commit=False)
             f.comment_owner = request.user
             f.commented_album = album_details
@@ -171,14 +160,12 @@ def create_comment(request):
         # return HttpResponse(content)
 
 
-
 @login_required(login_url='login')
 def display_my_albums(request):
     my_albums = Album.objects.all()
     return render(request, 'baseApp/parts/display_my_albums.html', {
         'my_albums': my_albums,
     })
-
 
 
 @login_required(login_url='login')
@@ -195,7 +182,6 @@ def albums_search(request):
     })
 
 
-
 @login_required(login_url='login')
 def delete_album(request, pk):
     delete_album = Album.objects.get(pk=pk)
@@ -210,7 +196,6 @@ def delete_album_comment(request, pk):
         album_comment.delete()
         content = "<p> Comment deleted </p>"
         return HttpResponse(content)
-
 
 
 
@@ -293,4 +278,14 @@ def display_all_dislikes(request, pk):
         'album_dislikes': album_dislikes
     })
 
+def profiles_list(request):
+    profiles = Profile.objects.exclude(user=request.user)
+    return render(request, 'baseApp/parts/profiles_list.html', {
+        'profiles': profiles
+    })
 
+def profile(request, pk):
+    profile = Profile.objects.get(user_id=pk)
+    return render(request, 'baseApp/parts/profile.html', {
+        'profile': profile
+    })

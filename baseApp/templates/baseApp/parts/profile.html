@@ -1,0 +1,25 @@
+
+{% if profile %}
+  <div class="alert alert-muted alert-dismissible fade show" role="alert">
+    <div style="height:200px; overflow: auto;">
+
+      {{ profile.user.username }}'s follows <br>
+
+      <strong> Following </strong> <br>
+
+        {% for following in profile.follows.all %}
+          <a href="">{{ following.user.username }} </a> <br>
+        {% endfor %}
+
+
+
+        <strong> Followed by </strong><br>
+
+        {% for followers in profile.followed_by.all %}
+          <a href="">{{ followers.user.username }} </a> <br>
+        {% endfor %}
+
+    </div>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %} <br>

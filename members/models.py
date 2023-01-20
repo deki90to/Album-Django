@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 
 class UserManager(BaseUserManager):
@@ -32,7 +31,6 @@ class UserManager(BaseUserManager):
         return user
 
 
-
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(max_length=100, verbose_name='email', unique=True)
     username = models.CharField(max_length=255, unique=True)
@@ -59,3 +57,22 @@ class CustomUser(AbstractBaseUser):
 
     def is_staff(self):
         return self.is_admin
+    
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    follows = models.ManyToManyField('self', related_name='followed_by', symmetrical=False, blank=True)
+
+    def __str__(self):
+        return f"User: {self.user}"
+    
+
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        user_profile = Profile(user=instance)
+        user_profile.save()
+        user_profile.follows.set([instance.profile.id])
+        user_profile.save()
+        print('new user created')
+
+post_save.connect(create_profile, sender=CustomUser)

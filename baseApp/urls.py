@@ -26,4 +26,8 @@ urlpatterns = [
     path('dislike/<pk>/', views.addDislike, name='dislike'),
     path('display_all_likes/<pk>/', views.display_all_likes, name='display_all_likes'),
     path('display_all_dislikes/<pk>/', views.display_all_dislikes, name='display_all_dislikes'),
+
+    path('profile_list/', views.profiles_list, name='profile_list'),
+    path('profile/<pk>/', views.profile, name='profile'),
+
 ]
