@@ -52,3 +52,14 @@ select[name=album_year] {
   background-color: #1d1d1d;
   color: lightblue;
 }
+
+#followers_container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+  background-color: #222222;
+  padding: 10px;
+  border-radius: 10px;
+}
+#comments_container {
+  background-color: #222222;
+}

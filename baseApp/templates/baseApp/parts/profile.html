@@ -1,25 +1,37 @@
 
 {% if profile %}
+
   <div class="alert alert-muted alert-dismissible fade show" role="alert">
     <div style="height:200px; overflow: auto;">
 
-      {{ profile.user.username }}'s follows <br>
+      <div id="followers_container">
 
-      <strong> Following </strong> <br>
+      <!-- {{ profile.user.username }}'s follows <br> -->
+        
+      <div id="you_follow">
+        <strong> You follow </strong> <br>
 
         {% for following in profile.follows.all %}
+        {% if following.user != profile.user %}
           <a href="">{{ following.user.username }} </a> <br>
+        {% endif %}
         {% endfor %}
+      </div>
 
-
-
+      <div id="followed_by">
         <strong> Followed by </strong><br>
 
         {% for followers in profile.followed_by.all %}
+        {% if followers.user != profile.user %}
           <a href="">{{ followers.user.username }} </a> <br>
+          {% endif %}
         {% endfor %}
+      </div>
+
+      </div>
 
     </div>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
+
 {% endif %} <br>
