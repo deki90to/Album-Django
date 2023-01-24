@@ -14,19 +14,25 @@
 
         {% if album_details.comment_set.all %}
         {% for comment in album_details.comment_set.all %}
-        <p><b>{{ comment.comment_owner.username }}</b> <small>{{ comment.comment_owner.email }}</small> |
-          <small> {{ comment.comment_created|timesince }} ago</small><br>
-          {{ comment.comment|capfirst }}
+        <p>
+          <a hx-get="{% url 'display_user_profile' comment.comment_owner.pk %}" hx-target="#replaceable-div">
+            {{ comment.comment_owner.username }} <small>({{ comment.comment_owner.email }})
+          </a>
+            {{ comment.comment_created|timesince }} ago</small><br>
+
+            {{ comment.comment|capfirst }}
+
           {% if comment.comment_owner.email == request.user.email %}
-          <button class="btn btn-outline-danger btn-sm" hx-delete="{% url 'delete_album_comment' comment.pk %}"
-            hx-confirm="Delete comment?">
+          <button class="btn btn-outline-danger btn-sm" hx-delete="{% url 'delete_album_comment' comment.pk %}" hx-confirm="Delete comment?">
             Delete
           </button>
           {% endif %}
         </p>
+
         {% endfor %}
+        
         {% else %}
-        No comments yet
+          No comments yet
         {% endif %}
 
       </div>

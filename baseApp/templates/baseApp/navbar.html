@@ -1,10 +1,15 @@
+
 <ul class="nav justify-content-end">
   {% if not user.is_authenticated %}
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'login' %}" hx-boost="true">Login</a>
+    <a class="nav-link" href="{% url 'login' %}" hx-boost="true">
+      Login
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'register' %}" hx-boost="true">Register</a>
+    <a class="nav-link" href="{% url 'register' %}" hx-boost="true">
+      Register
+    </a>
   </li>
 
   {% else %}
@@ -26,8 +31,8 @@
         aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
           <!-- <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel"> Pages </h5> -->
-          <a class="nav-link" aria-current="page" href="{% url 'logout' %}"> Logout {{ request.user.username }} 
-            {{ request.user.email }}</a> <br>
+          <a class="nav-link" aria-current="page" href="{% url 'logout' %}"> 
+            Logout {{ request.user.username }} {{ request.user.email }}</a> <br>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
             aria-label="Close"></button>
         </div>
@@ -38,25 +43,27 @@
               <a class="nav-link" aria-current="page" href="{% url 'home' %}"> All albums </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" hx-get="{% url 'display_my_albums' %}"
-                hx-target="#replaceable-div"> My profile </a>
+              <a class="nav-link" aria-current="page" hx-get="{% url 'display_user_profile' request.user.pk %}" hx-target="#replaceable-div">
+                My profile 
+              </a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" aria-current="page" hx-get="{% url 'display_participants' %}" hx-target="#activities">
                 Activities </a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" hx-get="{% url 'create_new_album_form_display' %}" hx-target="#album-create"
-                swap="none"> Create new album </a>
+                swap="none"> 
+                Create new album 
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'chat_home' %}"> Create or join a room </a>
+              <a class="nav-link" href="{% url 'chat_home' %}"> 
+                Create or join a room 
+              </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Filter albums
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
@@ -69,8 +76,12 @@
                   <a hx-get="{% url 'one_season_albums_display' season.pk %}" class="dropdown-item"
                     hx-target="#replaceable-div" class="list-group-item list-group-item-action">
                     <div class="d-flex w-90 justify-content-between">
-                      <p class="mb-0" id="all_seasons_font"> {{ season.season_name }} </p>
-                      <small class="text-primary">{{ season.album_set.all.count }}</small>
+                      <p class="mb-0" id="all_seasons_font"> 
+                        {{ season.season_name }} 
+                      </p>
+                      <small class="text-primary">
+                        {{ season.album_set.all.count }}
+                      </small>
                     </div>
                   </a>
                   {% endfor %}
@@ -85,8 +96,12 @@
                   <a hx-get="{% url 'one_year_album_display' year.pk %}" class="dropdown-item"
                     hx-target="#replaceable-div" class="list-group-item list-group-item-action">
                     <div class="d-flex w-90 justify-content-between">
-                      <p class="mb-0" id="all_years_font"> {{ year.album_year }} </p>
-                      <small class="text-primary">{{ year.album_set.all.count }}</small>
+                      <p class="mb-0" id="all_years_font"> 
+                        {{ year.album_year }} 
+                      </p>
+                      <small class="text-primary">
+                        {{ year.album_set.all.count }}
+                      </small>
                     </div>
                   </a>
                 </div>
@@ -102,6 +117,6 @@
         </div>
       </div>
     </div>
-    {% endif %}
+  {% endif %}
 </ul>
 </nav>

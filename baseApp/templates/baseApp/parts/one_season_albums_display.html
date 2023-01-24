@@ -17,7 +17,9 @@
       <div class="card-body">
         <h5 class="card-title"> {{ season.album_name }} {{ season.album_year }}</h5> <br>
         <p class="card-text">
-          <b><a href="" style="text-decoration: none;">{{ season.album_owner.username }} | {{ season.album_owner.email }}</a></b>
+          <a hx-get="{% url 'profile' season.album_owner.pk %}" hx-target="#replaceable-div" style="text-decoration: none;">
+            {{ season.album_owner.username }} | {{ season.album_owner.email }}
+          </a>
         </p>
         <p class="card-text"><small class="text-muted"> Created {{ season.album_created.date }} </small></p>
         <p class="card-text"><small class="text-muted"> Last login {{ season.album_owner.last_login|timesince }} ago </small></p>

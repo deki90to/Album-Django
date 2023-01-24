@@ -4,34 +4,36 @@
   <div class="alert alert-muted alert-dismissible fade show" role="alert">
     <div style="height:200px; overflow: auto;">
 
-      <div id="followers_container">
+    <div id="followers_container">
 
-      <!-- {{ profile.user.username }}'s follows <br> -->
-        
       <div id="you_follow">
-        <strong> You follow </strong> <br>
+      <strong> You follow </strong> <br>
 
-        {% for following in profile.follows.all %}
-        {% if following.user != profile.user %}
-          <a href="">{{ following.user.username }} </a> <br>
-        {% endif %}
-        {% endfor %}
+      {% for following in profile.follows.all %}
+      {% if following.user != profile.user %}
+        <a hx-get="{% url 'display_user_profile' following.pk %}" hx-target="#replaceable-div">
+          {{ following.user.username }} 
+        </a> <br>
+      {% endif %}
+      {% endfor %}
       </div>
 
       <div id="followed_by">
-        <strong> Followed by </strong><br>
+      <strong> Followed by </strong><br>
 
-        {% for followers in profile.followed_by.all %}
-        {% if followers.user != profile.user %}
-          <a href="">{{ followers.user.username }} </a> <br>
-          {% endif %}
-        {% endfor %}
+      {% for followers in profile.followed_by.all %}
+      {% if followers.user != profile.user %}
+        <a hx-get="{% url 'display_user_profile' followers.pk %}" hx-target="#replaceable-div">
+          {{ followers.user.username }} 
+        </a> <br>
+      {% endif %}
+      {% endfor %}
       </div>
 
-      </div>
+    </div>
 
     </div>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-
+  
 {% endif %} <br>

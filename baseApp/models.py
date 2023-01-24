@@ -3,7 +3,6 @@ from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-# from django.contrib.auth.models import User
 
 
 User = settings.AUTH_USER_MODEL
@@ -15,7 +14,6 @@ class Season(models.Model):
         return f'{self.season_name}'
 
 
-
 class Year(models.Model):
     album_year = models.IntegerField(
         validators=[MinValueValidator(1990), MaxValueValidator(2023)], default=2023
@@ -25,7 +23,6 @@ class Year(models.Model):
     
     class Meta:
         ordering = ['-album_year']
-
 
 
 class Album(models.Model):
@@ -81,3 +78,12 @@ class Comment(models.Model):
     
     class Meta:
         ordering = ['-comment_created']
+
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user} - {self.album}'

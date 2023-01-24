@@ -10,7 +10,8 @@ from django.core.mail import send_mail
 from members.models import CustomUser
 from django.urls import reverse
 from members.models import Profile
-
+from django.shortcuts import render, get_object_or_404, redirect
+# from django.contrib import settings
 
 
 @login_required(login_url='login')
@@ -32,7 +33,6 @@ def home(request):
         'all_seasons': all_seasons,
         'all_album_images': all_album_images,
     })
-
 
 
 @login_required(login_url='login')
@@ -278,14 +278,28 @@ def display_all_dislikes(request, pk):
         'album_dislikes': album_dislikes
     })
 
-def profiles_list(request):
-    profiles = Profile.objects.exclude(user=request.user)
-    return render(request, 'baseApp/parts/profiles_list.html', {
-        'profiles': profiles
-    })
 
 def profile(request, pk):
     profile = Profile.objects.get(user_id=pk)
     return render(request, 'baseApp/parts/profile.html', {
         'profile': profile
     })
+
+
+
+def display_user_profile(request, pk):
+    profile = Profile.objects.get(user_id=pk)
+    profile_album = profile.user.album_set.all()
+    return render(request, 'baseApp/parts/display_user_profile.html', {
+        'profile': profile,
+        'profile_album': profile_album
+    })
+
+
+def like_album(request, pk):
+    album = get_object_or_404(Album, id=pk)
+    if request.user in album.likes.all():
+        album.likes.remove(request.user)
+    else:
+        album.likes.add(request.user)
+    return redirect('display_all_images_from_single_album', album.id)

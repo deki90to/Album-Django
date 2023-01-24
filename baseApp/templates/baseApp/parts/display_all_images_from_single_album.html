@@ -26,27 +26,38 @@
 <!-- <button class="btn btn-sm btn-primary"> Follow {{ album_details.album_owner.username }}</button> -->
 
 <div style="display: flex; float: right;">
-  <input type="hidden">
-  <form action="{% url 'like' album_details.pk %}" method="POST">
-    {% csrf_token %} 
-    <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
-  </form>
-  <!-- Liked by {{ album_details.likes }} -->
 
-  <input type="hidden">
+  <a hx-post="{% url 'like_album' album_details.id %}" hx-target="#replaceable-div">
+    {% if user in album_details.likes.all %}
+      <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
+    {% else %}
+      <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
+    {% endif %}
+
+  <!-- <hr> -->
+  <!-- <input type="hidden">
+  <form action="{% url 'like' album_details.pk %}" method="POST">
+    {% csrf_token %}  -->
+    <!-- <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button> -->
+  <!-- </form> -->
+
+  <!-- <input type="hidden">
   <form action="{% url 'dislike' album_details.pk %}" method="POST">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-sm btn-outline-primary"> 👎 {{ album_details.dislikes.count }} </button>
-  </form>
+    {% csrf_token %} -->
+    <!-- <button type="submit" class="btn btn-sm btn-outline-primary"> 👎 {{ album_details.dislikes.count }} </button> -->
+  <!-- </form> -->
 </div><br><br>
 
 <div style="float: right;">
   <small>
     {% if album_likes %}
-    Recent liked by
+      Recent liked by
     {% for likes in album_likes|slice:":2" %}
-    <a href="#"><b> {% if likes.email == request.user.email %} you {% else %} {{ likes.username }} {% endif %}</b></a>,
+      <a hx-get="{% url 'display_user_profile' likes.pk %}" hx-target="#replaceable-div">
+        <b>{% if likes.email == request.user.email %} you {% else %} {{ likes.username }} {% endif %}</b>
+      </a>
     {% endfor %} <br>
+
     <a hx-get="{% url 'display_all_likes' album_details.pk %}" hx-target='#display_all_likes' style='float: right;'>
       {% if album_details.likes.count > 2 %} and {{ album_details.likes.count|add:"-2" }} more {% else %} {% endif %}
     </a><br>
