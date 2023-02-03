@@ -1,5 +1,18 @@
 
-<h3>{{ profile.user.username }}'s album</h3>
+<h3>@{{ profile.user.username }} albums 
+
+  {% comment %} <div id="follows">
+    {% if profile in user.profile.follows.all %}
+    <button hx-get="{% url 'profile' profile.id %}" hx-target="#follows" class="btn btn-danger btn-sm"> 
+        Unfollow @{{ profile.user.username }} 
+    </button> 
+    {% else %} 
+    <button hx-get="{% url 'profile' profile.id %}" hx-target="#follows" class="btn btn-primary btn-sm">
+      Follow @{{ profile.user.username }} 
+    </button> 
+    {% endif %}
+  </div> {% endcomment %}
+</h3>
 
 {% if profile_album %}
   {% for album in profile_album %}
@@ -14,8 +27,8 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title"> {{ album.album_name }} {{ album.album_year }}</h5><br>
-            <p class="card-text"> {{ album.album_owner.username }} | {{ album.album_owner.email }} </p>
+            <h5 class="card-title"> {{ album.album_name }} {{ album.album_year }}</h5>
+            <p class="card-text"> @{{ album.album_owner.username }} ({{ album.album_owner.email }}) </p>
             <p class="card-text"><small class="text-muted"> Created {{ album.album_created.date }} </small></p>
             <p class="card-text"><small class="text-muted"> Last login {{ album.album_owner.last_login|timesince }} ago </small></p>
             <p class="card-text"><small class="text-muted"> Member since {{ album.album_owner.date_joined.date }}

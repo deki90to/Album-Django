@@ -2,7 +2,7 @@
 <div class="alert alert-muted alert-dismissible fade show" role="alert">
   <div style="height: auto; width: auto; overflow: auto;">
     {% for likes in album_likes %}
-    <a href="#">{% if likes.email == request.user.email %} you {% else %} {{ likes.username }} {% endif %}</a>,
+    <a href="#">{% if likes.email == request.user.email %} you {% else %} {{ likes.username }} {% endif %}</a> |
     {% endfor %}
   </div>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

@@ -32,15 +32,6 @@ select[name=album_year] {
   box-shadow: 1px 10px 10px 1px grey;
 }
 
-#comments-likes-section {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	min-height: 100vh;
-	flex-direction: column;
-}
-#comments-likes-right {
-  padding-left: 10px;
-}
 
 .btn-close {
   background-color: lightblue;
@@ -53,13 +44,15 @@ select[name=album_year] {
   color: lightblue;
 }
 
-#followers_container {
+#my_likes_section, #my_follows_container {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
   background-color: #222222;
   padding: 10px;
   border-radius: 10px;
 }
-#comments_container {
-  background-color: #222222;
+
+img{
+  width: 100%;
+  height: auto;
 }

@@ -15,12 +15,18 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"> {{ year.album_name }} {{ year.album_year }}</h5> <br>
-        <p class="card-text">
-          <a hx-get="{% url 'profile' year.album_owner.pk %}" hx-target="#replaceable-div" style="text-decoration: none;">
-            {{ year.album_owner.username }} | {{ year.album_owner.email }}
-          </a>
-        </p>
+        <h5 class="card-title"> {{ year.album_name }} {{ year.album_year }}</h5>
+          {% if user.profile in year.album_owner.profile.followed_by.all %}
+          <p class="card-text">
+            <a hx-get="{% url 'display_user_profile' year.album_owner.pk %}" hx-target="#replaceable-div">
+              @<b>{{ year.album_owner.username }} ({{ year.album_owner.email }})</b>
+            </a> 
+          </p> 
+        {% else %}
+          <p class="card-text">
+              @{{ year.album_owner.username }} ({{ year.album_owner.email }})
+          </p> 
+        {% endif %}
         <p class="card-text"><small class="text-muted"> Created {{ year.album_created.date }} </small></p>
         <p class="card-text"><small class="text-muted"> Last login {{ year.album_owner.last_login|timesince }} ago </small></p>
         <p class="card-text"><small class="text-muted"> Member since {{ year.album_owner.date_joined.date }}

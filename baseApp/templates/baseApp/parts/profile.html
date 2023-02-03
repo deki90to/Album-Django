@@ -1,39 +1,71 @@
 
 {% if profile %}
 
-  <div class="alert alert-muted alert-dismissible fade show" role="alert">
-    <div style="height:200px; overflow: auto;">
+  <!-- <div class="alert alert-muted alert-dismissible fade show" role="alert">
+    <div style="height:50px; overflow: auto;"> -->
 
-    <div id="followers_container">
+    <!-- <div id="followers_container"> -->
 
-      <div id="you_follow">
-      <strong> You follow </strong> <br>
+      <!-- <div id="you_follow">
+      <strong> You follow </strong> 
 
       {% for following in profile.follows.all %}
+
       {% if following.user != profile.user %}
         <a hx-get="{% url 'display_user_profile' following.pk %}" hx-target="#replaceable-div">
           {{ following.user.username }} 
         </a> <br>
       {% endif %}
-      {% endfor %}
-      </div>
 
-      <div id="followed_by">
-      <strong> Followed by </strong><br>
+      {% endfor %}
+      </div> -->
+
+      
+      <!-- <div id="followed_by">
+      <strong> Followed by </strong>
 
       {% for followers in profile.followed_by.all %}
+
       {% if followers.user != profile.user %}
         <a hx-get="{% url 'display_user_profile' followers.pk %}" hx-target="#replaceable-div">
           {{ followers.user.username }} 
         </a> <br>
       {% endif %}
+
       {% endfor %}
-      </div>
+      </div> -->
 
-    </div>
+      <form hx-post="{% url 'profile' profile.id %}">
+        {% csrf_token %}
 
-    </div>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+        {% if profile in user.profile.follows.all %}
+
+          {% if request.user != profile.user.email %}
+            <div style="display: flex;">
+            <button class="btn btn-danger btn-sm" name="follow" value="unfollow" type="submit">
+              Unfollow @{{ profile.user.username }}
+            </button>
+            <button class="btn btn-sm btn-outline-primary" hx-get="{% url 'display_user_profile' profile.pk %}" hx-target="#replaceable-div">
+              <h6> {{ profile.user.username }} profile </h6>
+            </button> 
+          </div>
+          {% endif %}
+
+        {% else %}
+
+          {% if request.user != profile.user.email %}
+            <button class="btn btn-primary btn-sm" name="follow" value="follow" type="submit">
+              Follow @{{ profile.user.username }}
+            </button>
+          {% endif %}
+            
+        {% endif %}
+      </form>
+      
+    <!-- </div> -->
+
+    <!-- </div> -->
+  <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div> -->
   
-{% endif %} <br>
+{% endif %} 

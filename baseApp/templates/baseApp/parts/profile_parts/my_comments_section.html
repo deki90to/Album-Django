@@ -1,28 +1,28 @@
 
-<div id="comments-likes-section">
-
-  <div id="my-comments"> 
     <center>💬</center>
-    <div style="height:600px; overflow: auto;">
+    
+    <!-- <div style="height:600px; overflow: auto;"> -->
       {% for comment in profile.user.comment_set.all %}
         <ol class="list-group list-group">
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              "{{ comment.comment }}" to <br>
-              <a href="">{{ comment.commented_album.album_owner.username }}'s</a>
-              <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}"
-                hx-target="#replaceable-div"><b style="text-decoration: underline;">{{ comment.commented_album }}</b></a>
+              "{{ comment.comment }}" 
+              <a hx-get="{% url 'display_user_profile' comment.comment_owner.pk %}" hx-target="#replaceable-div"> <br>
+                - <b>{{ comment.commented_album.album_owner.username }}'s</b> album
+              </a>
+              <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}" hx-target="#replaceable-div">
+                <b> {{ comment.commented_album }} </b>
+                </a>
             </div>
           </li>
-          <span class="badge bg-muted text-light">{{ comment.comment_created }}</span>
+          <span class="badge bg-muted text-light">{{ comment.comment_created }}</span> <hr>
         </ol>
       {% endfor %}
-    </div>
-  </div>
+    <!-- </div> -->
   
-  <div id="my-likes">
+  <!-- <div id="my-likes"> -->
     <!-- ❤️  -->
-    <center>👍</center>
+    <!-- <center>👍</center>
     <div style="height:600px; overflow: auto;">
       {% for likes in profile.user.likes.all %}
         <ol class="list-group list-group">
@@ -30,14 +30,16 @@
             <div class="ms-2 me-auto">
               <a hx-get="{% url 'display_all_images_from_single_album' likes.pk %}" 
                 hx-target="#replaceable-div"> 
-                {{ likes.album_owner.username }}'s album <p style="text-decoration: underline;">{{ likes }}</p> 
+                <a hx-get="{% url 'display_user_profile' likes.album_owner.pk %}" hx-target="#replaceable-div">
+                  {{ likes.album_owner.username }}'s
+                </a> album <p style="text-decoration: underline;">{{ likes }}</p> 
               </a>
             </div>
             <span class="badge bg-primary rounded-pill"></span>
           </li>
         </ol> 
       {% endfor %}
-    </div>
+    </div> -->
 
     <!-- 💔 -->
     <!-- <center>👎</center> 

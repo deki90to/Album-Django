@@ -1,0 +1,31 @@
+
+<center>👬</center>
+
+<div id="my_follows_container">
+    
+  <div id="you_follow">
+    <h5>@You follow</h5>
+
+    {% for follows in profile.follows.all %}
+    {% if follows.user != profile.user %}
+      <a hx-get="{% url 'display_user_profile' follows.pk %}" hx-target="#replaceable-div">
+          {{ follows.user.username }} ({{ follows.user.email }})
+      </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+
+  <div id="followed_by">
+    <h5>@You are followed by</h5>
+
+    {% for followed_by in profile.followed_by.all %}
+    {% if followed_by.user != profile.user %}
+      <a hx-get="{% url 'display_user_profile' followed_by.pk %}" hx-target="#replaceable-div">
+          {{ followed_by.user.username }} ({{ followed_by.user.email }})
+      </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+</div>

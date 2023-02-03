@@ -102,12 +102,14 @@ def display_all_images_from_single_album(request, pk):
     # global album_details used in commented_album
     global album_details
     album_details = Album.objects.get(pk=pk)
+
     album_likes = album_details.likes.all()
     album_images = album_details.images_set.all()
+
     return render(request, 'baseApp/parts/display_all_images_from_single_album.html', {
         'album_details': album_details,
         'album_images': album_images,
-        'album_likes': album_likes
+        'album_likes': album_likes,
     })
 
 
@@ -281,6 +283,17 @@ def display_all_dislikes(request, pk):
 
 def profile(request, pk):
     profile = Profile.objects.get(user_id=pk)
+
+    if request.method == 'POST':
+        user_profile = request.user.profile
+        action = request.POST['follow']
+        
+        if action == 'unfollow':
+            user_profile.follows.remove(profile)
+        elif action == 'follow':
+            user_profile.follows.add(profile)
+        user_profile.save()
+
     return render(request, 'baseApp/parts/profile.html', {
         'profile': profile
     })
@@ -303,3 +316,4 @@ def like_album(request, pk):
     else:
         album.likes.add(request.user)
     return redirect('display_all_images_from_single_album', album.id)
+

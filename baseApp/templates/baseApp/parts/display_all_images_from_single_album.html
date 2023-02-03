@@ -1,39 +1,56 @@
 
 <div id="album-slideshow"></div>
-
-<!-- <button class="btn btn-sm btn-primary"> Follow {{ album_details.album_owner.username }}</button> -->
-
-<h3>{{ album_details.album_name }} 
+<!-- <h6><a hx-get="{% url 'display_user_profile' album_details.album_owner.pk %}" hx-target="#replaceable-div">
+  {{ album_details.album_owner.username }} 
+</a></h6> -->
   
-  <section style="float: right;"> 
-    {% if request.user.email != album_details.album_owner.email %}
-      <button class="btn btn-sm btn-primary"> Follow {{ album_details.album_owner.username }}</button>
+<!-- <button class="btn btn-sm btn-primary"> Follow {{ album_details.album_owner.username }}</button> -->
+<h3>
+  {{ album_details.album_name }} 
+  
+  <section style="float: right;">
+    {% comment %} <button class="btn btn-sm btn-outline-primary" hx-get="{% url 'profile' album_details.album_owner.pk %}" hx-target="#profile">
+      <h6> {{ album_details.album_owner.username }} profile </h6>
+    </button>  {% endcomment %}
+    {% comment %} {{ user.profile }} | {{ album_details.album_owner.profile.follows.all }} {% endcomment %}
+    {% if user.profile in album_details.album_owner.profile.followed_by.all %}
+      <div style="display: flex;">
+        <form hx-post="{% url 'profile' album_details.album_owner.profile.id %}">
+          {% csrf_token %}
+          {% comment %} show user profile btn instead of follow user btn if user is already followed {% endcomment %}
+          <button class="btn btn-danger btn-sm" name="follow" value="unfollow" type="submit">
+            Unfollow @{{ album_details.album_owner.username  }}
+          </button>
+          <button class="btn btn-sm btn-outline-primary" hx-get="{% url 'display_user_profile' album_details.album_owner.pk %}" hx-target="#replaceable-div">
+            <h6> {{ album_details.album_owner.username }} profile </h6>
+          </button> 
+        </form>
+  </div>
+
+    {% else %}
+      <form hx-post="{% url 'profile' album_details.album_owner.profile.id %}">
+        {% csrf_token %}
+        {% comment %} if profile is unfollowed, show follow btn {% endcomment %}
+        <button class="btn btn-primary btn-sm" name="follow" value="follow" type="submit">
+          Follow @{{ album_details.album_owner.username }}
+        </button>
+      </form>
     {% endif %}
-    <button class="btn btn-sm btn-outline-primary" hx-get="{% url 'profile' album_details.album_owner.pk %}" hx-target="#profile">
-      <h6> {{ album_details.album_owner.username }}'s followers </h6>
-    </button>
+
   </section> 
 </h3>
 
 {{ album_images.count }} {% if album_images.count == 1 %} image {% else %} images {% endif %}
 
-<div id="profile"></div>
-
-<!-- <a href="{{request.META.HTTP_REFERER}}" hx-boost="true" class="btn btn-outline-primary btn-sm"> 
-  &laquo Back 
-</a> -->
-
 <!-- <button class="btn btn-sm btn-primary"> Follow {{ album_details.album_owner.username }}</button> -->
 
 <div style="display: flex; float: right;">
-
   <a hx-post="{% url 'like_album' album_details.id %}" hx-target="#replaceable-div">
     {% if user in album_details.likes.all %}
       <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
     {% else %}
       <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
     {% endif %}
-
   <!-- <hr> -->
   <!-- <input type="hidden">
   <form action="{% url 'like' album_details.pk %}" method="POST">

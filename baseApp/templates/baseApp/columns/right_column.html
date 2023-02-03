@@ -61,11 +61,18 @@
           <div style="float: right;">
             <h6> 👍 {{ album.likes.count }} </h6>
           </div> 
-          <p class="card-text">
-            <a hx-get="{% url 'display_user_profile' album.album_owner.pk %}" hx-target="#replaceable-div">
-              {{ album.album_owner.username }} | {{ album.album_owner.email }} 
-            </a> 
-          </p> 
+          {% comment %} link to the profile user if user is followed by request.user {% endcomment %}
+          {% if user.profile in album.album_owner.profile.followed_by.all %}
+            <p class="card-text">
+              <a hx-get="{% url 'display_user_profile' album.album_owner.pk %}" hx-target="#replaceable-div">
+                <b>@{{ album.album_owner.username }} ({{ album.album_owner.email }})</b>
+              </a> 
+            </p> 
+          {% else %}
+            <p class="card-text">
+                @{{ album.album_owner.username }} ({{ album.album_owner.email }})
+            </p> 
+          {% endif %}
           <p class="card-text"><small class="text-muted"> Created {{ album.album_created.date }} </small></p>
           <p class="card-text"><small class="text-muted"> Last login {{ album.album_owner.last_login|timesince }} ago </small></p>
           <p class="card-text"><small class="text-muted"> Member since {{ album.album_owner.date_joined.date }} </small>

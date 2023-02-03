@@ -7,13 +7,20 @@
     {% if participants %}
       {% for participant in participants %}
 
-      <a hx-get="{% url 'display_user_profile' participant.comment_owner.pk %}" hx-target="#replaceable-div">
-        @{{ participant.comment_owner.username }}
-      </a> commented <br>
+      {% comment %} {{ user.profile }} <br> {{ participant.comment_owner.profile.followed_by.all}} <br> {% endcomment %}
+      {% if user.profile in participant.comment_owner.profile.followed_by.all %}
+        <a hx-get="{% url 'display_user_profile' participant.comment_owner.pk %}" hx-target="#replaceable-div">
+          <b>{{ participant.comment_owner.username }}</b>
+        </a> 
+      {% else %}
+        {{ participant.comment_owner.username }}
+      {% endif %}
+      commented <br>
 
-      <a hx-get="{% url 'profile' participant.commented_album.album_owner.pk %}" hx-target="#replaceable-div">
-        @{{ participant.commented_album.album_owner.username }}'s
-      </a> album 
+      <a hx-get="{% url 'display_user_profile' participant.commented_album.album_owner.pk %}" hx-target="#replaceable-div">
+        @{{ participant.commented_album.album_owner.username }}
+      </a> 
+      album
 
       <a hx-get="{% url 'display_all_images_from_single_album' participant.commented_album.pk %}" hx-target="#replaceable-div">
         <b style="text-decoration: underline;">{{ participant.commented_album.album_name }}</b>
