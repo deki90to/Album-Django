@@ -40,6 +40,10 @@
       <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
     {% endif %}
   </a>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6ab5d3081643b08aa8cf09e64162e518bed02404
 </div><br><br>
 
 <div style="float: right;">
@@ -48,13 +52,14 @@
       Recent liked by
       {% for like in album_likes|slice:":2" %}
       
+<!--  if I follow the user that liked the album, linking is enabled to his profile -->
       {% if user.profile in like.profile.followed_by.all %}
-        {% comment %} Pratim lajkaca   {% endcomment %}
         <a hx-get="{% url 'display_user_profile' like.pk %}" hx-target="#replaceable-div">
           <b>{% if like.email == request.user.email %} you {% else %} {{ like.username }} {% endif %}</b>
         </a>
+    
+<!--   if I don't follow user that liked the album, just print his name -->
       {% else %}
-        {% comment %} Ne pratim lajkaca {% endcomment %}
         {% if like.email == request.user.email %} you {% else %} {{ like.username }} {% endif %}
       {% endif %}
         
