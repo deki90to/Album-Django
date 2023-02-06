@@ -15,11 +15,15 @@
       {% else %}
         {{ participant.comment_owner.username }}
       {% endif %}
-      commented <br>
+      commented <br> 
 
+      {% if user.profile in participant.commented_album.album_owner.profile.followed_by.all %}
       <a hx-get="{% url 'display_user_profile' participant.commented_album.album_owner.pk %}" hx-target="#replaceable-div">
-        @{{ participant.commented_album.album_owner.username }}
+        <b>@{{ participant.commented_album.album_owner.username }}</b>
       </a> 
+      {% else %}
+        @{{ participant.commented_album.album_owner.username }}
+      {% endif %}
       album
 
       <a hx-get="{% url 'display_all_images_from_single_album' participant.commented_album.pk %}" hx-target="#replaceable-div">

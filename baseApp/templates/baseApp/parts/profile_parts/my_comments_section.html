@@ -8,7 +8,7 @@
             <div class="ms-2 me-auto">
               "{{ comment.comment }}" 
               <a hx-get="{% url 'display_user_profile' comment.comment_owner.pk %}" hx-target="#replaceable-div"> <br>
-                - <b>{{ comment.commented_album.album_owner.username }}'s</b> album
+                - <b>{{ comment.commented_album.album_owner.username }}</b> album
               </a>
               <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}" hx-target="#replaceable-div">
                 <b> {{ comment.commented_album }} </b>

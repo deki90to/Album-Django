@@ -5,14 +5,14 @@
     <div class="alert alert-muted alert-dismissible fade show" role="alert">
       <div style="height:300px; overflow: auto;">
 
-        {% csrf_token %}
+      {% csrf_token %}
         {% for form in comment_form %}
-        <label for=""> Write comment </label><br>
-        {{ form }}
+          <label for=""> Write comment </label><br>
+          {{ form }}
         {% endfor %}<br><br>
-        <button type="submit" id="btn" class="btn btn-primary btn-sm"> Save comment </button><br><br>
+      <button type="submit" id="btn" class="btn btn-primary btn-sm"> Save comment </button><br><br>
 
-        {% if album_details.comment_set.all %}
+      {% if album_details.comment_set.all %}
         {% for comment in album_details.comment_set.all %}
         <p>
           {% comment %} link to the profile user if user is followed by request.user {% endcomment %}
@@ -27,19 +27,17 @@
           {{ comment.comment_created|timesince }} ago</small><br>
           {{ comment.comment|capfirst }}
 
-          {% if comment.comment_owner.email == request.user.email %}
-          <button style="display: block;" class="btn btn-outline-danger btn-sm" 
-            hx-delete="{% url 'delete_album_comment' comment.pk %}" hx-confirm="Delete comment?">
-              Delete
-          </button>
-          {% endif %}
+            {% if comment.comment_owner.email == request.user.email %}
+            <button style="display: block;" class="btn btn-outline-danger btn-sm" 
+              hx-delete="{% url 'delete_album_comment' comment.pk %}" hx-confirm="Delete comment?">
+                Delete
+            </button>
+            {% endif %}
         </p>
-
         {% endfor %}
-        
-        {% else %}
-          No comments yet
-        {% endif %}
+      {% else %}
+        No comments yet
+      {% endif %}
 
       </div>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
