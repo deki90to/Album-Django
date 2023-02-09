@@ -1,23 +1,18 @@
 
 <div id="album-slideshow"></div>
 
-<h3>
-  {{ album_details.album_name }} 
-  
-  <section style="float: right;">
+  <section style="float: right; display: flex;">
     {% if user.profile in album_details.album_owner.profile.followed_by.all %}
-      <div style="display: flex;">
-        <form hx-post="{% url 'profile' album_details.album_owner.profile.id %}">
-          {% csrf_token %}
-          {% comment %} show user profile btn instead of follow user btn if user is already followed {% endcomment %}
-          <button class="btn btn-danger btn-sm" name="follow" value="unfollow" type="submit">
-            Unfollow @{{ album_details.album_owner.username  }}
-          </button>
-          <button class="btn btn-sm btn-outline-primary" hx-get="{% url 'display_user_profile' album_details.album_owner.pk %}" hx-target="#replaceable-div">
-            <h6> {{ album_details.album_owner.username }} profile </h6>
-          </button> 
-        </form>
-      </div>
+      <form hx-post="{% url 'profile' album_details.album_owner.profile.id %}">
+        {% csrf_token %}
+        {% comment %} show user profile btn instead of follow user btn if user is already followed {% endcomment %}
+        <button class="btn btn-danger btn-sm" name="follow" value="unfollow" type="submit">
+          Unfollow @{{ album_details.album_owner.username  }}
+        </button>
+        <button class="btn btn-sm btn-primary btn-sm" hx-get="{% url 'display_user_profile' album_details.album_owner.pk %}" hx-target="#replaceable-div">
+          {{ album_details.album_owner.username }} profile 
+        </button> 
+      </form>
     {% else %}
       <form hx-post="{% url 'profile' album_details.album_owner.profile.id %}">
         {% csrf_token %}
@@ -28,23 +23,29 @@
       </form>
     {% endif %}
   </section> 
-</h3>
+  {% comment %} <div style="float: right;" class="btn btn-sm btn-outline-primary"><button>👍</button></div> {% endcomment %}
+  
+  <section style="display: flex; justify-content: flex-start;">
+    <b>{{ album_details.album_name }}</b> <br>
+    <small> 
+    ({{ album_images.count }} 
+      {% if album_images.count == 1 %} 
+       image)
+      {% else %}
+       images) 
+      {% endif %} 
+    </small><br><br>
+  </section>
 
-{{ album_images.count }} {% if album_images.count == 1 %} image {% else %} images {% endif %}
-
-<div style="display: flex; float: right;">
-  <a hx-post="{% url 'like_album' album_details.id %}" hx-target="#replaceable-div">
-    {% if user in album_details.likes.all %}
-      <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
-    {% else %}
-      <button type="submit" class="btn btn-sm btn-outline-primary">👍 {{ album_details.likes.count }} </button>
-    {% endif %}
-  </a>
-<<<<<<< HEAD
-=======
-
->>>>>>> 6ab5d3081643b08aa8cf09e64162e518bed02404
-</div><br><br>
+  <section style="float: right;">
+    <a hx-post="{% url 'like_album' album_details.id %}" hx-target="#replaceable-div">
+      {% if user in album_details.likes.all %}
+        <button type="submit" class="btn btn-sm btn-primary">👍 {{ album_details.likes.count }} </button>
+      {% else %}
+        <button type="submit" class="btn btn-sm btn-primary">👍 {{ album_details.likes.count }} </button>
+      {% endif %}
+    </a>
+  </section><br><br>
 
 <div style="float: right;">
   <small>
@@ -52,16 +53,15 @@
       Recent liked by
       {% for like in album_likes|slice:":2" %}
       
-<!--  if I follow the user that liked the album, linking is enabled to his profile -->
-      {% if user.profile in like.profile.followed_by.all %}
-        <a hx-get="{% url 'display_user_profile' like.pk %}" hx-target="#replaceable-div">
-          <b>{% if like.email == request.user.email %} you {% else %} {{ like.username }} {% endif %}</b>
-        </a>
-    
-<!--   if I don't follow user that liked the album, just print his name -->
-      {% else %}
-        {% if like.email == request.user.email %} you {% else %} {{ like.username }} {% endif %}
-      {% endif %}
+        {% if user.profile in like.profile.followed_by.all %}
+          {% comment %} Pratim lajkaca {% endcomment %}
+          <a hx-get="{% url 'display_user_profile' like.pk %}" hx-target="#replaceable-div">
+            <b>{% if like.email == request.user.email %} you {% else %} {{ like.username }} {% endif %}</b>
+          </a>
+        {% else %}
+          {% comment %} Ne pratim lajkaca {% endcomment %}
+          {% if like.email == request.user.email %} you {% else %} {{ like.username }} {% endif %}
+        {% endif %}
         
       {% endfor %} <br>
 
@@ -71,10 +71,10 @@
 
     <div id="display_all_likes"></div>
 
-  {% else %}
-    No likes yet
-  {% endif %}
-</small>
+    {% else %}
+      No likes yet
+    {% endif %}
+  </small>
 </div><br><br>
 
 <!-- comment form -->

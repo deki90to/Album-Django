@@ -35,32 +35,32 @@
       {% endfor %}
       </div> -->
 
-      <form hx-post="{% url 'profile' profile.id %}">
-        {% csrf_token %}
+  <form hx-post="{% url 'profile' profile.id %}">
+    {% csrf_token %}
 
-        {% if profile in user.profile.follows.all %}
+    {% if profile in user.profile.follows.all %}
 
-          {% if request.user != profile.user.email %}
-            <div style="display: flex;">
-            <button class="btn btn-danger btn-sm" name="follow" value="unfollow" type="submit">
-              Unfollow @{{ profile.user.username }}
-            </button>
-            <button class="btn btn-sm btn-outline-primary" hx-get="{% url 'display_user_profile' profile.pk %}" hx-target="#replaceable-div">
-              <h6> {{ profile.user.username }} profile </h6>
-            </button> 
-          </div>
-          {% endif %}
+      {% if request.user != profile.user.email %}
+        <div style="display: flex;">
+        <button class="btn btn-danger btn-sm" name="follow" value="unfollow" type="submit">
+          Unfollow @{{ profile.user.username }}
+        </button>
+        <button class="btn btn-primary btn-sm" hx-get="{% url 'display_user_profile' profile.pk %}" hx-target="#replaceable-div">
+          {{ profile.user.username }} profile
+        </button> 
+      </div>
+      {% endif %}
 
-        {% else %}
+    {% else %}
 
-          {% if request.user != profile.user.email %}
-            <button class="btn btn-primary btn-sm" name="follow" value="follow" type="submit">
-              Follow @{{ profile.user.username }}
-            </button>
-          {% endif %}
-            
-        {% endif %}
-      </form>
+      {% if request.user != profile.user.email %}
+        <button class="btn btn-primary btn-sm" name="follow" value="follow" type="submit">
+          Follow @{{ profile.user.username }}
+        </button>
+      {% endif %}
+        
+    {% endif %}
+  </form>
       
     <!-- </div> -->
 

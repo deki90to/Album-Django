@@ -44,7 +44,8 @@ select[name=album_year] {
   color: lightblue;
 }
 
-#my_likes_section, #my_follows_container {
+/* #my_likes_section, #my_follows_container */
+#my_follows_container {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
   background-color: #222222;

@@ -9,9 +9,9 @@
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
               <a hx-get="{% url 'display_user_profile' likes.album_owner.pk %}" hx-target="#replaceable-div">
-                <b>{{ likes.album_owner.username }}'s</b>
+                @<b>{{ likes.album_owner.username }}'s</b>
               </a> 
-              <a hx-get="{% url 'display_all_images_from_single_album' likes.pk %}" hx-target="#replaceable-div"> album <br> 
+              <a hx-get="{% url 'display_user_profile' profile.user.pk %}" hx-target="#replaceable-div"> album 
                 <b> {{ likes }} </b> 
             </a>
           </div>
@@ -21,14 +21,14 @@
     {% endfor %}
   </div>
 
-  <div id="my-dislikes">
+  {% comment %} <div id="my-dislikes">
         <!-- 💔 -->
   <center>👎</center> 
     {% for dislikes in profile.user.dislikes.all %}
       <ol class="list-group list-group">
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <a hx-get="{% url 'display_all_images_from_single_album' dislikes.pk %}" 
+            <a hx-get="{% url 'display_user_profile' profile.user.pk %}" 
               hx-target="#replaceable-div"> 
               {{ dislikes.album_owner.username }}'s album<p style="text-decoration: underline;">{{ dislikes }} </p>
             </a>
@@ -37,6 +37,6 @@
         </li>
       </ol> 
     {% endfor %}
-  </div>
+  </div> {% endcomment %}
 
 </div>
