@@ -10,12 +10,12 @@
 
           {% comment %} if user is followed, I can access his profile over his name as a link {% endcomment %}
           {% if user.profile in comment.comment_owner.profile.followed_by.all %}
-            <a hx-get="{% url 'display_user_profile' comment.comment_owner.pk %}" hx-target="#replaceable-div"> <br>
-              - <b>{{ comment.commented_album.album_owner.username }}</b> album
+            <a hx-get="{% url 'display_user_profile' comment.pk %}" hx-target="#replaceable-div"> <br>
+              - <b>{{ comment.commented_album.album_owner.username }}</b> 
             </a>
           {% else %}
             - {{ comment.commented_album.album_owner.username }}
-          {% endif %}
+          {% endif %} album
 
           <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}" hx-target="#replaceable-div">
             <b> {{ comment.commented_album }} </b>

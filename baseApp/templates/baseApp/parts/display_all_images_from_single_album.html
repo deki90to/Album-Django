@@ -78,7 +78,10 @@
       No likes yet
     {% endif %}
   </small>
-</div><br><br>
+</div>
+
+  <p class="card-text"><small class="text-muted"> Last login {{ album_details.album_owner.last_login|timesince }} ago <br>
+  Member since {{ album_details.album_owner.date_joined.date }}</small></p>
 
 <!-- comment form -->
 <a id="album_comments_button" hx-get="{% url 'comment_form_display' %}" hx-target="#comment_form">

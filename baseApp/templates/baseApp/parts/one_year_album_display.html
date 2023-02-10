@@ -28,9 +28,8 @@
           </p> 
         {% endif %}
         <p class="card-text"><small class="text-muted"> Created {{ year.album_created.date }} </small></p>
-        <p class="card-text"><small class="text-muted"> Last login {{ year.album_owner.last_login|timesince }} ago </small></p>
-        <p class="card-text"><small class="text-muted"> Member since {{ year.album_owner.date_joined.date }}
-          </small></p>
+        {% comment %} <p class="card-text"><small class="text-muted"> Last login {{ year.album_owner.last_login|timesince }} ago </small></p>
+        <p class="card-text"><small class="text-muted"> Member since {{ year.album_owner.date_joined.date }}</small></p> {% endcomment %}
       </div>
     </div>
   </div>

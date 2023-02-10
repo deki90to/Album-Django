@@ -1,4 +1,7 @@
 
+{% comment %} <p class="card-text"><small class="text-muted"> Last login {{ profile.user.last_login|timesince }} ago <br>
+Member since {{ profile.user.date_joined.date }} </small></p> {% endcomment %}
+
 <h3>{{ profile.user.username }} albums 
 
   {% comment %} <div id="follows">
@@ -13,7 +16,6 @@
     {% endif %}
   </div> {% endcomment %}
 </h3>
-
 {% if profile_album %}
   {% for album in profile_album %}
     <div class="card mb-2">
@@ -30,9 +32,8 @@
             <h5 class="card-title"> {{ album.album_name }} {{ album.album_year }}</h5>
             <p class="card-text"> @{{ album.album_owner.username }} ({{ album.album_owner.email }}) </p>
             <p class="card-text"><small class="text-muted"> Created {{ album.album_created.date }} </small></p>
-            <p class="card-text"><small class="text-muted"> Last login {{ album.album_owner.last_login|timesince }} ago </small></p>
-            <p class="card-text"><small class="text-muted"> Member since {{ album.album_owner.date_joined.date }}
-              </small></p>
+            {% comment %} <p class="card-text"><small class="text-muted"> Last login {{ album.album_owner.last_login|timesince }} ago </small></p>
+            <p class="card-text"><small class="text-muted"> Member since {{ album.album_owner.date_joined.date }} </small></p> {% endcomment %}
           </div>
         </div>
       </div>

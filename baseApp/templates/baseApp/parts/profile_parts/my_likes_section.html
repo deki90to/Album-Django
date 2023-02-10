@@ -18,7 +18,7 @@
               @{{ likes.album_owner.username }}'s
             {% endif %}
 
-            <a hx-get="{% url 'display_user_profile' profile.user.pk %}" hx-target="#replaceable-div"> album 
+            <a hx-get="{% url 'display_all_images_from_single_album' likes.pk %}" hx-target="#replaceable-div"> album 
               <b> {{ likes }} </b> 
             </a>
 
