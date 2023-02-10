@@ -14,7 +14,7 @@ input[type=password],
 input[type=email],
 select[name=season_name],
 select[name=album_year] {
-  width: 90%;
+  width: 95%;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 5px;

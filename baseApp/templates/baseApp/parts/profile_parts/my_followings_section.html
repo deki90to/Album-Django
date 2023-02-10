@@ -7,24 +7,33 @@
     <h5>You follow</h5>
 
     {% for follows in profile.follows.all %}
-    {% if follows.user != profile.user %}
-      <a hx-get="{% url 'display_user_profile' follows.pk %}" hx-target="#replaceable-div">
-        @<b>{{ follows.user.username }}</b> ({{ follows.user.email }})
-      </a>
-    {% endif %}
+      {% if follows.user != profile.user %}
+      {% comment %} {% if user.profile in follows.followed_by.all %} {% endcomment %}
+        <a hx-get="{% url 'display_user_profile' follows.pk %}" hx-target="#replaceable-div">
+          @<b>{{ follows.user.username }}</b> ({{ follows.user.email }}) <br>
+        </a>
+      {% endif %}
     {% endfor %}
   </div>
 
+  
 
   <div id="followed_by">
     <h5>You are followed by</h5>
 
     {% for followed_by in profile.followed_by.all %}
-    {% if followed_by.user != profile.user %}
-      <a hx-get="{% url 'display_user_profile' followed_by.pk %}" hx-target="#replaceable-div">
-        @<b>{{ followed_by.user.username }}</b> ({{ followed_by.user.email }})
-      </a>
-    {% endif %}
+      {% if followed_by.user != profile.user %}
+
+      {% if user.profile in followed_by.followed_by.all %}
+        <a hx-get="{% url 'display_user_profile' followed_by.pk %}" hx-target="#replaceable-div">
+          @<b>{{ followed_by.user.username }}</b> ({{ followed_by.user.email }})
+        </a>
+      {% else %}
+        @{{ followed_by.user.username }} ({{ followed_by.user.email }})
+      {% endif %}
+
+        
+      {% endif %}
     {% endfor %}
   </div>
 

@@ -6,9 +6,12 @@
       <form hx-post="{% url 'profile' album_details.album_owner.profile.id %}">
         {% csrf_token %}
         {% comment %} show user profile btn instead of follow user btn if user is already followed {% endcomment %}
-        <button class="btn btn-danger btn-sm" name="follow" value="unfollow" type="submit">
-          Unfollow @{{ album_details.album_owner.username  }}
-        </button>
+        {% comment %} if logged user id is equal to user that posted the album, hide 'unfollow' button  {% endcomment %}
+        {% if user.profile.id != album_details.album_owner.id %}
+          <button class="btn btn-danger btn-sm" name="follow" value="unfollow" type="submit">
+            Unfollow {{ album_details.album_owner.username  }}
+          </button>
+        {% endif %}
         <button class="btn btn-sm btn-primary btn-sm" hx-get="{% url 'display_user_profile' album_details.album_owner.pk %}" hx-target="#replaceable-div">
           {{ album_details.album_owner.username }} profile 
         </button> 

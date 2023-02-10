@@ -9,7 +9,7 @@
 </div>
 
 <div class="container">
-  <form id="post-form" method="POST" action="checkview">
+  <form id="post-form" hx-post="{% url 'checkview' %}" hx-target="#chat_section">
     {% csrf_token %}
     <input type="text" name="room_name" id="room_name" required placeholder="Create / enter the room" /><br><br>
     <input type="hidden" type="text" name="username" id="username" value="{{ request.user.username }}"
