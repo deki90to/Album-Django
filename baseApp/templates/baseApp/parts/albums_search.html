@@ -2,40 +2,40 @@
 
 {% if searched_albums %}
 <h3> Results for "{{ q }}"</h3>
-{% for search in searched_albums %}
-  {% if search.hidden == False %}
-  <div class="card mb-2">
-    <div class="row g-0">
-      <div class="col-md-4">
-        {% for image in search.images_set.all|slice:":1" %}
-        <a hx-get="{% url 'display_all_images_from_single_album' search.pk %}" hx-target="#replaceable-div">
-          <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
-        </a>
-        {% endfor %}
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"> {{ search.album_name }} {{ search.album_year }}</h5>
-            {% if user.profile in search.album_owner.profile.followed_by.all %}
-            <p class="card-text">
-              <a hx-get="{% url 'display_user_profile' search.album_owner.pk %}" hx-target="#replaceable-div">
-                @<b>{{ search.album_owner.username }} ({{ search.album_owner.email }})</b>
-              </a> 
-            </p> 
-          {% else %}
-            <p class="card-text">
-              @{{ search.album_owner.username }} ({{ search.album_owner.email }})
-            </p> 
-          {% endif %}
-          <p class="card-text"><small class="text-muted"> Created {{ search.album_created.date }} </small></p>
-          {% comment %} <p class="card-text"><small class="text-muted"> Last login {{ search.album_owner.last_login|timesince }} ago </small></p>
-          <p class="card-text"><small class="text-muted"> Member since {{ search.album_owner.date_joined.date }} </small></p> {% endcomment %}
+  {% for search in searched_albums %}
+    {% if search.hidden == False %}
+    <div class="card mb-2">
+      <div class="row g-0">
+        <div class="col-md-4">
+          {% for image in search.images_set.all|slice:":1" %}
+          <a hx-get="{% url 'display_all_images_from_single_album' search.pk %}" hx-target="#replaceable-div">
+            <img src="{{ image.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+          </a>
+          {% endfor %}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"> {{ search.album_name }} {{ search.album_year }}</h5>
+              {% if user.profile in search.album_owner.profile.followed_by.all %}
+              <p class="card-text">
+                <a hx-get="{% url 'display_user_profile' search.album_owner.pk %}" hx-target="#replaceable-div">
+                  @<b>{{ search.album_owner.username }} ({{ search.album_owner.email }})</b>
+                </a> 
+              </p> 
+            {% else %}
+              <p class="card-text">
+                @{{ search.album_owner.username }} ({{ search.album_owner.email }})
+              </p> 
+            {% endif %}
+            <p class="card-text"><small class="text-muted"> Created {{ search.album_created.date }} </small></p>
+            {% comment %} <p class="card-text"><small class="text-muted"> Last login {{ search.album_owner.last_login|timesince }} ago </small></p>
+            <p class="card-text"><small class="text-muted"> Member since {{ search.album_owner.date_joined.date }} </small></p> {% endcomment %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  {% endif %}
-{% endfor %}
+    {% endif %}
+  {% endfor %}
 {% else %}
-<p> No results for "{{ q }}"</p>
+  <p> No results for "{{ q }}"</p>
 {% endif %}

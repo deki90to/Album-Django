@@ -2,40 +2,40 @@
 <h3> {{ one_season }} </h3>
 
 {% if choosen_season %}
-{% for season in choosen_season %}
-{% if season.hidden == False %}
-<div class="card mb-2">
-  <div class="row g-0">
-    <div class="col-md-4">
-      {% for images in season.images_set.all|slice:":1" %}
-      <a hx-get="{% url 'display_all_images_from_single_album' season.pk %}" hx-target="#replaceable-div">
-        <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
-      </a>
-      {% endfor %}
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"> {{ season.album_name }} {{ season.album_year }}</h5>
-          {% if user.profile in season.album_owner.profile.followed_by.all %}
-          <p class="card-text">
-            <a hx-get="{% url 'display_user_profile' season.album_owner.pk %}" hx-target="#replaceable-div">
-              @<b>{{ season.album_owner.username }} ({{ season.album_owner.email }})</b>
-            </a> 
-          </p> 
-        {% else %}
-          <p class="card-text">
-              @{{ season.album_owner.username }} ({{ season.album_owner.email }})
-          </p> 
-        {% endif %}
-        <p class="card-text"><small class="text-muted"> Created {{ season.album_created.date }} </small></p>
-        {% comment %} <p class="card-text"><small class="text-muted"> Last login {{ season.album_owner.last_login|timesince }} ago </small></p>
-        <p class="card-text"><small class="text-muted"> Member since {{ season.album_owner.date_joined.date }} </small></p> {% endcomment %}
+  {% for season in choosen_season %}
+    {% if season.hidden == False %}
+    <div class="card mb-2">
+      <div class="row g-0">
+        <div class="col-md-4">
+          {% for images in season.images_set.all|slice:":1" %}
+          <a hx-get="{% url 'display_all_images_from_single_album' season.pk %}" hx-target="#replaceable-div">
+            <img src="{{ images.images.url }}" width="100%" height="100%" class="card-img-top" alt="...">
+          </a>
+          {% endfor %}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"> {{ season.album_name }} {{ season.album_year }}</h5>
+              {% if user.profile in season.album_owner.profile.followed_by.all %}
+              <p class="card-text">
+                <a hx-get="{% url 'display_user_profile' season.album_owner.pk %}" hx-target="#replaceable-div">
+                  @<b>{{ season.album_owner.username }} ({{ season.album_owner.email }})</b>
+                </a> 
+              </p> 
+            {% else %}
+              <p class="card-text">
+                @{{ season.album_owner.username }} ({{ season.album_owner.email }})
+              </p> 
+            {% endif %}
+            <p class="card-text"><small class="text-muted"> Created {{ season.album_created.date }} </small></p>
+            {% comment %} <p class="card-text"><small class="text-muted"> Last login {{ season.album_owner.last_login|timesince }} ago </small></p>
+            <p class="card-text"><small class="text-muted"> Member since {{ season.album_owner.date_joined.date }} </small></p> {% endcomment %}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-{% endif %}
-{% endfor %}
+    {% endif %}
+  {% endfor %}
 {% else %}
-<h6>No albums for {{ one_season }} season </h6>
+  <h6>No albums for {{ one_season }} season </h6>
 {% endif %}
