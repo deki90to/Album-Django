@@ -32,5 +32,5 @@ urlpatterns = [
     path('display_user_profile/<pk>/', views.display_user_profile, name='display_user_profile'),
 
     path('album/<int:pk>/like/', views.like_album, name='like_album'),
-         
+
 ]

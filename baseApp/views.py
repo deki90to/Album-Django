@@ -316,4 +316,3 @@ def like_album(request, pk):
     else:
         album.likes.add(request.user)
     return redirect('display_all_images_from_single_album', album.id)
-

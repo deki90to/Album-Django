@@ -15,7 +15,7 @@
             </a>
           {% else %}
             - {{ comment.commented_album.album_owner.username }}
-          {% endif %} album
+          {% endif %} album's
 
           <a hx-get="{% url 'display_all_images_from_single_album' comment.commented_album.pk %}" hx-target="#replaceable-div">
             <b> {{ comment.commented_album }} </b>

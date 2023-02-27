@@ -21,6 +21,12 @@
         style="font-family: brush script mt, cursive; font-size: 20px;"> 
          Homepage
       </a>
+      <li class="nav-item">
+        <a class="nav-link" hx-get="{% url 'chat_section' %}" hx-target="#chat_section"> 
+          <button class="btn btn-sm btn-outline-light">Live chat</button>
+          {% comment %} hx-trigger="every 2s" {% endcomment %}
+        </a>
+      </li>
       <!-- ({{ all_albums|length }})-->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
         aria-controls="offcanvasDarkNavbar">
@@ -56,16 +62,16 @@
                 Create new album 
               </a>
             </li>
-            <li class="nav-item">
+            {% comment %} <li class="nav-item">
               <a class="nav-link" href="{% url 'chat_home' %}"> 
                 Create or join a room 
               </a>
-            </li>
+            </li> {% endcomment %}
             <li class="nav-item">
-              <a class="nav-link" hx-get="{% url 'chat_home' %}" hx-target="#chat_section"> 
+              {% comment %} <a class="nav-link" hx-get="{% url 'chat2' %}" hx-target="#chat_section"> 
                 Show chat
-              </a>
-            </li>
+              </a> {% endcomment %}
+            </li> 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Filter albums

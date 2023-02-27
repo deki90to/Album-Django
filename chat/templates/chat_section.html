@@ -1,0 +1,16 @@
+<br><br><br>
+<!-- <div class="alert alert-muted alert-dismissible fade show" role="alert"> -->
+
+
+<form hx-post="{% url 'new_chat_message' %}" hx-target="#chat_section">
+  {% csrf_token %}
+  <input type="text" name="chat_message" required>
+  <button style="width: 30%; margin:10px 0px 0px 0px;" class="btn btn-sm btn-primary"> Send ⏎ </button>
+</form>
+
+<div id="all_messages">
+  <div id="chat" hx-get="{% url 'chat_messages' %}" hx-target="#chat" hx-trigger="every 1s"></div>
+</div>
+
+<!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div> -->

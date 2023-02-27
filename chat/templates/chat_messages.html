@@ -1,0 +1,18 @@
+<br>
+
+<div id="chat_messages" style="height: 400px; overflow: auto; padding-left: 2%;">
+  {% for message in messages %}
+    <small>
+      <b>{{ message.user.username }} ({{ message.user }}) </b> 
+      <a hx-delete="{% url 'delete_message' message.pk %}" hx-confirm="Delete message?" style="color: red;">
+        Delete
+      </a> <br>
+        <section style="padding-left: 10px;">{{ message.message }}</section>
+    </small>
+  {% endfor %} 
+</div> <br>
+
+<a hx-get="{% url 'chat_messages' %}" hx-target="#all_messages">
+  <button class="btn btn-sm btn-success">Stop syncing</button>
+</a>
+

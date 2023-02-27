@@ -41,7 +41,16 @@ INSTALLED_APPS = [
     'baseApp.apps.BaseappConfig',
     'members.apps.MembersConfig',
     'chat.apps.ChatConfig',
+    'channels',
 ]
+
+ASGI_APPLICATION = 'AlbumDjangoHtmxProject.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 AUTH_USER_MODEL = 'members.CustomUser'
 
