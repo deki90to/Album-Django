@@ -16,61 +16,71 @@
 
 <body>
 
-  {% comment %} <style>
-    body {
-      /* padding: 10px; */
-      background-color: #1d1d1d;
-      color: lightblue;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+<style>
+  body {
+    padding: 5px;
+    background-color: #1d1d1d;
+    color: lightblue;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    input[type=text],
-    input[type=date],
-    input[type=file],
-    input[type=submit],
-    input[type=password],
-    input[type=email],
-    select[name=season_name],
-    select[name=album_year] {
-      width: 90%;
-      box-sizing: border-box;
-      border: 2px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 2px 2px 5px 0px black;
-    }
+  input[type=text],
+  input[type=date],
+  input[type=file],
+  input[type=submit],
+  input[type=password],
+  input[type=email],
+  select[name=season_name],
+  select[name=album_year] {
+    width: 95%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 0px black;
+  }
 
-    #display {
-      background-color: rgb(255, 255, 255);
-      color: rgb(96, 96, 96);
-      /* border-right: 1px solid grey; */
-      /* border-bottom: 1px solid grey; */
-      padding-bottom: 20px;
-      border-radius: 20px;
-      box-shadow: 1px 10px 10px 1px grey;
-    }
 
-    #comments-likes-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 100vh;
-      flex-direction: column;
-    }
-    #comments-likes-right {
-      padding-left: 10px;
-    }
+  #display {
+    background-color: rgb(255, 255, 255);
+    color: rgb(96, 96, 96);
+    /* border-right: 1px solid grey; */
+    /* border-bottom: 1px solid grey; */
+    padding-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 1px 10px 10px 1px grey;
+  }
 
-    .btn-close {
-      background-color: lightblue;
-    }
-    .card-body, .card-title {
-      background-color: #1d1d1d;
-    }
-    .list-group-item {
-      background-color: #1d1d1d;
-      color: lightblue;
-    }
-  </style> {% endcomment %}
+
+  .btn-close {
+    background-color: lightblue;
+  }
+  .card-body, .card-title {
+    background-color: #1d1d1d;
+  }
+  .list-group-item, .col-md-8 {
+    background-color: #1d1d1d;
+    color: lightblue;
+  }
+
+  /* #my_likes_section, #my_follows_container */
+  #my_follows_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #222222;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  img{
+    width: 100%;
+    height: auto;
+  }
+  /* #chat_messages {
+    background-color: #000000;
+  } */
+  
+</style> 
 
   {% include 'baseApp/navbar.html' %}
 
