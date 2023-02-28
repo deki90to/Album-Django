@@ -30,7 +30,9 @@
               Delete
           </a></small><br>
           
-          <section style="padding: 0px 0px 0px 10px;">{{ comment.comment|capfirst }}</section>
+          <section style="padding: 5px 5px 5px 10px; border: 1px solid grey; border-radius: 10px; background: black;">
+            {{ comment.comment|capfirst }}
+          </section>
 
           {% if comment.comment_owner.email == request.user.email %}
           <!-- <a style="color: red;"  
