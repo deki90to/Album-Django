@@ -19,10 +19,10 @@
 
       {% if user.profile in participant.commented_album.album_owner.profile.followed_by.all %}
       <a hx-get="{% url 'display_user_profile' participant.commented_album.album_owner.pk %}" hx-target="#replaceable-div">
-        <b>@{{ participant.commented_album.album_owner.username }}</b>
+        <b>@{{ participant.commented_album.album_owner.username }}'s</b>
       </a> 
       {% else %}
-        @{{ participant.commented_album.album_owner.username }}
+        @{{ participant.commented_album.album_owner.username }}'s
       {% endif %}
       album
 

@@ -14,26 +14,31 @@
 
       {% if album_details.comment_set.all %}
         {% for comment in album_details.comment_set.all %}
-        <p>
           {% comment %} link to the profile user if user is followed by request.user {% endcomment %}
           {% if user.profile in comment.comment_owner.profile.followed_by.all %}
             <a hx-get="{% url 'display_user_profile' comment.comment_owner.pk %}" hx-target="#replaceable-div">
               <b>@{{ comment.comment_owner.username }} <small>({{ comment.comment_owner.email }})</b>
             </a>
           {% else %}
-            @{{ comment.comment_owner.username }} <small>({{ comment.comment_owner.email }})
+          <small> @{{ comment.comment_owner.username }} ({{ comment.comment_owner.email }})
           {% endif %}
           
-          {{ comment.comment_created|timesince }} ago</small><br>
-          {{ comment.comment|capfirst }}
+          {{ comment.comment_created|timesince }} ago 
+          <a style="color: red;"  
+            hx-delete="{% url 'delete_album_comment' comment.pk %}" 
+            hx-confirm="Delete comment?">
+              Delete
+          </a></small><br>
+          
+          <section style="padding: 0px 0px 0px 10px;">{{ comment.comment|capfirst }}</section>
 
-            {% if comment.comment_owner.email == request.user.email %}
-            <button style="display: block;" class="btn btn-outline-danger btn-sm" 
-              hx-delete="{% url 'delete_album_comment' comment.pk %}" hx-confirm="Delete comment?">
-                Delete
-            </button>
-            {% endif %}
-        </p>
+          {% if comment.comment_owner.email == request.user.email %}
+          <!-- <a style="color: red;"  
+            hx-delete="{% url 'delete_album_comment' comment.pk %}" 
+            hx-confirm="Delete comment?">
+              Delete
+          </a> -->
+          {% endif %}
         {% endfor %}
       {% else %}
         No comments yet

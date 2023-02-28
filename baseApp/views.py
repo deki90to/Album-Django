@@ -269,8 +269,10 @@ def addDislike(request, pk):
 def display_all_likes(request, pk):
     album_details = Album.objects.get(pk=pk)
     album_likes = album_details.likes.all()
+    album_likes_reversed = reversed(album_likes)
     return render(request, 'baseApp/parts/display_all_likes.html', {
-        'album_likes': album_likes
+        'album_likes': album_likes,
+        'album_likes_reversed': album_likes_reversed
     })
 
 def display_all_dislikes(request, pk):

@@ -1,7 +1,6 @@
 <br><br><br>
 <!-- <div class="alert alert-muted alert-dismissible fade show" role="alert"> -->
 
-
 <form hx-post="{% url 'new_chat_message' %}" hx-target="#chat_section">
   {% csrf_token %}
   <input type="text" name="chat_message" required>

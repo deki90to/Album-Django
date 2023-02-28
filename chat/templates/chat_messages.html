@@ -1,18 +1,43 @@
 <br>
 
+<a hx-get="{% url 'chat_messages' %}" hx-target="#all_messages">
+  <input class="btn btn-sm btn-success" id="stop_sync" value="Stop syncing" readonly="readonly">
+</a> <br><br>
+
 <div id="chat_messages" style="height: 400px; overflow: auto; padding-left: 2%;">
   {% for message in messages %}
-    <small>
-      <b>{{ message.user.username }} ({{ message.user }}) </b> 
+  <small>
+    <!-- Ulogovan profil: {{ user.profile }} <br>
+    Komenantor: {{ message.user }} <br>
+    Komentator follows: {{ message.user.profile.follows.all }} <br><br> -->
+
+    {% if user.profile in message.user.profile.followed_by.all %}
+      <a hx-get="{% url 'display_user_profile' message.user.id %}" hx-target="#replaceable-div">
+        <b>{{ message.user.username }} ({{ message.user }})</b>
+      </a>
+    {% else %}
+      {{ message.user.username }} ({{ message.user }})
+    {% endif %}
+
+    {{ message.created_on | timesince }}
+    {% if message.user == request.user %}
       <a hx-delete="{% url 'delete_message' message.pk %}" hx-confirm="Delete message?" style="color: red;">
         Delete
-      </a> <br>
-        <section style="padding-left: 10px;">{{ message.message }}</section>
-    </small>
+      </a>
+    {% endif %}<br>  
+    <section style="padding: 5px 5px 5px 10px; border: 1px solid grey; border-radius: 10px; background: black;">
+      {{ message.message | capfirst }}
+    </section> 
+  </small>
+  
   {% endfor %} 
 </div> <br>
 
-<a hx-get="{% url 'chat_messages' %}" hx-target="#all_messages">
-  <button class="btn btn-sm btn-success">Stop syncing</button>
-</a>
+<!-- <a hx-get="{% url 'chat_messages' %}" hx-target="#all_messages">
+  <input class="btn btn-sm btn-success" id="stop_sync" value="Stop syncing" readonly="readonly">
+</a> -->
 
+<script>
+  var btn = document.getElementById("stop_sync");
+  // btn.innerHTML = 'Stopped';
+</script>

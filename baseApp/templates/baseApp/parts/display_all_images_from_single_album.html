@@ -54,7 +54,7 @@
   <small>
     {% if album_likes %}
       Recent liked by
-      {% for like in album_likes|slice:":2" %}
+      {% for like in album_likes|slice:":-2" %}
       
         {% if user.profile in like.profile.followed_by.all %}
           {% comment %} Pratim lajkaca {% endcomment %}
@@ -80,8 +80,12 @@
   </small>
 </div>
 
-  <p class="card-text"><small class="text-muted"> Last login {{ album_details.album_owner.last_login|timesince }} ago <br>
-  Member since {{ album_details.album_owner.date_joined.date }}</small></p>
+  <p class="card-text">
+    <small class="text-muted"> 
+      Last login {{ album_details.album_owner.last_login|timesince }} ago <br>
+      Member since {{ album_details.album_owner.date_joined.date }}
+    </small>
+  </p>
 
 <!-- comment form -->
 <a id="album_comments_button" hx-get="{% url 'comment_form_display' %}" hx-target="#comment_form">
