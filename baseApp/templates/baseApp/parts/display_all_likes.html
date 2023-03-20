@@ -1,9 +1,35 @@
 
-<div class="alert alert-muted alert-dismissible fade show" role="alert">
-  <div style="height: auto; width: auto; overflow: auto;">
-    {% for likes in album_likes %}
-    <a href="#">{% if likes.email == request.user.email %} you {% else %} {{ likes.username }} {% endif %}</a> |
+<br>
+<div class="alert alert-muted alert-dismissible" role="alert">
+  <div style="height: 50px; 
+    width: 100px; overflow: auto;
+    border: 0px;
+    border-radius: 5px;">
+    
+    {% for likes in album_likes|slice:"2:"|slice:"::-1" %}
+
+      {% if user.profile in likes.profile.followed_by.all %} 
+        <button hx-get="{% url 'display_user_profile' likes.pk %}" 
+        hx-target="#replaceable-div" 
+        style="background-color: #222222; 
+        color: lightblue; 
+        border-radius: 5px;">
+          {% if likes.email == request.user.email %} 
+            <b> you </b>
+          {% else %} 
+            <b> {{ likes.username }} </b> 
+          {% endif %} 
+        </button>
+      {% else %}
+        {% if likes.email == request.user.email %} 
+          you 
+        {% else %} 
+          {{ likes.username }} 
+        {% endif %} 
+      {% endif %}
+
     {% endfor %}
+    
   </div>
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-color: #222222;"></button>
 </div>

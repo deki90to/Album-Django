@@ -28,7 +28,8 @@
   </section> 
   {% comment %} <div style="float: right;" class="btn btn-sm btn-outline-primary"><button>👍</button></div> {% endcomment %}
   
-  <section style="display: flex; justify-content: flex-start;">
+  <section style="display: flex; 
+    justify-content: flex-start;">
     <b>{{ album_details.album_name }}</b> <br>
     <small> 
     ({{ album_images.count }} 
@@ -53,26 +54,50 @@
 <div style="float: right;">
   <small>
     {% if album_likes %}
+
       Recent liked by
-      {% for like in album_likes|slice:":-2" %}
+      
+      {% for like in album_likes|slice:":2"|slice:"::-1" %}
       
         {% if user.profile in like.profile.followed_by.all %}
-          {% comment %} Pratim lajkaca {% endcomment %}
-          <a hx-get="{% url 'display_user_profile' like.pk %}" hx-target="#replaceable-div">
-            <b>{% if like.email == request.user.email %} you {% else %} {{ like.username }} {% endif %}</b>
-          </a>
+          <button hx-get="{% url 'display_user_profile' like.pk %}" 
+          hx-target="#replaceable-div"
+          style='float: right; 
+          background-color: #222222; 
+          color: lightblue; 
+          border-radius: 5px;'>
+            {% if like.email == request.user.email %} 
+              <b> you </b>
+            {% else %} 
+              <b> {{ like.username }} </b> 
+            {% endif %}  
+          </button>
         {% else %}
-          {% comment %} Ne pratim lajkaca {% endcomment %}
-          {% if like.email == request.user.email %} you {% else %} {{ like.username }} {% endif %}
-        {% endif %}
+          {% if like.email == request.user.email %}
+            you 
+          {% else %} 
+            {{ like.username }} 
+          {% endif %}
+        {% endif %} 
         
       {% endfor %} <br>
 
-    <a hx-get="{% url 'display_all_likes' album_details.pk %}" hx-target='#display_all_likes' style='float: right;'>
-      {% if album_details.like.count > 2 %} and {{ album_details.like.count|add:"-2" }} more {% else %} {% endif %}
-    </a><br>
+      {% if album_details.likes.count > 2 %} 
+        <button hx-get="{% url 'display_all_likes' album_details.pk %}" 
+        hx-target='#display_all_likes' 
+        style='float: right; 
+        background-color: #222222; 
+        color: lightblue; 
+        border-radius: 5px; 
+        margin: 0px 0px 0px 50px;'>
+          <b> and {{ album_details.likes.count|add:"-2" }} more </b>
+        </button>
+      {% else %} 
+      
+      {% endif %}
 
-    <div id="display_all_likes"></div>
+      <div id="display_all_likes">
+      </div>
 
     {% else %}
       No likes yet
@@ -88,7 +113,9 @@
   </p>
 
 <!-- comment form -->
-<a id="album_comments_button" hx-get="{% url 'comment_form_display' %}" hx-target="#comment_form">
+<a id="album_comments_button" 
+hx-get="{% url 'comment_form_display' %}" 
+hx-target="#comment_form">
   <button class="btn btn-primary btn-sm btn-block" style="width: 100%;">
     Comments {{ album_details.comment_set.all.count }}
   </button>

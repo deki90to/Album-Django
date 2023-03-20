@@ -15,13 +15,12 @@ def delete_message(request, pk):
     message = ChatMessages.objects.get(pk=pk)
     if request.method == 'DELETE':
         message.delete()
-        # return HttpResponse('Message deleted.')
-        return redirect('chat_section')
+        return HttpResponse('Message deleted.')
+        # return redirect('chat_section')
 
 
 # def chat_home(request):
 #     return render(request, 'chat_home.html')
-
 
 
 # def room(request, room):
