@@ -16,7 +16,11 @@ def delete_message(request, pk):
     if request.method == 'DELETE':
         message.delete()
         return HttpResponse('Message deleted.')
+<<<<<<< HEAD
         # return redirect('chat_section')
+=======
+#         return redirect('chat_section')
+>>>>>>> 35e1531b53c7dd1cc7af0fd362e2e66400cc3fe8
 
 
 # def chat_home(request):
