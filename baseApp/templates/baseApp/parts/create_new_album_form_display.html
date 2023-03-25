@@ -1,5 +1,4 @@
 
-
 <form hx-post="{% url 'create_new_album' %}" hx-encoding="multipart/form-data" onsubmit='disableButton()'>
   <div class="alert alert-muted alert-dismissible fade show" role="alert">
     {% csrf_token %}

@@ -114,8 +114,8 @@
 
 <!-- comment form -->
 <a id="album_comments_button" 
-hx-get="{% url 'comment_form_display' %}" 
-hx-target="#comment_form">
+  hx-get="{% url 'comment_form_display' %}" 
+  hx-target="#comment_form">
   <button class="btn btn-primary btn-sm btn-block" style="width: 100%;">
     Comments {{ album_details.comment_set.all.count }}
   </button>
@@ -132,7 +132,7 @@ hx-target="#comment_form">
       <img src="{{ images.images.url }}" class="card-img-top" alt="...">
       <!-- </a> -->
       <a href="{{ images.images.url }}" download="Click do download">
-        <button class="btn" style="width:100%"><i class="fa fa-download"></i> Download </button>
+        <button class="btn" style="width:100%; background-color: #222222; color: lightblue;"><i class="fa fa-download"></i> Download </button>
       </a>
       <!-- <p class="card-title"> Tap image to download </p> -->
     </div>

@@ -11,6 +11,7 @@ from members.models import CustomUser
 from django.urls import reverse
 from members.models import Profile
 from django.shortcuts import render, get_object_or_404, redirect
+from chat.models import ChatMessages
 # from django.contrib import settings
 
 
@@ -27,11 +28,13 @@ def home(request):
     all_years = Year.objects.all()
     all_seasons = Season.objects.all()
     all_album_images = Images.objects.all()
+    chat_messages = ChatMessages.objects.all()
     return render(request, 'baseApp/home.html', {
         'all_albums': all_albums,
         'all_years': all_years,
         'all_seasons': all_seasons,
         'all_album_images': all_album_images,
+        'chat_messages': chat_messages
     })
 
 

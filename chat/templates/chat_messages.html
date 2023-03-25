@@ -1,8 +1,12 @@
 <br>
 
 <a hx-get="{% url 'chat_messages' %}" hx-target="#all_messages">
-  <input class="btn btn-sm btn-success" id="stop_sync" value="Stop syncing" readonly="readonly">
-</a> <br><br>
+  <input type="button" id="stop_sync" value="Stop 🔁" readonly="readonly"
+  style="color: lightblue; 
+    border: 1px solid lightblue; 
+    border-radius: 5px; 
+    background-color: #222222;">
+</a> <br><br> 
 
 <div id="chat_messages" style="height: 400px; overflow: auto; padding-left: 2%;">
   {% for message in messages %}
@@ -19,7 +23,7 @@
       {{ message.user.username }} ({{ message.user }})
     {% endif %}
 
-    {{ message.created_on | timesince }}
+    {{ message.created_on | timesince }} ago
     {% if message.user == request.user %}
       <a hx-delete="{% url 'delete_message' message.pk %}" hx-confirm="Delete message?" style="color: red;">
         Delete
