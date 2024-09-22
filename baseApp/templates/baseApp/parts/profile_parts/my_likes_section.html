@@ -10,18 +10,18 @@
           <div class="ms-2 me-auto">
 
             {% comment %} if user is followed, I can access his profile over his name as a link {% endcomment %}
+
             {% if user.profile in likes.album_owner.profile.followed_by.all %}
+            You liked <br>
               <a hx-get="{% url 'display_user_profile' likes.album_owner.pk %}" hx-target="#replaceable-div">
                 @<b>{{ likes.album_owner.username }}'s</b>
               </a> 
             {% else %}
               @{{ likes.album_owner.username }}'s
             {% endif %}
-
             <a hx-get="{% url 'display_all_images_from_single_album' likes.pk %}" hx-target="#replaceable-div"> album 
               <b> {{ likes }} </b> 
             </a>
-
           </div>
           <span class="badge bg-primary rounded-pill"></span>
         </li>

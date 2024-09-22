@@ -76,7 +76,9 @@
           {% if like.email == request.user.email %}
             you 
           {% else %} 
+          <a hx-get="{% url 'profile' like.pk %}"" hx-target="#replaceable-div">
             {{ like.username }} 
+          </a>
           {% endif %}
         {% endif %} 
         

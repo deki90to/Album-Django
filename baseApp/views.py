@@ -69,11 +69,14 @@ def create_new_album_form_display(request):
         'all_albums': all_albums,
     })
 
+
 @login_required(login_url='login')
 def create_new_album(request):
+    
     if request.method == 'POST':
         form = AlbumForm(request.POST)
         files = request.FILES.getlist('images')
+
         if len(files) > 20:
             content = '<p> Max number of images is 20 </p>'
             return HttpResponse(content)
@@ -82,22 +85,22 @@ def create_new_album(request):
                 f = form.save(commit=False)
                 f.album_owner = request.user
                 f.save()
+
                 for i in files:
                     Images.objects.create(
                         album_images = f,
                         images = i                 
                     )
-                email = f.album_owner.email
-                subject = 'Album created'
-                message = f"Album '{f.album_name}' successfully created, check it here https://deki90to.pythonanywhere.com/"
-                send_mail(
-                    subject,
-                    message,
-                    email,
-                    [f.album_owner.email, 'deki90to@gmail.com']
-                )
+                # email = f.album_owner.email
+                # subject = 'Album created'
+                # message = f"Album '{f.album_name}' successfully created, check it here https://deki90to.pythonanywhere.com/"
+                # send_mail(
+                #     subject,
+                #     message,
+                #     email,
+                #     [f.album_owner.email, 'deki90to@gmail.com']
+                # )
                 return redirect('display_all_images_from_single_album', f.pk)
-
 
 
 @login_required(login_url='login')
@@ -114,7 +117,6 @@ def display_all_images_from_single_album(request, pk):
         'album_images': album_images,
         'album_likes': album_likes,
     })
-
 
 
 #COMMENTS

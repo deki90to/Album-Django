@@ -20,15 +20,15 @@ def register_(request):
             account = authenticate(email=email, password=raw_password)
             login(request, account)
 
-            email = email
-            subject = 'New registration'
-            message = f'{email} successfully registred, your password is "{raw_password}", Welcome!'
-            send_mail(
-                subject,
-                message,
-                email,
-                [email, 'deki90to@gmail.com']
-            )
+            # email = email
+            # subject = 'New registration'
+            # message = f'{email} successfully registred, your password is "{raw_password}", Welcome!'
+            # send_mail(
+            #     subject,
+            #     message,
+            #     email,
+            #     [email, 'deki90to@gmail.com']
+            # )
             return redirect('home')
     else:
         form = RegistrationForm()
@@ -47,16 +47,17 @@ def login_(request):
         
         if user is not None:
             login(request, user)
-            email = email
-            subject = 'User logged in'
-            message = f'{user.username} {email} logged in'
-            if email != 'deki90to@gmail.com':
-                send_mail(
-                    subject,
-                    message,
-                    email,
-                    ['deki90to@gmail.com']
-                )
+            
+            # email = email
+            # subject = 'User logged in'
+            # message = f'{user.username} {email} logged in'
+            # if email != 'deki90to@gmail.com':
+            #     send_mail(
+            #         subject,
+            #         message,
+            #         email,
+            #         ['deki90to@gmail.com']
+            #     )
                 # messages.success(request, 'Successfully logged in')
             return redirect('home')
         else:

@@ -16,7 +16,7 @@ class Season(models.Model):
 
 class Year(models.Model):
     album_year = models.IntegerField(
-        validators=[MinValueValidator(1990), MaxValueValidator(2023)], default=2023
+        validators=[MinValueValidator(1990), MaxValueValidator(2024)], default=2024
     )
     def __str__(self):
         return f'{self.album_year}'
@@ -78,7 +78,6 @@ class Comment(models.Model):
     
     class Meta:
         ordering = ['-comment_created']
-
 
 
 class Like(models.Model):
